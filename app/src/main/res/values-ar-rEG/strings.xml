@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">رافق</string>
+    <string name="rafik">رافق</string>
+    <string name="rafik_phone_number">+201093111955</string>
+    <string name="you_need_an_organic_fertilizer">تحتاج سماد عضوي</string>
+    <string name="producing_an_organic_product_or_selling_it">تريد انتاج منتج عضوي / او بيعه</string>
+
+</resources>
