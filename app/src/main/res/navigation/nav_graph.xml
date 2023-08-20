@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/splashScreen"
         android:name="com.example.rafik.ui.SplashScreen"
-        tools:layout="@layout/fragment_splash_screen"
-        android:label="SplashScreen" >
+        android:label="SplashScreen"
+        tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -17,5 +17,23 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.rafik.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home_screen">
+        <action
+            android:id="@+id/action_homeFragment_to_organicFertilizerFragment"
+            app:destination="@id/organicFertilizerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/organicFertilizerFragment"
+        android:name="com.example.rafik.ui.organic_fertilizer.OrganicFertilizerFragment"
+        android:label="OrganicFertilizerFragment"
+        tools:layout="@layout/fragment_organic_fertilizer"/>
+    <fragment
+        android:id="@+id/trainingFragment"
+        android:name="com.example.rafik.ui.training.TrainingFragment"
+        android:label="TrainingFragment"
+        tools:layout="@layout/fragment_training" />
 </navigation>
