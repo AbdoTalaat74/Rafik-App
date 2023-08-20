@@ -6,85 +6,131 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_marginTop="@dimen/_64sdp"
-            android:contentDescription="@string/app_name"
-            android:layoutDirection="ltr"
-            android:src="@drawable/rafik_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/organic_fertilizer_btn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginHorizontal="@dimen/_24sdp"
-            android:layout_marginTop="@dimen/_32sdp"
-            android:text="@string/you_need_an_organic_fertilizer"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:strokeColor="#7CC644" />
-
-        <Button
-            android:id="@+id/produce_organic_product_btn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="@dimen/_24sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:text="@string/producing_an_organic_product_or_selling_it"
-            android:textSize="@dimen/_14ssp"
-            app:cornerRadius="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/organic_fertilizer_btn"
-            app:strokeColor="#7CC644" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/contact_us_layout"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:layoutDirection="ltr"
-            android:orientation="horizontal"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:drawableStart="@drawable/rafik_logo">
 
-            <ImageView
-                android:id="@+id/whatsapp_iv"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/ic_whatsapp" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                style="@style/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/top_app_bar" />
 
-            <TextView
-                android:id="@+id/mobile_number_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_48sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:gravity="center_vertical"
-                android:text="@string/contact_us"
-                android:textSize="@dimen/_18ssp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_180sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:contentDescription="@string/app_name"
+                    android:layoutDirection="ltr"
+                    android:src="@drawable/rafik_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/organic_fertilizer_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginHorizontal="@dimen/_24sdp"
+                    android:text="@string/organic_fertilizer"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    app:cornerRadius="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:strokeColor="@color/base_green_color" />
+
+                <Button
+                    android:id="@+id/manufacture_training_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginHorizontal="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/organic_products_manufacture_training"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    app:cornerRadius="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/organic_fertilizer_btn"
+                    app:strokeColor="@color/base_green_color" />
+
+
+                <Button
+                    android:id="@+id/product_for_sale"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginHorizontal="@dimen/_24sdp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/product_for_sale"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    app:cornerRadius="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/manufacture_training_btn"
+                    app:strokeColor="@color/base_green_color" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/contact_us_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_4sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/product_for_sale">
+
+                    <ImageView
+                        android:id="@+id/whatsapp_iv"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:src="@drawable/ic_whatsapp" />
+
+                    <TextView
+                        android:id="@+id/mobile_number_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_48sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/contact_us"
+                        android:textSize="@dimen/_18ssp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
