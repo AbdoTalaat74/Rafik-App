@@ -9,24 +9,21 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentHomeScreenBinding
 
-class HomeFragment: Fragment() {
-    private lateinit var binding:FragmentHomeScreenBinding
+class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeScreenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentHomeScreenBinding.inflate(layoutInflater)
-
-
         binding.contactUsLayout.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
-
             animation.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                     // Animation started
@@ -42,9 +39,10 @@ class HomeFragment: Fragment() {
                 }
             })
             it.startAnimation(animation)
+        }
+        binding.produceOrganicProductBtn.setOnClickListener {
 
         }
-
         return binding.root
     }
 
@@ -53,5 +51,4 @@ class HomeFragment: Fragment() {
         intent.data = Uri.parse("https://api.whatsapp.com/send?phone=201093111955")
         startActivity(intent)
     }
-
 }
