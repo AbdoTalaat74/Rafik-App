@@ -2,9 +2,31 @@
     <string name="app_name">Rafik</string>
     <string name="rafik">Rafik</string>
     <string name="rafik_phone_number">+201093111955</string>
-    <string name="you_need_an_organic_fertilizer">you need an organic fertilizer</string>
-    <string name="producing_an_organic_product_or_selling_it">Producing or selling an organic product</string>
+    <string name="organic_fertilizer">Organic Fertilizer</string>
+    <string name="organic_products_manufacture_training">Organic Products manufacturing Training</string>
     <string name="contact_us">Contact us</string>
+    <string name="product_for_sale">Product for sale</string>
+    <string name="land_area">Land Area</string>
+    <string name="cultivation_or_crop_type">Cultivation or Crop type</string>
+    <string name="type_of_fertilizer_required">The type of Fertilizer required</string>
+    <string name="send_request">send request</string>
+    <string name="product_type">Product type</string>
+    <string name="training_places">Training places</string>
+    <string name="trainings">Trainings</string>
+
+    <string-array name="product_types">
+        <item>product 1</item>
+        <item>product 2</item>
+        <item>product 3</item>
+        <item>product 4</item>
+    </string-array>
+
+    <string-array name="training_places">
+        <item>place 1</item>
+        <item>place 2</item>
+        <item>place 3</item>
+        <item>place 4</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="sign_up">SIGN UP</string>
     <string name="username">Username</string>

@@ -110,7 +110,6 @@ dependencies {
     // otpView
     implementation 'com.github.appsfeature:otp-view:1.0'
 
-
 }
 
 apply plugin: 'androidx.navigation.safeargs.kotlin'

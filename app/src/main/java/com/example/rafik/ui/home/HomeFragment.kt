@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentHomeScreenBinding
@@ -24,6 +25,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeScreenBinding.inflate(layoutInflater)
         binding.contactUsLayout.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
+
+
             animation.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                     // Animation started
@@ -43,6 +46,14 @@ class HomeFragment : Fragment() {
         binding.produceOrganicProductBtn.setOnClickListener {
 
         }
+        binding.organicFertilizerBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.organicFertilizerFragment)
+        }
+
+        binding.manufactureTrainingBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.trainingFragment)
+        }
+
         return binding.root
     }
 

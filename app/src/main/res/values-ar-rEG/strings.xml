@@ -4,9 +4,33 @@
     <string name="app_name">رافق</string>
     <string name="rafik">رافق</string>
     <string name="rafik_phone_number">+201093111955</string>
-    <string name="you_need_an_organic_fertilizer">تحتاج سماد عضوي</string>
-    <string name="producing_an_organic_product_or_selling_it">تريد انتاج منتج عضوي / او بيعه</string>
+    <string name="organic_fertilizer">سماد عضوي</string>
+    <string name="organic_products_manufacture_training">تدريب لصناعة المنتجات العضوية</string>
     <string name="contact_us">تواصل معنا</string>
+    <string name="product_for_sale">منتج للبيع</string>
+    <string name="land_area">مساحة الأرض</string>
+    <string name="cultivation_or_crop_type">نوع الزراعة أو المحصول</string>
+    <string name="type_of_fertilizer_required">نوع السماد المطلوب</string>
+    <string name="send_request">إرسال الطلب</string>
+    <string name="product_type">نوع المنتج</string>
+    <string name="training_places">اماكن التدريب</string>
+    <string name="trainings">التدريبات</string>
+
+
+
+    <string-array name="product_types">
+        <item>منتج 1</item>
+        <item>منتج 2</item>
+        <item>منتج 3</item>
+        <item>منتج 4</item>
+    </string-array>
+
+    <string-array name="training_places">
+        <item>مكان 1</item>
+        <item>مكان 2</item>
+        <item>مكان 3</item>
+        <item>مكان 4</item>
+    </string-array>
     <string name="sign_up">تسجيل دخول</string>
     <string name="username">الاسم</string>
     <string name="registration">تسجيل دخول</string>

@@ -52,4 +52,8 @@
     <color name="Teal">#008080</color>
     <color name="Green">#008000</color>
     <color name="DarkGreen">#006400</color>
+    <color name="day_toolbar_background">#FFFFFF</color>
+    <color name="night_toolbar_background">#282929</color>
+    <color name="toolbar_text_color">#0bcbff</color>
+    <color name="base_green_color">#7CC644</color>
 </resources>
