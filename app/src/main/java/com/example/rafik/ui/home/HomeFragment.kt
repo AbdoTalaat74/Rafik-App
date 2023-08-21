@@ -3,6 +3,7 @@ package com.example.rafik.ui.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentHomeScreenBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeScreenBinding
@@ -43,15 +44,20 @@ class HomeFragment : Fragment() {
             })
             it.startAnimation(animation)
         }
-        binding.produceOrganicProductBtn.setOnClickListener {
-
-        }
+//        binding.produceOrganicProductBtn.setOnClickListener {
+//
+//        }
         binding.organicFertilizerBtn.setOnClickListener {
             this.findNavController().navigate(R.id.organicFertilizerFragment)
         }
 
         binding.manufactureTrainingBtn.setOnClickListener {
             this.findNavController().navigate(R.id.trainingFragment)
+        }
+        binding.signOut.setOnClickListener {
+            Log.i("HomeFragment","signOut pressed")
+            FirebaseAuth.getInstance().signOut()
+            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
         }
 
         return binding.root

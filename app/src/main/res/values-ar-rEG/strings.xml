@@ -48,5 +48,6 @@
     <string name="verification_code">رمز التحقق</string>
     <string name="code_sent"> تم ارسال كود لـ</string>
     <string name="contian_11">يجب ان يحتوي علي 11 رقم</string>
+    <string name="signout">تسجيل خروج</string>
 
 </resources>

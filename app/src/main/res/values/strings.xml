@@ -45,6 +45,7 @@
     <string name="verification_code">Verification Code</string>
     <string name="code_sent">code sent to </string>
     <string name="contian_11">Must Contain 11 Number</string>
+    <string name="signout">signOut</string>
 
 
 </resources>
