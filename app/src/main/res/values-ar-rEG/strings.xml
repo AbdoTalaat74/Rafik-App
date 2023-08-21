@@ -31,5 +31,23 @@
         <item>مكان 3</item>
         <item>مكان 4</item>
     </string-array>
+    <string name="sign_up">تسجيل دخول</string>
+    <string name="username">الاسم</string>
+    <string name="registration">تسجيل دخول</string>
+    <string name="city">المحافظة</string>
+    <string name="area">المركز</string>
+    <string name="todo">TODO</string>
+    <string name="address">العنوان</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="bias1">0.0</string>
+    <string name="bias0">1.0</string>
+    <string name="enter_your_name">ادخل اسمك</string>
+    <string name="enter_your_address">ادخل عنوانك</string>
+    <string name="enter_phone">ادخل رقم هاتفك</string>
+    <string name="lenght_phone_check">ادخل 11 رقم </string>
+    <string name="verification_code">رمز التحقق</string>
+    <string name="code_sent"> تم ارسال كود لـ</string>
+    <string name="contian_11">يجب ان يحتوي علي 11 رقم</string>
+    <string name="signout">تسجيل خروج</string>
 
 </resources>

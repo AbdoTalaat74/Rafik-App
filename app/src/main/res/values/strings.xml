@@ -27,4 +27,25 @@
         <item>place 3</item>
         <item>place 4</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="sign_up">SIGN UP</string>
+    <string name="username">Username</string>
+    <string name="registration">Registration</string>
+    <string name="todo">TODO</string>
+    <string name="city">City</string>
+    <string name="area">Area</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="bias1">1.0</string>
+    <string name="bias0">0.0</string>
+    <string name="enter_your_name">Enter your Name</string>
+    <string name="enter_your_address">Enter your ِAddress</string>
+    <string name="enter_phone">Enter your Phone Number</string>
+    <string name="lenght_phone_check">Enter 11 num Phone </string>
+    <string name="verification_code">Verification Code</string>
+    <string name="code_sent">code sent to </string>
+    <string name="contian_11">Must Contain 11 Number</string>
+    <string name="signout">signOut</string>
+
+
 </resources>
