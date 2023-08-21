@@ -1,6 +1,5 @@
 package com.example.rafik.ui.registration
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOtpAuthBinding
-import com.example.rafik.ui.MainActivity
 import com.example.rafik.viewModel.LoginViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -30,9 +28,7 @@ class OtpAuthFrag : Fragment() {
     private lateinit var binding: FragmentOtpAuthBinding
     private lateinit var mAuth: FirebaseAuth
     private val loginViewModel by activityViewModels<LoginViewModel>()
-    private lateinit var phone :String
-
-    // string for storing our verification ID
+    private lateinit var phone: String
     private lateinit var verificationId: String
 
     override fun onCreateView(
@@ -42,12 +38,13 @@ class OtpAuthFrag : Fragment() {
         binding = FragmentOtpAuthBinding.inflate(layoutInflater)
         mAuth = FirebaseAuth.getInstance()
         loginViewModel.user.observe(viewLifecycleOwner) {
-            Log.i("OtpAuthFrag","observing $it")
+            Log.i("OtpAuthFrag", "observing $it")
             binding.user = it
             phone = "+20" + it!!.phone
+            binding.otpView.requestFocus()
             sendVerificationCode(phone)
-            binding.otpView.requestFocusOTP()
         }
+
         binding.otpView.otpListener = object : OTPListener {
             override fun onInteractionListener() {
 
@@ -58,9 +55,20 @@ class OtpAuthFrag : Fragment() {
             }
         }
 
+        binding.tryAgain.setOnClickListener {
+            binding.otpView.requestFocus()
+            sendVerificationCode(phone)
+        }
+
         binding.idBtnVerify.setOnClickListener {
-            if (TextUtils.isEmpty(phone)) {
-                Toast.makeText(requireContext(), "Please enter OTP", Toast.LENGTH_SHORT).show()
+            binding.idBtnVerify.startAnimation()
+            if (TextUtils.isEmpty(binding.otpView.otp)) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.please_enter_code),
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.idBtnVerify.revertAnimation()
             } else {
                 binding.otpView.otp?.let {
                     verifyCode(it)
@@ -78,11 +86,15 @@ class OtpAuthFrag : Fragment() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_otpTestFrag_to_homeFragment)
+                    loginViewModel.setUser(binding.user!!)
+                    Navigation.findNavController(requireView())
+                        .navigate(R.id.action_otpTestFrag_to_homeFragment)
                 } else {
                     Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG)
                         .show()
                     Log.e("signInWithCredential", task.exception!!.message.toString())
+                    binding.idBtnVerify.revertAnimation()
+
                 }
             }
     }
@@ -107,19 +119,21 @@ class OtpAuthFrag : Fragment() {
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                 val code = phoneAuthCredential.smsCode
                 if (code != null) {
-                  //  binding.idEdtOtp.setText(code)
+                    //  binding.idEdtOtp.setText(code)
                     verifyCode(code)
                 }
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), e.message, Toast.LENGTH_LONG).show()
                 Log.e("onVerificationFailed", e.message.toString())
             }
         }
 
     private fun verifyCode(code: String) {
-        val credential = PhoneAuthProvider.getCredential(verificationId, code)
-        signInWithCredential(credential)
+        verificationId?.let {
+            val credential = PhoneAuthProvider.getCredential(it, code)
+            signInWithCredential(credential)
+        }
     }
 }

@@ -25,10 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
             android:text="@string/registration"
             android:textSize="@dimen/_20ssp"
+            app:chainUseRtl="false"
             app:layout_constraintBottom_toBottomOf="@+id/img_hexagon"
-            app:layout_constraintEnd_toStartOf="@+id/img_hexagon"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="@string/bias0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,24 +61,22 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    app:helperTextTextColor="@color/md_red_400"
                     app:helperText=""
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:helperTextTextColor="@color/md_red_400"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <EditText
                         android:id="@+id/editTextName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autofillHints="Name"
-                        android:text="khph"
                         android:background="@drawable/round3_button"
                         android:hint="@string/username"
                         android:inputType="textPersonName"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:text="khph" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -85,53 +85,27 @@
                     android:layout_height="wrap_content"
                     android:text="@string/city"
                     android:textSize="@dimen/_15ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/city_rela"
+                    app:layout_constraintBottom_toBottomOf="@+id/city_spinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textInputName"
-                    app:layout_constraintTop_toTopOf="@+id/city_rela" />
+                    app:layout_constraintTop_toTopOf="@+id/city_spinner" />
 
-                <RelativeLayout
-                    android:id="@+id/city_rela"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/city_spinner"
                     android:layout_width="0dp"
                     android:layout_height="?attr/dropdownListPreferredItemHeight"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    android:background="@drawable/spinner_bg"
+                    android:background="@drawable/green_outline"
+                    android:elevation="80dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:popupElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputName"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toBottomOf="@+id/textInputName" />
 
-                    <Spinner
-                        android:id="@+id/cities_spinner"
-                        style="@style/Widget.AppCompat.Spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:dropDownWidth="match_parent"
-                        android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
-                        android:gravity="center"
-                        android:popupElevation="3dp"
-                        android:spinnerMode="dropdown"
-                        android:stateListAnimator="@drawable/spinner_sla" />
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="end"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/drop"
-                        tools:ignore="ImageContrastCheck" />
-
-                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -139,52 +113,27 @@
                     android:layout_height="wrap_content"
                     android:text="@string/area"
                     android:textSize="@dimen/_15ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/center_rela"
+                    app:layout_constraintBottom_toBottomOf="@+id/area_spinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/center_rela" />
+                    app:layout_constraintTop_toTopOf="@+id/area_spinner" />
 
-                <RelativeLayout
-                    android:id="@+id/center_rela"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/area_spinner"
                     android:layout_width="0dp"
                     android:layout_height="?attr/dropdownListPreferredItemHeight"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    android:background="@drawable/spinner_bg"
+                    android:background="@drawable/green_outline"
+                    android:elevation="80dp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:popupElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toBottomOf="@+id/city_rela"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toBottomOf="@+id/city_spinner" />
 
-                    <Spinner
-                        android:id="@+id/centers_spinner"
-                        style="@style/Widget.AppCompat.Spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:dropDownWidth="match_parent"
-                        android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
-                        android:gravity="center"
-                        android:popupElevation="3dp"
-                        android:spinnerMode="dropdown"
-                        android:stateListAnimator="@drawable/spinner_sla" />
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="end"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/drop"
-                        tools:ignore="ImageContrastCheck" />
-                </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputAddress"
@@ -193,25 +142,25 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
+                    app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:helperText=""
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/center_rela"
+                    app:layout_constraintTop_toBottomOf="@+id/area_spinner"
                     app:layout_constraintVertical_bias="0.0">
 
                     <EditText
                         android:id="@+id/editTextAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="15 maycity cairo"
                         android:autofillHints="Name"
                         android:background="@drawable/round3_button"
                         android:hint="@string/address"
                         android:inputType="textPersonName"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:text="15 maycity cairo" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -221,11 +170,11 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
+                    app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:helperText=""
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputAddress"
                     app:layout_constraintVertical_bias="0.0">
@@ -235,11 +184,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autofillHints="Name"
-                        android:text="01129891472"
                         android:background="@drawable/round3_button"
                         android:hint="@string/phone"
                         android:inputType="phone"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:text="01129891472" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.apachat.loadingbutton.core.customViews.CircularProgressButton

@@ -7,18 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSignInBinding
+import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.User
+import com.example.rafik.viewModel.InitViewModel
 import com.example.rafik.viewModel.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private val loginViewModel by activityViewModels<LoginViewModel>()
-    private lateinit var auth: FirebaseAuth
+    private val initViewModel by activityViewModels<InitViewModel>()
+
     lateinit var name: String
     private lateinit var phone: String
     private lateinit var address: String
@@ -31,6 +36,13 @@ class SignInFragment : Fragment() {
         nameFocusListener()
         addressFocusListener()
         phoneFocusListener()
+        initViewModel.cities.observe(viewLifecycleOwner) {
+            initCitySpinner(binding.citySpinner, it)
+        }
+        initViewModel.areas.observe(viewLifecycleOwner) {
+            initAreaSpinner(binding.citySpinner, it)
+        }
+
         binding.registerButton.setOnClickListener {
             binding.registerButton.startAnimation()
             if (binding.editTextName.text.toString() == "") {
@@ -88,6 +100,49 @@ class SignInFragment : Fragment() {
         return null
     }
 
+    private fun initCitySpinner(spinner: AppCompatSpinner, cities: List<City>) {
+        val citiesAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cities)
+        citiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = citiesAdapter
+        spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.i("initAreaSpinner", "area: ${cities[position]}")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    //todo
+                }
+            }
+    }
+
+    private fun initAreaSpinner(spinner: AppCompatSpinner, area: List<String>) {
+        val areaAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, area)
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = areaAdapter
+        spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.i("initAreaSpinner", "area: ${area[position]}")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    //todo
+                }
+            }
+    }
+
     private fun phoneFocusListener() {
         binding.editTextPhone.setOnFocusChangeListener { _, focus ->
             if (!focus) {
@@ -110,12 +165,12 @@ class SignInFragment : Fragment() {
         }
         if (!phone.matches("01\\d{9}".toRegex())) {
             binding.registerButton.revertAnimation()
-            return  getString(R.string.contian_11)
+            return getString(R.string.contian_11)
         }
         return null
     }
 
-    private fun submitForm(view:View) {
+    private fun submitForm(view: View) {
         binding.textInputName.helperText = validateName()
         binding.textInputAddress.helperText = validateAddress()
         binding.textInputPhone.helperText = validatePhone()
@@ -124,11 +179,12 @@ class SignInFragment : Fragment() {
         val validPhone = (binding.textInputPhone.helperText == null)
         if (validName && validAddress && validPhone) {
             //todo throw user to vm
-            user=User(name, phone, address, "")
-            Log.i("SignInFragment","throw $user to vm")
+            user = User(name, phone, address, "")
+            Log.i("SignInFragment", "throw $user to vm")
             loginViewModel.postUser(user)
             //todo navigating to otp
-            Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_otpTestFrag)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signInFragment_to_otpTestFrag)
         }
     }
 }

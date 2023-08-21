@@ -15,11 +15,10 @@ class OrganicFertilizerFragment:Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentOrganicFertilizerBinding.inflate(layoutInflater)
-
         initToolbar(binding.topAppBar, getString(R.string.organic_fertilizer), this)
+
         return binding.root
     }
 }
