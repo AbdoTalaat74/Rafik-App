@@ -3,11 +3,13 @@ package com.example.rafik.ui.organic_fertilizer
 import android.app.AlertDialog
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOrganicFertilizerBinding
 import com.example.rafik.ui.initToolbar
@@ -31,17 +33,18 @@ class OrganicFertilizerFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        viewModel.onNavigateUp.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigateUp()
+            }
+        }
 
-//        binding.sendRequestBtn.setOnClickListener {
-//            viewModel.invalidForm()
-//        }
-
-        viewModel.dialogMessage.observe(viewLifecycleOwner){message ->
-            if (!(message.isNullOrBlank())){
+        viewModel.dialogMessage.observe(viewLifecycleOwner) { message ->
+            if (!(message.isNullOrBlank())) {
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.error))
                     .setMessage(message)
-                    .setPositiveButton(getString(R.string.okay)){ _, _ ->
+                    .setPositiveButton(getString(R.string.okay)) { _, _ ->
                         // do nothing
                     }
                     .setIcon(R.drawable.ic_warning)
@@ -49,7 +52,6 @@ class OrganicFertilizerFragment : Fragment() {
             }
 
         }
-
 
         return binding.root
     }

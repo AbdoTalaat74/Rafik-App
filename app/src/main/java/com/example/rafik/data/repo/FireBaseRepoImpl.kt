@@ -99,6 +99,17 @@ class FireBaseRepoImpl : FirebaseRepo {
     }
 
     override suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean {
-        TODO("Not yet implemented")
+        var res = false
+        val newCityRef = db.collection("Request").document()
+        fertilizerRequest.id = newCityRef.id
+        newCityRef.set(fertilizerRequest)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+        return res
     }
 }

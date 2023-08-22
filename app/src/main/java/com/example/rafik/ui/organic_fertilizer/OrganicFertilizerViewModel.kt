@@ -28,10 +28,10 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     private val _dialogMessage = MutableLiveData<String>()
     val dialogMessage: LiveData<String>
         get() = _dialogMessage
-//    fun sendOrganicFertilizerRequest(){
-//        invalidForm()
-//    }
 
+    private val _onNavigateUp = MutableLiveData<Boolean>()
+    val onNavigateUp: LiveData<Boolean>
+        get() = _onNavigateUp
 
     private fun validateForm() {
         Log.e("OrganicFertilizerViewModel", "invalidForm Called")
@@ -62,15 +62,30 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     fun sendRequest() {
         validateForm()
         if (validArea && validCropType && validFertilizerType) {
-//            Log.e("OrganicFertilizerViewModel", "Request Sent")
-            val fertilizerRequest =  FertilizerRequest(acre.get()?.toDouble(),carat.get()?.toDouble(),cropType.get()!!,fertilizerType.get()!!, user.value!!)
-        //    fireBaseRepoImpl.
+            val fertilizerRequest = FertilizerRequest(
+                "",
+                acre.get()?.toDouble(),
+                carat.get()?.toDouble(),
+                cropType.get()!!,
+                fertilizerType.get()!!,
+                user.value!!
+            )
+            acre.set("")
+            carat.set("")
+            cropType.set("")
+            fertilizerType.set("")
+            viewModelScope.launch {
+                fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
+            }
+            _onNavigateUp.value = true
         }
     }
+
     init {
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
         }
     }
+
     val user = fireBaseRepoImpl.user
 }
