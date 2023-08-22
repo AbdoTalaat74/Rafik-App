@@ -6,13 +6,17 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.rafik.R
+import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.FertilizerRequest
+import kotlinx.coroutines.launch
 
 class OrganicFertilizerViewModel(private val application: Application) : ViewModel() {
+    private val fireBaseRepoImpl = FireBaseRepoImpl()
 
 
-    val arce = ObservableField<String>()
+    val acre = ObservableField<String>()
     val carat = ObservableField<String>()
     val cropType = ObservableField<String>()
     val fertilizerType = ObservableField<String>()
@@ -32,7 +36,7 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     private fun validateForm() {
         Log.e("OrganicFertilizerViewModel", "invalidForm Called")
         var message = ""
-        if (arce.get().isNullOrBlank() && carat.get().isNullOrBlank()) {
+        if (acre.get().isNullOrBlank() && carat.get().isNullOrBlank()) {
             message += application.resources.getString(R.string.pleasefill_the_area_field)
             validArea = false
         } else {
@@ -59,8 +63,14 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
         validateForm()
         if (validArea && validCropType && validFertilizerType) {
 //            Log.e("OrganicFertilizerViewModel", "Request Sent")
-            val fertilizerRequest =  FertilizerRequest(arce.get()?.toDouble(),carat.get()?.toDouble(),cropType.get()!!,fertilizerType.get()!!)
+            val fertilizerRequest =  FertilizerRequest(acre.get()?.toDouble(),carat.get()?.toDouble(),cropType.get()!!,fertilizerType.get()!!, user.value!!)
+        //    fireBaseRepoImpl.
         }
     }
-
+    init {
+        viewModelScope.launch {
+            fireBaseRepoImpl.getUser()
+        }
+    }
+    val user = fireBaseRepoImpl.user
 }

@@ -1,6 +1,7 @@
 package com.example.rafik.domian.repo
 
 import com.example.rafik.domian.entity.City
+import com.example.rafik.domian.entity.FertilizerRequest
 import com.example.rafik.domian.entity.User
 
 interface FirebaseRepo {
@@ -11,4 +12,7 @@ interface FirebaseRepo {
     suspend fun getUsers(): List<User>
 
     suspend fun getCities(): List<City>
+
+    suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean
+
 }
