@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.rafik.ui.organic_fertilizer.OrganicFertilizerViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -80,6 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:text="@={viewModel.arce}"
                         android:inputType="number|numberDecimal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +102,7 @@
                         android:id="@+id/carat_text_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={viewModel.carat}"
                         android:gravity="center"
                         android:inputType="number|numberDecimal" />
 
@@ -119,6 +123,8 @@
                         android:id="@+id/cultivation_type_text_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={viewModel.cropType}"
+
                         android:gravity="center" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -139,6 +145,7 @@
                         android:id="@+id/fertilizer_type_text_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={viewModel.fertilizerType}"
                         android:gravity="center" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -153,6 +160,7 @@
                     android:backgroundTint="@color/base_green_color"
                     android:text="@string/send_request"
                     android:textSize="@dimen/_14ssp"
+                    android:onClick="@{()->viewModel.sendRequest()}"
                     app:cornerRadius="@dimen/_15sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

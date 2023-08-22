@@ -56,6 +56,11 @@
     <string name="yourInternetIsBack">تم اعاده الاتصال بالانترنت</string>
     <string name="acre">فدان</string>
     <string name="carat">قيراط</string>
+    <string name="error">حدث خطأ</string>
+    <string name="pleasefill_the_area_field">"\nبرجاء ادخال مساحة الارض "</string>
+    <string name="please_fill_crop_type_field">\nبرجاء ادخال نوع المحصول</string>
+    <string name="please_fill_fertilizer_type_field">\nبرجاء ادخال نوع السماد</string>
+    <string name="okay">حسناً</string>
 
 
 </resources>
