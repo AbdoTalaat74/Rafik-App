@@ -80,7 +80,7 @@
                     app:strokeColor="@color/base_green_color" />
 
                 <Button
-                    android:id="@+id/product_for_sale"
+                    android:id="@+id/product_for_sale_btn"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_60sdp"
@@ -109,7 +109,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/product_for_sale">
+                    app:layout_constraintTop_toBottomOf="@+id/product_for_sale_btn">
 
                     <ImageView
                         android:id="@+id/whatsapp_iv"
