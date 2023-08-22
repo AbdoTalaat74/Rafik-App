@@ -57,10 +57,20 @@
     <string name="acre">فدان</string>
     <string name="carat">قيراط</string>
     <string name="error">حدث خطأ</string>
-    <string name="pleasefill_the_area_field">"\nبرجاء ادخال مساحة الارض "</string>
+    <string name="please_fill_the_area_field">"\nبرجاء ادخال مساحة الارض "</string>
     <string name="please_fill_crop_type_field">\nبرجاء ادخال نوع المحصول</string>
     <string name="please_fill_fertilizer_type_field">\nبرجاء ادخال نوع السماد</string>
     <string name="okay">حسناً</string>
+    <string name="amount">الكمية</string>
+    <string name="price">السعر</string>
+    <string name="date">التاريخ</string>
+    <string name="target">المستهدف</string>
+    <string name="add_image">إضافة صورة (اختياري)</string>
+    <string name="production_date">تاريخ الإنتاج</string>
 
+    <string-array name="target_type">
+        <item>محلى</item>
+        <item>تصدير</item>
+    </string-array>
 
 </resources>

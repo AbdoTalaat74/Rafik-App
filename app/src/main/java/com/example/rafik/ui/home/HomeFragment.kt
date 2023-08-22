@@ -60,6 +60,10 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
         }
 
+        binding.productForSaleBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.sellProductFragment)
+        }
+
         return binding.root
     }
 

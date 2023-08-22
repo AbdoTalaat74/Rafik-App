@@ -54,10 +54,21 @@
     <string name="acre">Acre</string>
     <string name="carat">Carat</string>
     <string name="error">Error</string>
-    <string name="pleasefill_the_area_field">"\nPleaseFill the Area Field "</string>
+    <string name="please_fill_the_area_field">"\nPleaseFill the Area Field "</string>
     <string name="please_fill_crop_type_field">\nPlease Fill Crop type Field</string>
     <string name="please_fill_fertilizer_type_field">\nPlease Fill Fertilizer type Field</string>
     <string name="okay">Okay</string>
+    <string name="amount">Amount</string>
+    <string name="price">Price</string>
+    <string name="date">Date</string>
+    <string name="target">Target</string>
+    <string name="add_image">Add image (Optional)</string>
+    <string name="production_date">Production Date</string>
+
+    <string-array name="target_type">
+        <item>Local</item>
+        <item>Export</item>
+    </string-array>
 
 
 </resources>

@@ -37,7 +37,7 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
         Log.e("OrganicFertilizerViewModel", "invalidForm Called")
         var message = ""
         if (acre.get().isNullOrBlank() && carat.get().isNullOrBlank()) {
-            message += application.resources.getString(R.string.pleasefill_the_area_field)
+            message += application.resources.getString(R.string.please_fill_the_area_field)
             validArea = false
         } else {
             validArea = true
