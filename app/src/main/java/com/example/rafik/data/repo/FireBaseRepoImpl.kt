@@ -3,6 +3,7 @@ package com.example.rafik.data.repo
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.rafik.domian.entity.City
+import com.example.rafik.domian.entity.FertilizerRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
 import com.google.firebase.auth.FirebaseAuth
@@ -95,5 +96,9 @@ class FireBaseRepoImpl : FirebaseRepo {
                 Log.w(TAG, "Error getting documents.", exception)
             }
         return citiesArray
+    }
+
+    override suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean {
+        TODO("Not yet implemented")
     }
 }

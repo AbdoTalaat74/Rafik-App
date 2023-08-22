@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@={viewModel.arce}"
+                        android:text="@={viewModel.acre}"
                         android:inputType="number|numberDecimal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
