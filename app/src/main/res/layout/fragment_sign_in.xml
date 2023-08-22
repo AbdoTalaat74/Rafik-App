@@ -56,23 +56,24 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
+
                     app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autofillHints="Name"
-                        android:background="@drawable/round3_button"
                         android:hint="@string/username"
                         android:inputType="textPersonName"
                         android:maxLines="1"
@@ -85,26 +86,31 @@
                     android:layout_height="wrap_content"
                     android:text="@string/city"
                     android:textSize="@dimen/_15ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/city_spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintBottom_toBottomOf="@+id/city_spinner_card"
                     app:layout_constraintStart_toStartOf="@+id/textInputName"
-                    app:layout_constraintTop_toTopOf="@+id/city_spinner" />
+                    app:layout_constraintTop_toTopOf="@+id/city_spinner_card" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/city_spinner"
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/city_spinner_card"
                     android:layout_width="0dp"
-                    android:layout_height="?attr/dropdownListPreferredItemHeight"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:background="@drawable/green_outline"
-                    android:elevation="80dp"
-                    android:orientation="horizontal"
-                    android:popupElevation="8dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputName" />
+                    app:layout_constraintTop_toBottomOf="@+id/textInputName"
+                    app:strokeWidth="1dp">
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/city_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/dropdownListPreferredItemHeight"
+                        android:orientation="horizontal" />
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
@@ -113,34 +119,38 @@
                     android:layout_height="wrap_content"
                     android:text="@string/area"
                     android:textSize="@dimen/_15ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/area_spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintBottom_toBottomOf="@+id/area_spinner_card"
                     app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/area_spinner" />
+                    app:layout_constraintTop_toTopOf="@+id/area_spinner_card" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/area_spinner"
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/area_spinner_card"
                     android:layout_width="0dp"
-                    android:layout_height="?attr/dropdownListPreferredItemHeight"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:background="@drawable/green_outline"
-                    android:elevation="80dp"
-                    android:orientation="horizontal"
-                    android:popupElevation="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toBottomOf="@+id/city_spinner" />
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintEnd_toEndOf="@+id/city_spinner_card"
+                    app:layout_constraintStart_toStartOf="@+id/city_spinner_card"
+                    app:layout_constraintTop_toBottomOf="@+id/city_spinner_card"
+                    tools:layout_height="?attr/dropdownListPreferredItemHeight">
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/area_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/dropdownListPreferredItemHeight"
+                        android:orientation="horizontal" />
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputAddress"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
@@ -148,15 +158,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/area_spinner"
+                    app:layout_constraintTop_toBottomOf="@+id/area_spinner_card"
                     app:layout_constraintVertical_bias="0.0">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autofillHints="Name"
-                        android:background="@drawable/round3_button"
                         android:hint="@string/address"
                         android:inputType="textPersonName"
                         android:maxLines="1"
@@ -165,10 +174,11 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputPhone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
@@ -179,12 +189,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/textInputAddress"
                     app:layout_constraintVertical_bias="0.0">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextPhone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autofillHints="Name"
-                        android:background="@drawable/round3_button"
                         android:hint="@string/phone"
                         android:inputType="phone"
                         android:maxLines="1"

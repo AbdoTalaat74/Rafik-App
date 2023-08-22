@@ -53,6 +53,11 @@
     <string name="yourInternetIsBack">Your Connection Is Back</string>
     <string name="acre">Acre</string>
     <string name="carat">Carat</string>
+    <string name="error">Error</string>
+    <string name="pleasefill_the_area_field">"\nPleaseFill the Area Field "</string>
+    <string name="please_fill_crop_type_field">\nPlease Fill Crop type Field</string>
+    <string name="please_fill_fertilizer_type_field">\nPlease Fill Fertilizer type Field</string>
+    <string name="okay">Okay</string>
 
 
 </resources>
