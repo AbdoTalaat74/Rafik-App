@@ -8,12 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.TrainingRequest
-import com.example.rafik.domian.entity.User
 import kotlinx.coroutines.launch
 
 class TrainingViewModel(application: Application) : ViewModel() {
-
-
     private val fireBaseRepoImpl = FireBaseRepoImpl()
     private val _productType = MutableLiveData<String>()
     private val _trainingPlace = MutableLiveData<String>()
@@ -33,20 +30,23 @@ class TrainingViewModel(application: Application) : ViewModel() {
     }
 
     fun sendRequest() {
-        Log.e("TrainingViewModel","sendRequest called")
-        Log.e("TrainingViewModel",_productType.value!!)
-        Log.e("TrainingViewModel",_trainingPlace.value!!)
+        Log.e("TrainingViewModel", "sendRequest called")
+        Log.e("TrainingViewModel", _productType.value!!)
+        Log.e("TrainingViewModel", _trainingPlace.value!!)
         if (_trainingPlace.value.isNullOrBlank() && _productType.value.isNullOrBlank()) {
-            Log.e("TrainingViewModel","Null values")
+            Log.e("TrainingViewModel", "Null values")
             return
-        }else{
-            if (user.value!=null){
+        } else {
+            if (user.value != null) {
                 trainingRequest = TrainingRequest(
                     productType = _productType.value!!,
                     trainingPlace = _trainingPlace.value!!,
                     user = user.value!!
                 )
-                Log.e("TrainingViewModel","Request sent")
+                viewModelScope.launch {
+                    fireBaseRepoImpl.setTrainingRequest(trainingRequest)
+                }
+
                 _onNavigateUp.value = true
             }
         }

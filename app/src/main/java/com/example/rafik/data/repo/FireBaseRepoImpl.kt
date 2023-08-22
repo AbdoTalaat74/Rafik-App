@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.FertilizerRequest
+import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
 import com.google.firebase.auth.FirebaseAuth
@@ -100,7 +101,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean {
         var res = false
-        val newCityRef = db.collection("Request").document()
+        val newCityRef = db.collection("FertilizerRequest").document()
         fertilizerRequest.id = newCityRef.id
         newCityRef.set(fertilizerRequest)
             .addOnSuccessListener { documentReference ->
@@ -112,4 +113,18 @@ class FireBaseRepoImpl : FirebaseRepo {
             }
         return res
     }
+
+    override suspend fun setTrainingRequest(trainingRequest: TrainingRequest): Boolean {
+        var res = false
+        val newCityRef = db.collection("TrainingRequest").document()
+        trainingRequest.id = newCityRef.id
+        newCityRef.set(trainingRequest)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+        return res    }
 }

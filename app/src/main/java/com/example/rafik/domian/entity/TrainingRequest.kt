@@ -1,7 +1,7 @@
 package com.example.rafik.domian.entity
 
 data class TrainingRequest(
-    val id:String = "",
+    var id:String = "",
     val productType:String,
     val trainingPlace:String,
     val user:User
