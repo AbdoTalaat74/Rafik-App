@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.TrainingRequest
+import com.google.firebase.firestore.FieldValue
 import kotlinx.coroutines.launch
 
 class TrainingViewModel(application: Application) : ViewModel() {

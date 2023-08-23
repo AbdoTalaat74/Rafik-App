@@ -69,14 +69,12 @@ class OtpAuthFrag : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 binding.idBtnVerify.revertAnimation()
+                binding.otpView.showError()
             } else {
                 binding.otpView.otp?.let {
                     verifyCode(it)
                 }
             }
-            binding.otpView.showError()
-            binding.otpView.showSuccess()
-
         }
         // Inflate the layout for this fragment
         return binding.root
@@ -86,15 +84,15 @@ class OtpAuthFrag : Fragment() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    binding.otpView.showSuccess()
                     loginViewModel.setUser(binding.user!!)
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_otpTestFrag_to_homeFragment)
                 } else {
-                    Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG).show()
                     Log.e("signInWithCredential", task.exception!!.message.toString())
                     binding.idBtnVerify.revertAnimation()
-
+                    binding.otpView.showError()
                 }
             }
     }
@@ -114,6 +112,7 @@ class OtpAuthFrag : Fragment() {
             override fun onCodeSent(s: String, forceResendingToken: ForceResendingToken) {
                 super.onCodeSent(s, forceResendingToken)
                 verificationId = s
+                binding.idBtnVerify.isEnabled=true
             }
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
@@ -127,6 +126,7 @@ class OtpAuthFrag : Fragment() {
             override fun onVerificationFailed(e: FirebaseException) {
                 Toast.makeText(requireActivity(), e.message, Toast.LENGTH_LONG).show()
                 Log.e("onVerificationFailed", e.message.toString())
+                binding.otpView.showError()
             }
         }
 

@@ -9,6 +9,7 @@ interface FirebaseRepo {
     suspend fun refreshData()
 
     suspend fun setUser(user: User): Boolean
+    suspend fun updateUser(user: User): Boolean
     suspend fun getUser()
     suspend fun getUsers(): List<User>
 

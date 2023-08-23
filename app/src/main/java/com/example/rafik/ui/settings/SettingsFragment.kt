@@ -3,6 +3,8 @@ package com.example.rafik.ui.settings
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSettingsBinding
-import com.example.rafik.viewModel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
@@ -41,10 +42,16 @@ class SettingsFragment : Fragment() {
             when (binding.textInputName.visibility) {
                 View.GONE -> {
                     binding.textInputName.visibility = View.VISIBLE
+                    binding.user?.let {
+                        if (binding.editTextName.text.toString() != it.name) {
+                            binding.save.visibility = View.VISIBLE
+                        }
+                    }
                 }
 
                 View.VISIBLE -> {
                     binding.textInputName.visibility = View.GONE
+                    binding.save.visibility = View.GONE
                 }
 
                 View.INVISIBLE -> {
@@ -69,6 +76,25 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        binding.editTextName.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                binding.user?.let {
+                    if (s.toString() != it.name) {
+                        binding.save.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
+
         //function for enabling dark mode & language
         setDarkModeSwitch()
         setLanguageRadio()
@@ -86,6 +112,14 @@ class SettingsFragment : Fragment() {
                     langPref.setLanguage("en")
                     setLocale("en")
                 }
+            }
+        }
+
+        binding.save.setOnClickListener {
+            binding.user?.let {
+                it.name = binding.editTextName.text.toString()
+                settingsViewModel.updateUser(it)
+                binding.save.visibility = View.GONE
             }
         }
         return binding.root
