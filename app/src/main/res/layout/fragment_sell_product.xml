@@ -99,7 +99,7 @@
                             android:layout_marginTop="@dimen/_12sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+                            app:layout_constraintTop_toBottomOf="@+id/pickImg">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/product_type_text_field"
@@ -183,11 +183,11 @@
                             android:layout_marginTop="@dimen/_2sdp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/product_type_text_layout"
-                            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                            app:layout_constraintTop_toTopOf="@+id/pickImg" />
 
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/pickImg"
                             android:layout_width="@dimen/_32sdp"
                             android:layout_height="@dimen/_32sdp"
                             android:layout_marginTop="16sp"

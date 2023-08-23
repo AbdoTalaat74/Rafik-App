@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_homeFragment_to_sellProductFragment"
             app:destination="@id/sellProductFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/organicFertilizerFragment"
@@ -75,4 +78,15 @@
         android:id="@+id/sellProductFragment"
         android:name="com.example.rafik.ui.sell_product.SellProductFragment"
         android:label="SellProductFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:name="com.example.rafik.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

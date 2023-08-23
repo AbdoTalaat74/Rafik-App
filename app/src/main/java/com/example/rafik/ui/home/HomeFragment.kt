@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
@@ -54,14 +55,21 @@ class HomeFragment : Fragment() {
         binding.manufactureTrainingBtn.setOnClickListener {
             this.findNavController().navigate(R.id.trainingFragment)
         }
-        binding.signOut.setOnClickListener {
-            Log.i("HomeFragment","signOut pressed")
-            FirebaseAuth.getInstance().signOut()
-            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
-        }
 
         binding.productForSaleBtn.setOnClickListener {
             this.findNavController().navigate(R.id.sellProductFragment)
+        }
+
+        // assign the on menu item click listener
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.setting -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+                    true
+                }
+
+                else -> false
+            }
         }
 
         return binding.root

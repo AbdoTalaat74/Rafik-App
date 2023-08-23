@@ -1,0 +1,131 @@
+package com.example.rafik.ui.settings
+
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat.recreate
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.rafik.R
+import com.example.rafik.databinding.FragmentSettingsBinding
+import com.example.rafik.viewModel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
+
+
+class SettingsFragment : Fragment() {
+    private val settingsViewModel by activityViewModels<SettingsViewModel>()
+    private lateinit var binding: FragmentSettingsBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        settingsViewModel.user.observe(viewLifecycleOwner) {
+            binding.user = it
+        }
+        binding.logout.setOnClickListener {
+            Log.i("SettingsFragment", "logout pressed")
+            FirebaseAuth.getInstance().signOut()
+            findNavController().navigate(R.id.action_settingsFragment_to_signInFragment)
+        }
+        binding.profileCardView.setOnClickListener {
+            when (binding.textInputName.visibility) {
+                View.GONE -> {
+                    binding.textInputName.visibility = View.VISIBLE
+                }
+
+                View.VISIBLE -> {
+                    binding.textInputName.visibility = View.GONE
+                }
+
+                View.INVISIBLE -> {
+                    Log.e("textInputName", "view is INVISIBLE")
+                }
+            }
+        }
+
+        binding.langCardView.setOnClickListener {
+            when (binding.radioGroup.visibility) {
+                View.GONE -> {
+                    binding.radioGroup.visibility = View.VISIBLE
+                }
+
+                View.VISIBLE -> {
+                    binding.radioGroup.visibility = View.GONE
+                }
+
+                View.INVISIBLE -> {
+                    Log.e("radioGroup", "view is INVISIBLE")
+                }
+            }
+        }
+
+        //function for enabling dark mode & language
+        setDarkModeSwitch()
+        setLanguageRadio()
+        // Get radio group selected item using on checked change listener
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val langPref = LanguagePrefManger(requireContext())
+            when (binding.root.findViewById(checkedId) as RadioButton) {
+                binding.ar -> {
+                    langPref.setLanguage(Locale.getDefault().language)
+                    langPref.setLanguage("ar")
+                    setLocale("ar")
+                }
+
+                binding.en -> {
+                    langPref.setLanguage("en")
+                    setLocale("en")
+                }
+            }
+        }
+        return binding.root
+    }
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = resources
+        val config: Configuration = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        recreate(requireActivity())
+    }
+
+    //في مشكله لما بيتحول لنايت مود وهو علي المود العادي todo
+    private fun setDarkModeSwitch() {
+        binding.darkModeSwitch.isChecked = DarkModePrefManager(requireContext()).isNightMode()
+        binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            val darkModePrefManager = DarkModePrefManager(requireContext())
+            darkModePrefManager.setDarkMode(isChecked)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            recreate(requireActivity())
+        }
+    }
+
+    private fun setLanguageRadio() {
+        val myLocale = Locale(LanguagePrefManger(requireContext()).getLanguage())
+        binding.radioGroup.clearCheck()
+        when (myLocale.language) {
+            "ar" -> {
+                binding.ar.isChecked = true
+            }
+
+            "en" -> {
+                binding.en.isChecked = true
+
+            }
+        }
+        binding.ar.isChecked
+    }
+
+}

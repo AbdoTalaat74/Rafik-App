@@ -29,7 +29,7 @@ class OtpAuthFrag : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private val loginViewModel by activityViewModels<LoginViewModel>()
     private lateinit var phone: String
-    private lateinit var verificationId: String
+    private var verificationId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -131,9 +131,7 @@ class OtpAuthFrag : Fragment() {
         }
 
     private fun verifyCode(code: String) {
-        verificationId?.let {
-            val credential = PhoneAuthProvider.getCredential(it, code)
-            signInWithCredential(credential)
-        }
+        val credential = PhoneAuthProvider.getCredential(verificationId, code)
+        signInWithCredential(credential)
     }
 }

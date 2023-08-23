@@ -4,18 +4,11 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class City(
-    @SerializedName("id")
-    val id: String = "",
+data class Area(
     @SerializedName("arName")
     val arName: String = "",
     @SerializedName("enName")
-    val enName: String = "",
-    @SerializedName("uid")
-    var uid: String = "",
-    @SerializedName("areas")
-    val areas: List<Area> = listOf()
-) {
+    val enName: String = "",) {
     override fun toString(): String {
         return "$enName:$arName"
     }
