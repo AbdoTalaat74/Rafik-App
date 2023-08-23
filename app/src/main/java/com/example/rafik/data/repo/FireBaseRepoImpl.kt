@@ -7,6 +7,10 @@ import com.example.rafik.domian.entity.FertilizerRequest
 import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
+import com.example.rafik.utils.Constants.CITIES
+import com.example.rafik.utils.Constants.FERTILIZER_REQUEST
+import com.example.rafik.utils.Constants.TRAINING_REQUEST
+import com.example.rafik.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -28,7 +32,20 @@ class FireBaseRepoImpl : FirebaseRepo {
     override suspend fun setUser(user: User): Boolean {
         val res = false
         auth.uid?.let { user.uid = it }
-        db.collection("users").document(user.uid)
+        db.collection(USERS).document(user.uid)
+            .set(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun updateUser(user: User): Boolean {
+        val res = false
+        db.collection(USERS).document(user.uid)
             .set(user)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
@@ -41,7 +58,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getUser() {
         auth.uid?.let {
-            db.collection("users").document(it).get()
+            db.collection(USERS).document(it).get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         document.toObject(User::class.java)?.let { user ->
@@ -60,7 +77,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getUsers(): List<User> {
         val usersArray = ArrayList<User>()
-        db.collection("users")
+        db.collection(USERS)
             .get()
             .addOnSuccessListener { result ->
                 usersArray.clear()
@@ -80,7 +97,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getCities(): List<City> {
         val citiesArray = ArrayList<City>()
-        db.collection("cities")
+        db.collection(CITIES)
             .get()
             .addOnSuccessListener { result ->
                 citiesArray.clear()
@@ -100,7 +117,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean {
         var res = false
-        val newCityRef = db.collection("FertilizerRequest").document()
+        val newCityRef = db.collection(FERTILIZER_REQUEST).document()
         fertilizerRequest.id = newCityRef.id
         newCityRef.set(fertilizerRequest)
             .addOnSuccessListener { documentReference ->
@@ -115,7 +132,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun setTrainingRequest(trainingRequest: TrainingRequest): Boolean {
         var res = false
-        val newCityRef = db.collection("TrainingRequest").document()
+        val newCityRef = db.collection(TRAINING_REQUEST).document()
         trainingRequest.id = newCityRef.id
         newCityRef.set(trainingRequest)
             .addOnSuccessListener { documentReference ->

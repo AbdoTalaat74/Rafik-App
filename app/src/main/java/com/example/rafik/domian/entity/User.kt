@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class User(
     @SerializedName("name")
-    val name: String = "",
+    var name: String = "",
     @SerializedName("phone")
     var phone: String = "",
     @SerializedName("address")

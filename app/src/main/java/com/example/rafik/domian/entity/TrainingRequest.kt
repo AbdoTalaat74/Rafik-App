@@ -1,8 +1,19 @@
 package com.example.rafik.domian.entity
 
+import com.google.firebase.firestore.FieldValue
+import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class TrainingRequest(
-    var id:String = "",
-    val productType:String,
-    val trainingPlace:String,
-    val user:User
+    @SerializedName("id")
+    var id: String = "",
+    @SerializedName("productType")
+    val productType: String,
+    @SerializedName("trainingPlace")
+    val trainingPlace: String,
+    @SerializedName("user")
+    val user: User,
+    @SerializedName("date")
+    var date: FieldValue = FieldValue.serverTimestamp()
 )

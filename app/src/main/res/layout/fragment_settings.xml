@@ -121,14 +121,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_16sdp"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/_16sdp"
                         android:layout_marginEnd="@dimen/_16sdp"
                         android:layout_marginBottom="@dimen/_16sdp"
-                        android:visibility="gone"
                         app:helperText=""
                         app:helperTextTextColor="@color/md_red_400"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/save"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -142,6 +142,18 @@
                             android:maxLines="1"
                             android:text="@{user.name}" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/save"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/save"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
