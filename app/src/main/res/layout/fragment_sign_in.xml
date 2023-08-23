@@ -62,7 +62,6 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
-
                     app:helperText=""
                     app:helperTextTextColor="@color/md_red_400"
                     app:layout_constraintEnd_toEndOf="parent"

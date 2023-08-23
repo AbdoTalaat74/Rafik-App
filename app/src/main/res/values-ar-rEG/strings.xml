@@ -67,6 +67,16 @@
     <string name="target">المستهدف</string>
     <string name="add_image">إضافة صورة (اختياري)</string>
     <string name="production_date">تاريخ الإنتاج</string>
+    <string name="settings">الاعدادات</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="app_v1_0_0"> الاصدار v1.0.0 </string>
+    <string name="dark_mode">الوضع الليلي</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="more">المزيد</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="language">اللغة</string>
+    <string name="english">الانجليزية</string>
+    <string name="arabic">العربية</string>
 
     <string-array name="target_type">
         <item>محلى</item>

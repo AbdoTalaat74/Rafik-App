@@ -64,11 +64,21 @@
     <string name="target">Target</string>
     <string name="add_image">Add image (Optional)</string>
     <string name="production_date">Production Date</string>
+    <string name="settings">Settings</string>
 
     <string-array name="target_type">
         <item>Local</item>
         <item>Export</item>
     </string-array>
+    <string name="logout">Logout</string>
+    <string name="app_v1_0_0">App v1.0.0</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="profile">Profile</string>
+    <string name="more">More</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="language">Language</string>
+    <string name="english">ُEnglish</string>
+    <string name="arabic">Arabic</string>
 
 
 </resources>

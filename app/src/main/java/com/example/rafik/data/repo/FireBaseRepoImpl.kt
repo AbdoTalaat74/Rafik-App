@@ -13,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class FireBaseRepoImpl : FirebaseRepo {
+    private val tag = "FireBaseRepoImpl"
     private val db = Firebase.firestore
     private val auth = FirebaseAuth.getInstance()
     val users = MutableLiveData<List<User>>()
@@ -20,8 +21,6 @@ class FireBaseRepoImpl : FirebaseRepo {
     val areas = MutableLiveData<List<String>>()
     var user = MutableLiveData<User>()
 
-
-    private val TAG = "FireBaseRepoImpl"
     override suspend fun refreshData() {
         TODO("Not yet implemented")
     }
@@ -32,10 +31,10 @@ class FireBaseRepoImpl : FirebaseRepo {
         db.collection("users").document(user.uid)
             .set(user)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.w(tag, "Error adding document", e)
             }
         return res
     }
@@ -48,13 +47,13 @@ class FireBaseRepoImpl : FirebaseRepo {
                         document.toObject(User::class.java)?.let { user ->
                             this.user.value = user
                         }
-                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                        Log.d(tag, "DocumentSnapshot data: ${document.data}")
                     } else {
-                        Log.d(TAG, "No such document")
+                        Log.d(tag, "No such document")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.d(TAG, "get failed with ", exception)
+                    Log.d(tag, "get failed with ", exception)
                 }
         }
     }
@@ -68,13 +67,13 @@ class FireBaseRepoImpl : FirebaseRepo {
                 for (document in result) {
                     val user: User = document.toObject(User::class.java)
                     usersArray.add(user)
-                    Log.d(TAG, "${document.id} => ${document.data}")
+                    Log.d(tag, "${document.id} => ${document.data}")
                 }
                 users.value = usersArray
 
             }
             .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
+                Log.w(tag, "Error getting documents.", exception)
             }
         return usersArray
     }
@@ -88,13 +87,13 @@ class FireBaseRepoImpl : FirebaseRepo {
                 for (document in result) {
                     val city: City = document.toObject(City::class.java)
                     citiesArray.add(city)
-                    Log.d(TAG, "${document.id} => ${document.data}")
+                    Log.d(tag, "${document.id} => ${document.data}")
                 }
                 cities.value = citiesArray
 
             }
             .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
+                Log.w(tag, "Error getting documents.", exception)
             }
         return citiesArray
     }
@@ -105,11 +104,11 @@ class FireBaseRepoImpl : FirebaseRepo {
         fertilizerRequest.id = newCityRef.id
         newCityRef.set(fertilizerRequest)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
                 res = true
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.w(tag, "Error adding document", e)
             }
         return res
     }
@@ -120,11 +119,12 @@ class FireBaseRepoImpl : FirebaseRepo {
         trainingRequest.id = newCityRef.id
         newCityRef.set(trainingRequest)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
                 res = true
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.w(tag, "Error adding document", e)
             }
-        return res    }
+        return res
+    }
 }
