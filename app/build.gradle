@@ -101,7 +101,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
     //viewModel
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
 
@@ -112,6 +112,11 @@ dependencies {
     implementation 'com.github.appsfeature:otp-view:1.0'
     //imagePicker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
 }
 
 
