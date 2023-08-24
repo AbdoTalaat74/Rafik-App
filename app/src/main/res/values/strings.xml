@@ -79,6 +79,16 @@
     <string name="language">Language</string>
     <string name="english">ُEnglish</string>
     <string name="arabic">Arabic</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="send_request_confirmation">Are you sure to send this request?</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_fill_product_type_field">\nPlease fill Product type Field</string>
+    <string name="please_fill_amount_field">\nPlease fill Amount Field</string>
+    <string name="please_fill_address_field">\nPlease fill Address Field</string>
+    <string name="please_fill_price_field">\nPlease fill Price Field</string>
+    <string name="please_fill_production_date_field">\nPlease fill Production Date Field</string>
+    <string name="remove_photo">delete photo</string>
+    <string name="navigate_up_confirmation">Are you sure you want to go back?\nyou will lose all data you entered!</string>
 
 
 </resources>

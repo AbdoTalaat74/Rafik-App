@@ -82,5 +82,15 @@
         <item>محلى</item>
         <item>تصدير</item>
     </string-array>
+    <string name="confirmation">تأكيد</string>
+    <string name="send_request_confirmation">هل انت متأكد من ارسال هذا الطلب؟</string>
+    <string name="cancel">إلغاء</string>
+    <string name="please_fill_product_type_field">\nبرجاء إدخال نوع المنتج</string>
+    <string name="please_fill_amount_field">\nبرجاء إدخال الكمية</string>
+    <string name="please_fill_address_field">\nبرجاء إدخال العنوان</string>
+    <string name="please_fill_price_field">\nبرجاء إدخال السعر</string>
+    <string name="please_fill_production_date_field">\nبرجاء إدخال تاريخ الانتاج</string>
+    <string name="remove_photo">إزالة الصورة</string>
+    <string name="navigate_up_confirmation">هل أنت متأكد من رغبتك في العودة\nسوف تفقد كل البيانات التي أدخلتها!</string>
 
 </resources>

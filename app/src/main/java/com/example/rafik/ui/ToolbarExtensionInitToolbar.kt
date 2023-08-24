@@ -1,6 +1,7 @@
 package com.example.rafik.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import com.google.android.material.appbar.MaterialToolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -14,7 +15,19 @@ fun initToolbar(
     toolbar.setTitleTextColor(fragment.resources.getColor(R.color.base_green_color))
     toolbar.isTitleCentered = true
     toolbar.setNavigationOnClickListener {
-        onBackPressed(fragment)
+
+        AlertDialog.Builder(fragment.context)
+            .setTitle(fragment.resources.getString(R.string.confirmation))
+            .setMessage(fragment.resources.getString(R.string.navigate_up_confirmation))
+            .setPositiveButton(fragment.resources.getString(R.string.okay)) { _, _ ->
+                onBackPressed(fragment)
+            }
+            .setNegativeButton(fragment.resources.getString(R.string.cancel)) { _, _ ->
+                //do nothing
+            }
+            .setIcon(R.drawable.ic_warning)
+            .show()
+
     }
 
 }

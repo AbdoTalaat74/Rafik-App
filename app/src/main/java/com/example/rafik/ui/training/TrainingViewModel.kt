@@ -18,9 +18,14 @@ class TrainingViewModel(application: Application) : ViewModel() {
     private lateinit var trainingRequest: TrainingRequest
 
 
-    private val _onNavigateUp = MutableLiveData<Boolean>()
-    val onNavigateUp: LiveData<Boolean>
-        get() = _onNavigateUp
+    private val _navigateUp = MutableLiveData<Boolean>()
+    val navigateUp: LiveData<Boolean>
+        get() = _navigateUp
+
+
+    fun onNavigateUp(){
+        _navigateUp.postValue(false)
+    }
 
     fun postProductType(productType: String) {
         _productType.postValue(productType)
@@ -47,8 +52,7 @@ class TrainingViewModel(application: Application) : ViewModel() {
                 viewModelScope.launch {
                     fireBaseRepoImpl.setTrainingRequest(trainingRequest)
                 }
-
-                _onNavigateUp.value = true
+                _navigateUp.value = true
             }
         }
     }

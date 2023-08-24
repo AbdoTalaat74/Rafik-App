@@ -1,6 +1,7 @@
 package com.example.rafik.ui.training
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,12 +35,14 @@ class TrainingFragment : Fragment() {
         binding.viewModel = viewModel
 
         initToolbar(binding.topAppBar, getString(R.string.trainings), this)
+
         initProductTypeSpinner()
         initTrainingPlacesSpinner()
 
-        viewModel.onNavigateUp.observe(viewLifecycleOwner) {
-            if (it) {
+        viewModel.navigateUp.observe(viewLifecycleOwner) {
+            if (it == true) {
                 findNavController().navigateUp()
+                viewModel.onNavigateUp()
             }
         }
 
@@ -47,30 +50,32 @@ class TrainingFragment : Fragment() {
         return binding.root
     }
 
-
     private fun initProductTypeSpinner() {
         val trainingsType = resources.getStringArray(R.array.product_types)
         val trainingsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, trainingsType)
         binding.productTypeSpinner.adapter = trainingsAdapter
-        binding.productTypeSpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    Log.i("initAreaSpinner", "area: ${trainingsType[position]}")
-                    viewModel.postProductType(trainingsType[position])
-                }
+        binding.productTypeSpinner.post {
+            binding.productTypeSpinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.i("initAreaSpinner", "area: ${trainingsType[position]}")
+                        viewModel.postProductType(trainingsType[position])
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    //todo
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+                        //todo
+                    }
                 }
-            }
+        }
+
     }
 
-    private fun initTrainingPlacesSpinner(){
+    private fun initTrainingPlacesSpinner() {
         val trainingPlaces = resources.getStringArray(R.array.training_places)
         val placesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, trainingPlaces)
         binding.trainingPlacesSpinner.adapter = placesAdapter
