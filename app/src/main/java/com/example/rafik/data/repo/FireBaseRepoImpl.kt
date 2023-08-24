@@ -1,28 +1,31 @@
 package com.example.rafik.data.repo
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.FertilizerRequest
+import com.example.rafik.domian.entity.SellProductRequest
 import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
-import com.example.rafik.utils.Constants.CITIES
 import com.example.rafik.utils.Constants.FERTILIZER_REQUEST
+import com.example.rafik.utils.Constants.PHOTOS
+import com.example.rafik.utils.Constants.SELL_PRODUCT_REQUEST
 import com.example.rafik.utils.Constants.TRAINING_REQUEST
 import com.example.rafik.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 
 
 class FireBaseRepoImpl : FirebaseRepo {
     private val tag = "FireBaseRepoImpl"
     private val db = Firebase.firestore
     private val auth = FirebaseAuth.getInstance()
+    private val storage = Firebase.storage
     val users = MutableLiveData<List<User>>()
-    val cities = MutableLiveData<List<City>>()
-    val areas = MutableLiveData<List<String>>()
     var user = MutableLiveData<User>()
 
     override suspend fun refreshData() {
@@ -95,31 +98,11 @@ class FireBaseRepoImpl : FirebaseRepo {
         return usersArray
     }
 
-    override suspend fun getCities(): List<City> {
-        val citiesArray = ArrayList<City>()
-        db.collection(CITIES)
-            .get()
-            .addOnSuccessListener { result ->
-                citiesArray.clear()
-                for (document in result) {
-                    val city: City = document.toObject(City::class.java)
-                    citiesArray.add(city)
-                    Log.d(tag, "${document.id} => ${document.data}")
-                }
-                cities.value = citiesArray
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(tag, "Error getting documents.", exception)
-            }
-        return citiesArray
-    }
-
     override suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean {
         var res = false
-        val newCityRef = db.collection(FERTILIZER_REQUEST).document()
-        fertilizerRequest.id = newCityRef.id
-        newCityRef.set(fertilizerRequest)
+        val newRequestRef = db.collection(FERTILIZER_REQUEST).document()
+        fertilizerRequest.id = newRequestRef.id
+        newRequestRef.set(fertilizerRequest)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
                 res = true
@@ -132,9 +115,9 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun setTrainingRequest(trainingRequest: TrainingRequest): Boolean {
         var res = false
-        val newCityRef = db.collection(TRAINING_REQUEST).document()
-        trainingRequest.id = newCityRef.id
-        newCityRef.set(trainingRequest)
+        val newRequestRef = db.collection(TRAINING_REQUEST).document()
+        trainingRequest.id = newRequestRef.id
+        newRequestRef.set(trainingRequest)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
                 res = true
@@ -143,5 +126,45 @@ class FireBaseRepoImpl : FirebaseRepo {
                 Log.w(tag, "Error adding document", e)
             }
         return res
+    }
+
+    override suspend fun setSellProductRequest(sellProductRequest: SellProductRequest): Boolean {
+        var res = false
+        val newRequestRef = db.collection(SELL_PRODUCT_REQUEST).document()
+        sellProductRequest.id = newRequestRef.id
+        sellProductRequest.productImage?.let {
+            sellProductRequest.imageUrl = uploadImage(it, newRequestRef.id)
+        }
+        sellProductRequest.productImage = null
+        newRequestRef.set(sellProductRequest)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun uploadImage(bitmap: Bitmap, name: String): String {
+        var url = ""
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask =
+            storage.reference.child("$PHOTOS + ${user.value!!.uid}//$name").putBytes(data)
+        uploadTask.addOnFailureListener { e ->
+            Log.w(tag, "Error adding document", e)
+        }.addOnSuccessListener { taskSnapshot ->
+            Log.d(tag, "taskSnapshot added with ID: ${taskSnapshot.storage.downloadUrl}")
+        }
+        storage.reference.child("$PHOTOS + ${user.value!!.uid}//$name").downloadUrl.addOnSuccessListener { uri ->
+            Log.d(tag, "taskSnapshot added with ID: $uri")
+            url = uri.toString()
+        }.addOnFailureListener { e ->
+            Log.w(tag, "Error adding document", e)
+        }
+        return url
     }
 }

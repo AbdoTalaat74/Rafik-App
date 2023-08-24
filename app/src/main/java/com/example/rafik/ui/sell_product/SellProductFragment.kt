@@ -3,7 +3,6 @@ package com.example.rafik.ui.sell_product
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -30,7 +29,6 @@ import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSellProductBinding
 import com.example.rafik.ui.initToolbar
 import com.github.dhaval2404.imagepicker.ImagePicker
-import javax.sql.DataSource
 
 class SellProductFragment : Fragment() {
     private lateinit var binding: FragmentSellProductBinding
@@ -39,22 +37,18 @@ class SellProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentSellProductBinding.inflate(layoutInflater)
-
         initToolbar(binding.topAppBar, getString(R.string.product_for_sale), this)
-
         viewModel = ViewModelProvider(
             this, SellProductVMFactory(requireContext().applicationContext as Application)
         )[SellProductViewModel::class.java]
-
         initTargetSpinner()
         binding.viewModel = viewModel
         binding.pickImg.setOnClickListener {
-
             ImagePicker.with(this)
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .compress(1024)//Final image size will be less than 1 MB(Optional)
                 .maxResultSize(
                     1080, 1080
-                )  //Final image resolution will be less than 1080 x 1080(Optional)
+                )//Final image resolution will be less than 1080 x 1080(Optional)
                 .createIntent { intent ->
                     viewModel.postImageProgressBarState(true)
                     startForProfileImageResult.launch(intent)
@@ -201,15 +195,12 @@ class SellProductFragment : Fragment() {
 
                     })
                         .into(binding.productImage)
-
-
                 }
 
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT)
                         .show()
                     viewModel.postImageProgressBarState(false)
-
                 }
 
                 else -> {
@@ -217,6 +208,5 @@ class SellProductFragment : Fragment() {
 
                 }
             }
-
         }
 }

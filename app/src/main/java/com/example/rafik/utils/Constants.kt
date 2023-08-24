@@ -1,6 +1,8 @@
 package com.example.rafik.utils
 
 object Constants {
+    const val SELL_PRODUCT_REQUEST = "SellProductRequest"
+    const val PHOTOS = "photos//"
     const val FERTILIZER_REQUEST = "FertilizerRequest"
     const val TRAINING_REQUEST = "TrainingRequest"
     const val CITIES = "cities"

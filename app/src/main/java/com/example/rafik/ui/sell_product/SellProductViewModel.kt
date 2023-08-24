@@ -1,9 +1,12 @@
 package com.example.rafik.ui.sell_product
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -13,7 +16,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.rafik.R
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.SellProductRequest
-import com.example.rafik.domian.entity.User
 import kotlinx.coroutines.launch
 
 @SuppressLint("UseCompatLoadingForDrawables")
@@ -116,25 +118,36 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
         validateForm()
         if (validProductType && validAmount && validAddress && validPrice && validProductionDate) {
             Log.e("SellProductViewModel", "validation done")
-
             _sendRequest.postValue(true)
         }
     }
 
+    @Suppress("DEPRECATION")
     fun sendRequest() {
-        Log.e("SellProductViewModel", "sendRequestCalled")
+        var bitmap: Bitmap? =null
+        Log.i("SellProductViewModel", "sendRequestCalled")
+        _imageUri.value?.let {
+            bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                ImageDecoder.decodeBitmap(ImageDecoder.createSource(application.applicationContext.contentResolver, it
+                ))
+            } else {
+                MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, it)
+            }
+        }
         val sellProductRequest = SellProductRequest(
-            productImage = _imageUri.value,
+            productImage = bitmap,
             productType = productType.get()!!,
             amount = amount.get()!!,
             address = address.get()!!,
             price = price.get()!!,
             productionDate = productionDate.get()!!,
             target = _target.value!!,
-//            user = user.value!!
-            user = User()
+            user = user.value!!
         )
-        Log.e("SellProductViewModel",sellProductRequest.toString())
+        Log.i("SellProductViewModel", sellProductRequest.toString())
+        viewModelScope.launch {
+            fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
+        }
         _navigateUp.postValue(true)
         _sendRequest.postValue(false)
     }
@@ -146,5 +159,4 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
     }
 
     val user = fireBaseRepoImpl.user
-
 }
