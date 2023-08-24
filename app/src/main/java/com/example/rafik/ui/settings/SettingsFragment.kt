@@ -20,11 +20,9 @@ import com.example.rafik.databinding.FragmentSettingsBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
-
 class SettingsFragment : Fragment() {
     private val settingsViewModel by activityViewModels<SettingsViewModel>()
     private lateinit var binding: FragmentSettingsBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -125,6 +123,7 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    @Suppress("DEPRECATION")
     private fun setLocale(languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)

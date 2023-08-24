@@ -84,6 +84,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
     //animated button for login
     implementation group: 'com.apachat', name: 'loadingbutton-android', version: '1.0.11'

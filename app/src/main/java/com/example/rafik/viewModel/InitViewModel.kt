@@ -13,8 +13,6 @@ import com.example.rafik.data.repo.FireBaseRepoImpl
 import kotlinx.coroutines.launch
 
 class InitViewModel : ViewModel() {
-    private val fireBaseRepoImpl = FireBaseRepoImpl()
-
     private val _isInternetAvailable = MutableLiveData<Boolean>()
     val isInternetAvailable: LiveData<Boolean>
         get() = _isInternetAvailable
@@ -34,9 +32,6 @@ class InitViewModel : ViewModel() {
 
     init {
         android.util.Log.i("InitViewModel", "init InitViewModel")
-        viewModelScope.launch {
-            fireBaseRepoImpl.getCities()
-        }
     }
 
     val networkRequest: NetworkRequest = NetworkRequest.Builder()
@@ -66,6 +61,4 @@ class InitViewModel : ViewModel() {
             internetStatus(false)
         }
     }
-    val cities = fireBaseRepoImpl.cities
-    val areas = fireBaseRepoImpl.areas
 }

@@ -5,14 +5,10 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class City(
-    @SerializedName("id")
-    val id: String = "",
     @SerializedName("arName")
     val arName: String = "",
     @SerializedName("enName")
     val enName: String = "",
-    @SerializedName("uid")
-    var uid: String = "",
     @SerializedName("areas")
     val areas: List<Area> = listOf()
 ) {

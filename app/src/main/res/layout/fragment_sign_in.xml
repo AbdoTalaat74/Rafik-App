@@ -133,6 +133,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/city_spinner_card"
                     app:layout_constraintStart_toStartOf="@+id/city_spinner_card"
                     app:layout_constraintTop_toBottomOf="@+id/city_spinner_card"
+                    app:strokeWidth="1dp"
                     tools:layout_height="?attr/dropdownListPreferredItemHeight">
 
                     <androidx.appcompat.widget.AppCompatSpinner
@@ -141,7 +142,6 @@
                         android:layout_height="?attr/dropdownListPreferredItemHeight"
                         android:orientation="horizontal" />
                 </com.google.android.material.card.MaterialCardView>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputAddress"

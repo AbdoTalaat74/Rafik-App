@@ -14,20 +14,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSignInBinding
+import com.example.rafik.domian.entity.Area
 import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.User
-import com.example.rafik.viewModel.InitViewModel
 import com.example.rafik.viewModel.LoginViewModel
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private val loginViewModel by activityViewModels<LoginViewModel>()
-    private val initViewModel by activityViewModels<InitViewModel>()
-
     lateinit var name: String
     private lateinit var phone: String
     private lateinit var address: String
     private lateinit var user: User
+    private lateinit var city: City
+    private lateinit var area: Area
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,13 +36,7 @@ class SignInFragment : Fragment() {
         nameFocusListener()
         addressFocusListener()
         phoneFocusListener()
-        initViewModel.cities.observe(viewLifecycleOwner) {
-            initCitySpinner(binding.citySpinner, it)
-        }
-        initViewModel.areas.observe(viewLifecycleOwner) {
-            initAreaSpinner(binding.citySpinner, it)
-        }
-
+        initCitySpinner(binding.citySpinner, loginViewModel.cities)
         binding.registerButton.setOnClickListener {
             binding.registerButton.startAnimation()
             if (binding.editTextName.text.toString() == "") {
@@ -105,6 +99,7 @@ class SignInFragment : Fragment() {
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cities)
         citiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = citiesAdapter
+     //   spinner.setSelection(citiesAdapter.getPosition())
         spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -113,6 +108,8 @@ class SignInFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
+                    city = City(cities[position].arName, cities[position].enName)
+                    initAreaSpinner(binding.areaSpinner, cities[position].areas)
                     Log.i("initAreaSpinner", "area: ${cities[position]}")
                 }
 
@@ -122,8 +119,9 @@ class SignInFragment : Fragment() {
             }
     }
 
-    private fun initAreaSpinner(spinner: AppCompatSpinner, area: List<String>) {
-        val areaAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, area)
+    private fun initAreaSpinner(spinner: AppCompatSpinner, areas: List<Area>) {
+        val areaAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, areas)
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = areaAdapter
         spinner.onItemSelectedListener =
@@ -134,7 +132,8 @@ class SignInFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    Log.i("initAreaSpinner", "area: ${area[position]}")
+                    area = areas[position]
+                    Log.i("initAreaSpinner", "area: ${areas[position]}")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -179,7 +178,7 @@ class SignInFragment : Fragment() {
         val validPhone = (binding.textInputPhone.helperText == null)
         if (validName && validAddress && validPhone) {
             //todo throw user to vm
-            user = User(name, phone, address, "")
+            user = User(name, phone, address, "", city, area)
             Log.i("SignInFragment", "throw $user to vm")
             loginViewModel.postUser(user)
             //todo navigating to otp

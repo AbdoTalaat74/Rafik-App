@@ -25,8 +25,7 @@
                 style="@style/MyToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/top_app_bar"></com.google.android.material.appbar.MaterialToolbar>
-
+                app:menu="@menu/top_app_bar" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,273 +36,258 @@
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/personalDetailsCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:padding="@dimen/_8sdp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/personalDetailsCard"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginVertical="@dimen/_8sdp"
-                    android:padding="@dimen/_8sdp"
-                    app:cardCornerRadius="30dp"
-                    app:cardElevation="4dp"
+                    android:paddingVertical="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/amount_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingVertical="@dimen/_8sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:hint="@string/amount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/product_type_text_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/amount_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="number|numberDecimal"
+                            android:text="@={viewModel.amount}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_type_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_28sdp"
+                        android:hint="@string/product_type"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/add_image_tv">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/product_type_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="textAutoComplete"
+                            android:text="@={viewModel.productType}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/price_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:hint="@string/price"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/address_text_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/price_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="number|numberDecimal"
+                            android:text="@={viewModel.price}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/address_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:hint="@string/address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/amount_text_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/address_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textAutoComplete"
+                            android:gravity="center"
+                            android:text="@={viewModel.address}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:hint="@string/production_date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/price_text_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/date_"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="textAutoComplete"
+                            android:text="@={viewModel.productionDate}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/add_image_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="@string/add_image"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/product_type_text_layout"
+                        app:layout_constraintTop_toTopOf="@+id/pickImg" />
+
+                    <ImageView
+                        android:id="@+id/pickImg"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginTop="16sp"
+                        android:clickable="true"
+                        android:contentDescription="@string/add_image"
+                        android:focusable="true"
+                        android:src="@drawable/ic_image"
+                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:clickable="true"
+                        android:contentDescription="@string/add_image"
+                        android:focusable="true"
+                        android:visibility="gone"
+                        app:imgUri="@{viewModel.imageUri}"
+                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5">
+                        tools:src="@drawable/ic_image" />
 
+                    <TextView
+                        android:id="@+id/delete_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/remove_photo"
+                        android:textColor="#2196F3"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/product_type_text_layout"
+                        app:layout_constraintEnd_toEndOf="@+id/productImage"
+                        app:layout_constraintStart_toStartOf="@+id/productImage"
+                        app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/amount_text_layout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <ProgressBar
+                        android:id="@+id/image_progress_bar"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/base_green_color"
+                        android:indeterminateTintMode="src_atop"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/product_type_spinner_card"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="@+id/date"
+                        app:layout_constraintStart_toEndOf="@+id/product_type_tv"
+                        app:layout_constraintTop_toBottomOf="@+id/date"
+                        app:strokeWidth="1dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/target_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:hint="@string/amount"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/product_type_text_layout">
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            tools:layout_height="?attr/dropdownListPreferredItemHeight" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/amount_text_field"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:inputType="number|numberDecimal"
-                                android:text="@={viewModel.amount}" />
+                    </com.google.android.material.card.MaterialCardView>
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/product_type_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/target"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_type_spinner_card"
+                        app:layout_constraintStart_toStartOf="@+id/date"
+                        app:layout_constraintTop_toTopOf="@+id/product_type_spinner_card" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/product_type_text_layout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_28sdp"
-                            android:hint="@string/product_type"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/add_image_tv">
+                    <Button
+                        android:id="@+id/send_request_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:backgroundTint="@color/base_green_color"
+                        android:onClick="@{()->viewModel.validateAndSendRequest()}"
+                        android:paddingVertical="@dimen/_8sdp"
+                        android:text="@string/send_request"
+                        android:textSize="@dimen/_16ssp"
+                        app:cornerRadius="@dimen/_15sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/product_type_spinner_card"
+                        app:strokeColor="@color/base_green_color" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/product_type_text_field"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:inputType="number|numberDecimal"
-                                android:text="@={viewModel.productType}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/price_text_layout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:hint="@string/price"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/address_text_layout">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/price_text_field"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@={viewModel.price}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/address_text_layout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:hint="@string/address"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/amount_text_layout">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/address_text_field"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@={viewModel.address}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/date"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:hint="@string/production_date"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/price_text_layout">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/date_"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@={viewModel.productionDate}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <TextView
-                            android:id="@+id/add_image_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:text="@string/add_image"
-                            android:textSize="@dimen/_16ssp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="@+id/product_type_text_layout"
-                            app:layout_constraintTop_toTopOf="@+id/pickImg" />
-
-
-                        <ImageView
-                            android:id="@+id/pickImg"
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:layout_marginTop="16sp"
-                            android:clickable="true"
-                            android:contentDescription="@string/add_image"
-                            android:focusable="true"
-                            android:src="@drawable/ic_image"
-                            app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/productImage"
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:clickable="true"
-                            android:contentDescription="@string/add_image"
-                            android:focusable="true"
-                            android:visibility="gone"
-                            app:imgUri="@{viewModel.imageUri}"
-                            app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:src="@drawable/ic_image" />
-
-                        <TextView
-                            android:id="@+id/delete_image"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:focusable="true"
-                            android:visibility="gone"
-                            android:text="@string/remove_photo"
-                            android:textColor="#2196F3"
-                            app:layout_constraintBottom_toTopOf="@+id/product_type_text_layout"
-                            app:layout_constraintEnd_toEndOf="@+id/productImage"
-                            app:layout_constraintStart_toStartOf="@+id/productImage"
-                            app:layout_constraintTop_toBottomOf="@+id/productImage" />
-
-                        <ProgressBar
-                            android:id="@+id/image_progress_bar"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="@dimen/_14sdp"
-                            android:indeterminate="true"
-                            android:indeterminateTint="@color/base_green_color"
-                            android:indeterminateTintMode="src_atop"
-                            android:visibility="gone"
-                            app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/product_type_spinner_card"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_24sdp"
-                            app:cardCornerRadius="10dp"
-                            app:cardElevation="4dp"
-                            app:layout_constraintEnd_toEndOf="@+id/date"
-                            app:layout_constraintStart_toEndOf="@+id/product_type_tv"
-                            app:layout_constraintTop_toBottomOf="@+id/date"
-                            app:strokeWidth="1dp">
-
-                            <androidx.appcompat.widget.AppCompatSpinner
-                                android:id="@+id/target_spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                tools:layout_height="?attr/dropdownListPreferredItemHeight" />
-
-                        </com.google.android.material.card.MaterialCardView>
-
-
-                        <TextView
-                            android:id="@+id/product_type_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/target"
-                            android:textSize="@dimen/_16ssp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/product_type_spinner_card"
-                            app:layout_constraintStart_toStartOf="@+id/date"
-                            app:layout_constraintTop_toTopOf="@+id/product_type_spinner_card" />
-
-
-                        <Button
-                            android:id="@+id/send_request_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/_24sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:backgroundTint="@color/base_green_color"
-                            android:onClick="@{()->viewModel.validateAndSendRequest()}"
-                            android:paddingVertical="@dimen/_8sdp"
-                            android:text="@string/send_request"
-                            android:textSize="@dimen/_16ssp"
-                            app:cornerRadius="@dimen/_15sdp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/product_type_spinner_card"
-                            app:strokeColor="@color/base_green_color" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.core.widget.NestedScrollView>
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 
