@@ -9,8 +9,11 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.ActivityMainBinding
+import com.example.rafik.ui.registration.SignInFragment
 import com.example.rafik.ui.settings.DarkModePrefManager
 import com.example.rafik.ui.settings.LanguagePrefManger
 import com.example.rafik.viewModel.InitViewModel
@@ -18,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val initViewModel: InitViewModel by viewModels()
@@ -78,5 +82,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideProgressBar() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        when (findNavController(R.id.home_nav_host_fragment).currentDestination?.id) {
+            R.id.signInFragment -> {
+                Log.e("onBackPressed", "  finishing")
+                finish()
+            }
+
+            else -> {
+                super.onBackPressed()
+            }
+        }
     }
 }

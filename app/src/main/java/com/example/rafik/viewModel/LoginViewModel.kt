@@ -492,6 +492,10 @@ class LoginViewModel : ViewModel() {
     val user: LiveData<User?>
         get() = _user
 
+    private val _isLogin = MutableLiveData<Boolean>()
+    val isLogin: LiveData<Boolean>
+        get() = _isLogin
+
     private val _authenticationState = MutableLiveData<AuthenticationState?>()
     val authenticationState: LiveData<AuthenticationState?>
         get() = _authenticationState
@@ -502,6 +506,16 @@ class LoginViewModel : ViewModel() {
             _authenticationState.value = AuthenticationState.AUTHENTICATED
         }
     }
+
+    fun loginUser(user: User) {
+        _user.value = user
+        _isLogin.value = true
+        _isLogin.postValue(true)
+        viewModelScope.launch {
+            _authenticationState.value = AuthenticationState.AUTHENTICATED
+        }
+    }
+
 
     fun setUser(user: User) {
         viewModelScope.launch {
@@ -515,6 +529,7 @@ class LoginViewModel : ViewModel() {
     }
 
     init {
+        _isLogin.value=false
         FirebaseUserLiveData().map { user ->
             if (user != null) {
                 _authenticationState.value = AuthenticationState.AUTHENTICATED

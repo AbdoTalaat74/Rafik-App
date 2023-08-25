@@ -89,6 +89,11 @@
     <string name="please_fill_production_date_field">\nPlease fill Production Date Field</string>
     <string name="remove_photo">delete photo</string>
     <string name="navigate_up_confirmation">Are you sure you want to go back?\nyou will lose all data you entered!</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">LogIn</string>
+    <string name="signup">SignUp</string>
+    <string name="join_now">Join Now</string>
+    <string name="new_to_rafik">New to Rafik?</string>
 
 
 </resources>

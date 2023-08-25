@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092181239560:android:9f3cd69f87f8436afeaebd",
+        "mobilesdk_app_id": "1:1092181239560:android:4cf74e4eba359daefeaebd",
         "android_client_info": {
           "package_name": "com.example.rafik"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1092181239560-to74d38fcv633nbe0gnd4n5jsjakukeu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rafik",
+            "certificate_hash": "d6b77c668a11a0bb68fccaafa580977168269838"
+          }
+        },
         {
           "client_id": "1092181239560-2rcgke3uh284mkh4htk66ab8dkfegpg2.apps.googleusercontent.com",
           "client_type": 3

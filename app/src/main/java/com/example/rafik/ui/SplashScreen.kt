@@ -8,13 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSplashScreenBinding
 import com.example.rafik.ui.settings.DarkModePrefManager
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : Fragment() {
@@ -45,16 +46,18 @@ class SplashScreen : Fragment() {
 
     private fun navigateToHomeFragment() {
         Handler(Looper.getMainLooper()).postDelayed({
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_splashScreen_to_homeFragment)
-        }, 2000)
+            lifecycleScope.launch {
+                findNavController().navigate(R.id.action_splashScreen_to_homeFragment)
+            }
+        }, 1500)
     }
 
     private fun navigateToRegisterFragment() {
         Handler(Looper.getMainLooper()).postDelayed({
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_splashScreen_to_signInFragment)
-        }, 2000)
+            lifecycleScope.launch {
+                findNavController().navigate(R.id.action_splashScreen_to_signInFragment)
+            }
+        }, 1500)
     }
 
 }
