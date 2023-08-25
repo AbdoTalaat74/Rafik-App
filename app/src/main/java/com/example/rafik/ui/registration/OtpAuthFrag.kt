@@ -1,5 +1,6 @@
 package com.example.rafik.ui.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -9,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOtpAuthBinding
+import com.example.rafik.ui.MainActivity
 import com.example.rafik.viewModel.LoginViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -30,12 +31,15 @@ class OtpAuthFrag : Fragment() {
     private val loginViewModel by activityViewModels<LoginViewModel>()
     private lateinit var phone: String
     private var verificationId: String = ""
+    private lateinit var intent: Intent
+    private var isLogin: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOtpAuthBinding.inflate(layoutInflater)
+
         mAuth = FirebaseAuth.getInstance()
         loginViewModel.user.observe(viewLifecycleOwner) {
             Log.i("OtpAuthFrag", "observing $it")
@@ -43,6 +47,11 @@ class OtpAuthFrag : Fragment() {
             phone = "+20" + it!!.phone
             binding.otpView.requestFocus()
             sendVerificationCode(phone)
+        }
+        loginViewModel.isLogin.observe(viewLifecycleOwner) {
+            isLogin = it
+            Log.i("isLogin", "isLogin $isLogin")
+
         }
 
         binding.otpView.otpListener = object : OTPListener {
@@ -84,26 +93,25 @@ class OtpAuthFrag : Fragment() {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    intent = Intent(activity, MainActivity::class.java)
                     binding.otpView.showSuccess()
-                        when (loginViewModel.isLogin.value!!) {
-                            true -> {
-                                Log.i("signInWithCredential", "login successfully")
-                            }
-
-                            false -> {
-                                Log.i("signInWithCredential", "sign up successfully")
-                                loginViewModel.setUser(binding.user!!)
-                            }
+                    when (isLogin) {
+                        true -> {
+                            Log.i("signInWithCredential", "login successfully")
+                            loginViewModel.loginUser(binding.user!!)
                         }
 
-                    Navigation.findNavController(requireView())
-                        .navigate(R.id.action_otpTestFrag_to_homeFragment)
+                        false -> {
+                            Log.i("signInWithCredential", "sign up successfully")
+                            loginViewModel.setUser(binding.user!!)
+                        }
+                    }
                 } else {
+                    binding.otpView.showError()
                     Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG)
                         .show()
                     Log.e("signInWithCredential", task.exception!!.message.toString())
                     binding.idBtnVerify.revertAnimation()
-                    binding.otpView.showError()
                 }
             }
     }
@@ -129,7 +137,7 @@ class OtpAuthFrag : Fragment() {
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                 val code = phoneAuthCredential.smsCode
                 if (code != null) {
-                    //  binding.idEdtOtp.setText(code)
+                    binding.idBtnVerify.isEnabled = true
                     verifyCode(code)
                 }
             }

@@ -500,11 +500,10 @@ class LoginViewModel : ViewModel() {
     val authenticationState: LiveData<AuthenticationState?>
         get() = _authenticationState
 
-    fun postUser(user: User) {
+    fun postUser(user: User ,isLogin:Boolean) {
         _user.value = user
-        viewModelScope.launch {
-            _authenticationState.value = AuthenticationState.AUTHENTICATED
-        }
+        _isLogin.value = isLogin
+        _isLogin.postValue(isLogin)
     }
 
     fun loginUser(user: User) {

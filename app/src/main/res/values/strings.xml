@@ -94,6 +94,10 @@
     <string name="signup">SignUp</string>
     <string name="join_now">Join Now</string>
     <string name="new_to_rafik">New to Rafik?</string>
+    <string name="are_you_sure">Are you sure with</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="register">Register</string>
     <string name="type_of_fertilizer">Types of Fertilizer</string>
     <string name="organic_products">Organic Products</string>

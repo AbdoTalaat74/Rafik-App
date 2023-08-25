@@ -3,22 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashScreen">
+    app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/splashScreen"
-        android:name="com.example.rafik.ui.SplashScreen"
-        android:label="SplashScreen"
-        tools:layout="@layout/fragment_splash_screen">
-        <action
-            android:id="@+id/action_splashScreen_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_splashScreen_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true" />
-    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.rafik.ui.home.HomeFragment"
@@ -30,11 +16,6 @@
         <action
             android:id="@+id/action_homeFragment_to_trainingFragment"
             app:destination="@id/trainingFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_sellProductFragment"
             app:destination="@id/sellProductFragment" />
@@ -57,26 +38,6 @@
         tools:layout="@layout/fragment_training" />
 
     <fragment
-        android:id="@+id/signInFragment"
-        tools:layout="@layout/fragment_sign_in"
-        android:name="com.example.rafik.ui.registration.SignInFragment"
-        android:label="SignInFragment" >
-        <action
-            android:id="@+id/action_signInFragment_to_otpTestFrag"
-            app:destination="@id/otpTestFrag" />
-    </fragment>
-    <fragment
-        android:id="@+id/otpTestFrag"
-        tools:layout="@layout/fragment_otp_auth"
-        android:name="com.example.rafik.ui.registration.OtpAuthFrag"
-        android:label="OtpTestFrag" >
-        <action
-            android:id="@+id/action_otpTestFrag_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         tools:layout="@layout/fragment_sell_product"
         android:id="@+id/sellProductFragment"
         android:name="com.example.rafik.ui.sell_product.SellProductFragment"
@@ -85,16 +46,13 @@
         android:id="@+id/settingsFragment"
         tools:layout="@layout/fragment_settings"
         android:name="com.example.rafik.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true" />
-    </fragment>
+            app:destination="@id/signInFragment" />
     <fragment
-        tools:layout="@layout/fragment_overview"
         android:id="@+id/overviewFragment"
+        tools:layout="@layout/fragment_overview"
         android:name="com.example.rafik.ui.overview.OverviewFragment"
         android:label="OverviewFragment" />
 </navigation>

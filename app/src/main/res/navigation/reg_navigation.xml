@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reg_navigation"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        tools:layout="@layout/fragment_sign_in"
+        android:name="com.example.rafik.ui.registration.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_otpAuthFrag"
+            app:destination="@id/otpAuthFrag" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_otp_auth"
+        android:id="@+id/otpAuthFrag"
+        android:name="com.example.rafik.ui.registration.OtpAuthFrag"
+        android:label="OtpAuthFrag" />
+</navigation>

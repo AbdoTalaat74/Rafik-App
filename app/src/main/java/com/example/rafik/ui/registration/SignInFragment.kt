@@ -1,6 +1,7 @@
 package com.example.rafik.ui.registration
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,7 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSignInBinding
 import com.example.rafik.domian.entity.Area
@@ -51,7 +52,7 @@ class SignInFragment : Fragment() {
                 binding.textInputPhone.helperText = getString(R.string.enter_phone)
                 binding.registerButton.revertAnimation()
             }
-            submitForm(it)
+            submitForm()
         }
 
         binding.loginButton.setOnClickListener {
@@ -60,7 +61,7 @@ class SignInFragment : Fragment() {
                 binding.textInputPhone.helperText = getString(R.string.enter_phone)
                 binding.registerButton.revertAnimation()
             }
-            submitForm2(it)
+            submitForm2()
         }
 
         return binding.root
@@ -112,7 +113,7 @@ class SignInFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View,
+                    view: View?,
                     position: Int,
                     id: Long
                 ) {
@@ -136,7 +137,7 @@ class SignInFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View,
+                    view: View?,
                     position: Int,
                     id: Long
                 ) {
@@ -177,19 +178,17 @@ class SignInFragment : Fragment() {
         return null
     }
 
-    private fun submitForm2(view: View) {
+    private fun submitForm2() {
         binding.textInputPhone.helperText = validatePhone()
         val validPhone = (binding.textInputPhone.helperText == null)
         if (validPhone) {
             user = User(phone = phone)
             Log.i("SignInFragment", "throw $user to vm")
-            loginViewModel.loginUser(user)
-            Navigation.findNavController(view)
-                .navigate(R.id.action_signInFragment_to_otpTestFrag)
+            alertDialog(true)
         }
     }
 
-    private fun submitForm(view: View) {
+    private fun submitForm() {
         binding.textInputName.helperText = validateName()
         binding.textInputAddress.helperText = validateAddress()
         binding.textInputPhone.helperText = validatePhone()
@@ -198,12 +197,36 @@ class SignInFragment : Fragment() {
         val validPhone = (binding.textInputPhone.helperText == null)
         if (validName && validAddress && validPhone) {
             //todo throw user to vm
-            user = User(name, phone, address, "", city, area)
-            Log.i("SignInFragment", "throw $user to vm")
-            loginViewModel.postUser(user)
-            //todo navigating to otp
-            Navigation.findNavController(view)
-                .navigate(R.id.action_signInFragment_to_otpTestFrag)
+            alertDialog(false)
         }
+    }
+
+    private fun alertDialog(isLogin: Boolean) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(resources.getString(R.string.confirmation))
+        builder.setMessage("${resources.getString(R.string.are_you_sure)} $phone ?")
+        builder.setPositiveButton(R.string.yes) { _, _ ->
+            //todo yes
+            when (isLogin) {
+                true -> {
+                    user = User(phone = phone)
+                    loginViewModel.postUser(user, true)
+                }
+
+                false -> {
+                    user = User(name, phone, address, "", city, area)
+                    Log.i("SignInFragment", "throw $user to vm")
+                    loginViewModel.postUser(user, false)
+                }
+            }
+            findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+        }
+
+        builder.setNegativeButton(R.string.no) { _, _ ->
+            //todo no
+            binding.registerButton.revertAnimation()
+            binding.loginButton.revertAnimation()
+        }
+        builder.show()
     }
 }
