@@ -54,6 +54,15 @@ class SignInFragment : Fragment() {
             submitForm(it)
         }
 
+        binding.loginButton.setOnClickListener {
+            binding.loginButton.startAnimation()
+            if (binding.editTextPhone.text.toString() == "") {
+                binding.textInputPhone.helperText = getString(R.string.enter_phone)
+                binding.registerButton.revertAnimation()
+            }
+            submitForm2(it)
+        }
+
         return binding.root
     }
 
@@ -99,7 +108,6 @@ class SignInFragment : Fragment() {
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cities)
         citiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = citiesAdapter
-     //   spinner.setSelection(citiesAdapter.getPosition())
         spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -110,7 +118,7 @@ class SignInFragment : Fragment() {
                 ) {
                     city = City(cities[position].arName, cities[position].enName)
                     initAreaSpinner(binding.areaSpinner, cities[position].areas)
-                    Log.i("initAreaSpinner", "area: ${cities[position]}")
+                    Log.i("initAreaSpinner", "city: ${cities[position]}")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -167,6 +175,18 @@ class SignInFragment : Fragment() {
             return getString(R.string.contian_11)
         }
         return null
+    }
+
+    private fun submitForm2(view: View) {
+        binding.textInputPhone.helperText = validatePhone()
+        val validPhone = (binding.textInputPhone.helperText == null)
+        if (validPhone) {
+            user = User(phone = phone)
+            Log.i("SignInFragment", "throw $user to vm")
+            loginViewModel.loginUser(user)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signInFragment_to_otpTestFrag)
+        }
     }
 
     private fun submitForm(view: View) {

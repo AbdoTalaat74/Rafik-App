@@ -85,11 +85,22 @@ class OtpAuthFrag : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     binding.otpView.showSuccess()
-                    loginViewModel.setUser(binding.user!!)
+                        when (loginViewModel.isLogin.value!!) {
+                            true -> {
+                                Log.i("signInWithCredential", "login successfully")
+                            }
+
+                            false -> {
+                                Log.i("signInWithCredential", "sign up successfully")
+                                loginViewModel.setUser(binding.user!!)
+                            }
+                        }
+
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_otpTestFrag_to_homeFragment)
                 } else {
-                    Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG)
+                        .show()
                     Log.e("signInWithCredential", task.exception!!.message.toString())
                     binding.idBtnVerify.revertAnimation()
                     binding.otpView.showError()
@@ -112,7 +123,7 @@ class OtpAuthFrag : Fragment() {
             override fun onCodeSent(s: String, forceResendingToken: ForceResendingToken) {
                 super.onCodeSent(s, forceResendingToken)
                 verificationId = s
-                binding.idBtnVerify.isEnabled=true
+                binding.idBtnVerify.isEnabled = true
             }
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
