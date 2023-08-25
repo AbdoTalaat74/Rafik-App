@@ -149,9 +149,8 @@ class SellProductFragment : Fragment() {
         binding.targetSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
-                    parent: AdapterView<*>, view: View, position: Int, id: Long
+                    parent: AdapterView<*>, view: View?, position: Int, id: Long
                 ) {
-                    Log.i("initAreaSpinner", "area: ${targetList[position]}")
                     viewModel.postTarget(targetList[position])
                 }
 

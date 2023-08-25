@@ -58,11 +58,10 @@ class TrainingFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View,
+                    view: View?,
                     position: Int,
                     id: Long
                 ) {
-                    Log.i("initAreaSpinner", "area: ${productTypes[position]}")
                     viewModel.postProductType(productTypes[position])
                 }
 
@@ -83,11 +82,10 @@ class TrainingFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View,
+                    view: View?,
                     position: Int,
                     id: Long
                 ) {
-                    Log.i("initAreaSpinner", "area: ${trainingPlaces[position]}")
                     viewModel.postTrainingPlace(trainingPlaces[position])
                 }
 
