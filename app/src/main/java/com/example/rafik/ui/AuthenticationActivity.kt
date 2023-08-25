@@ -1,29 +1,33 @@
 package com.example.rafik.ui
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.ConnectivityManager
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.findNavController
 import com.example.rafik.R
-import com.example.rafik.databinding.ActivityMainBinding
+import com.example.rafik.databinding.ActivityAuthenticationBinding
 import com.example.rafik.ui.settings.DarkModePrefManager
 import com.example.rafik.ui.settings.LanguagePrefManger
 import com.example.rafik.viewModel.InitViewModel
+import com.example.rafik.viewModel.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
 
+const val TAG = "AuthenticationActivity"
+
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class AuthenticationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAuthenticationBinding
+    private val loginViewModel by viewModels<LoginViewModel>()
     private val initViewModel: InitViewModel by viewModels()
-    private var wasFalse = true
+    private lateinit var intent: Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (DarkModePrefManager(applicationContext).isNightMode()) {
@@ -36,62 +40,50 @@ class MainActivity : AppCompatActivity() {
         Locale.setDefault(myLocale)
         conf.setLayoutDirection(myLocale)
         res.updateConfiguration(conf, res.displayMetrics)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val connectivityManager =
             getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         connectivityManager.requestNetwork(
-            initViewModel.networkRequest, initViewModel.networkCallback
+            initViewModel.networkRequest,
+            initViewModel.networkCallback
         )
         initViewModel.internetStatus(initViewModel.isInternetAvailable(this))
+
+        intent = Intent(this, MainActivity::class.java)
         initViewModel.isInternetAvailable.observe(this) { isInternetAvailable ->
             when (isInternetAvailable) {
                 true -> {
                     // Internet is available, perform your tasks here
-                    hideProgressBar()
-                    if (!wasFalse) {
-                        Snackbar.make(
-                            binding.frameLayout,
-                            resources.getString(R.string.yourInternetIsBack), Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
-                    Log.i("MainActivity", "Internet is available")
-                    wasFalse = true
+                    Log.i("AuthenticationActivity", "Internet is available")
                 }
 
                 false -> {
-                    wasFalse = false
                     // No internet connection, handle the scenario accordingly
-                    showProgressBar()
                     Snackbar.make(
-                        binding.frameLayout,
-                        resources.getString(R.string.checkYourInternet), Snackbar.LENGTH_SHORT
+                        binding.coordinatorLayout,
+                        resources.getString(R.string.checkYourInternet),
+                        Snackbar.LENGTH_SHORT
                     ).show()
-                    Log.i("MainActivity", " No internet connection")
+                    Log.i("AuthenticationActivity", " No internet connection")
                 }
             }
         }
-    }
 
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
+        loginViewModel.authenticationState.observe(this) {
+            when (it) {
+                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
+                    startActivity(intent)
+                    finish()
+                }
 
-    private fun hideProgressBar() {
-        binding.progressBar.visibility = View.GONE
-    }
+                LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.i(TAG, "UNAUTHENTICATED")
+                LoginViewModel.AuthenticationState.INVALID_AUTHENTICATION -> Log.i(
+                    TAG,
+                    "INVALID_AUTHENTICATION"
+                )
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        when (findNavController(R.id.home_nav_host_fragment).currentDestination?.id) {
-            R.id.signInFragment -> {
-                Log.i("onBackPressed", "  finishing")
-                finish()
-            }
-
-            else -> {
-                super.onBackPressed()
+                null -> Log.i(TAG, "INVALID_AUTHENTICATION")
             }
         }
     }

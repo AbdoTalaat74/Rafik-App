@@ -1,63 +1,61 @@
 package com.example.rafik.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.example.rafik.R
-import com.example.rafik.databinding.FragmentSplashScreenBinding
+import com.example.rafik.databinding.ActivitySplashScreenBinding
 import com.example.rafik.ui.settings.DarkModePrefManager
+import com.example.rafik.ui.settings.LanguagePrefManger
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.launch
+import java.util.Locale
 
+@Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")
-class SplashScreen : Fragment() {
-    private lateinit var binding: FragmentSplashScreenBinding
+class SplashScreen : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
     private val mAuth = FirebaseAuth.getInstance()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        if (DarkModePrefManager(requireContext()).isNightMode()) {
+    private lateinit var intent: Intent
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (DarkModePrefManager(applicationContext).isNightMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
-        binding = FragmentSplashScreenBinding.inflate(layoutInflater)
-        val mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            if (firebaseAuth.currentUser != null) {
-                navigateToHomeFragment()
-            }
-        }
+        val myLocale = Locale(LanguagePrefManger(this).getLanguage())
+        val res: Resources = resources
+        val conf: Configuration = res.configuration
+        conf.setLocale(myLocale)
+        Locale.setDefault(myLocale)
+        conf.setLayoutDirection(myLocale)
+        res.updateConfiguration(conf, res.displayMetrics)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (mAuth.currentUser != null) {
-            mAuth.addAuthStateListener(mAuthListener)
+            Log.i("SplashScreen", "intent to MainActivity")
+            intent =
+                Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            start()
         } else {
-            navigateToRegisterFragment()
+            Log.i("SplashScreen", "intent to AuthenticationActivity")
+            intent = Intent(
+                this,
+                AuthenticationActivity::class.java
+            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            start()
         }
-        return binding.root
     }
 
-
-    private fun navigateToHomeFragment() {
+    private fun start() {
+        Log.i("SplashScreen", "start called")
         Handler(Looper.getMainLooper()).postDelayed({
-            lifecycleScope.launch {
-                findNavController().navigate(R.id.action_splashScreen_to_homeFragment)
-            }
-        }, 1500)
+            startActivity(intent)
+            finish()
+        }, 1500) // 1500 is the delayed time in milliseconds.
     }
-
-    private fun navigateToRegisterFragment() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            lifecycleScope.launch {
-                findNavController().navigate(R.id.action_splashScreen_to_signInFragment)
-            }
-        }, 1500)
-    }
-
 }
