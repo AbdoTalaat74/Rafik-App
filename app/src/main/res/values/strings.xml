@@ -94,6 +94,11 @@
     <string name="signup">SignUp</string>
     <string name="join_now">Join Now</string>
     <string name="new_to_rafik">New to Rafik?</string>
+    <string name="register">Register</string>
+    <string name="type_of_fertilizer">Types of Fertilizer</string>
+    <string name="organic_products">Organic Products</string>
+    <string name="overview">Overview</string>
+    <string name="home_screen">Home</string>
 
 
 </resources>

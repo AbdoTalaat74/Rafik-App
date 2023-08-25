@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/organicFertilizerFragment"
@@ -89,4 +92,9 @@
             app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_overview"
+        android:id="@+id/overviewFragment"
+        android:name="com.example.rafik.ui.overview.OverviewFragment"
+        android:label="OverviewFragment" />
 </navigation>
