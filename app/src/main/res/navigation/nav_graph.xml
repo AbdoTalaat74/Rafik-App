@@ -49,12 +49,10 @@
         android:label="SettingsFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+            app:destination="@id/signInFragment" />
     <fragment
-        tools:layout="@layout/fragment_overview"
         android:id="@+id/overviewFragment"
+        tools:layout="@layout/fragment_overview"
         android:name="com.example.rafik.ui.overview.OverviewFragment"
         android:label="OverviewFragment" />
 </navigation>
