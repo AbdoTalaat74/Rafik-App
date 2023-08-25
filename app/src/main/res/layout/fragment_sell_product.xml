@@ -69,7 +69,8 @@
                         android:layout_marginHorizontal="@dimen/_32sdp"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:hint="@string/amount"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/product_type_text_layout">
 
@@ -91,6 +92,8 @@
                         android:layout_marginHorizontal="@dimen/_32sdp"
                         android:layout_marginTop="@dimen/_28sdp"
                         android:hint="@string/product_type"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/add_image_tv">
@@ -113,7 +116,8 @@
                         android:layout_marginHorizontal="@dimen/_32sdp"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:hint="@string/price"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/address_text_layout">
@@ -136,7 +140,8 @@
                         android:layout_marginHorizontal="@dimen/_32sdp"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:hint="@string/address"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/amount_text_layout">
 
@@ -144,8 +149,8 @@
                             android:id="@+id/address_text_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textAutoComplete"
                             android:gravity="center"
+                            android:inputType="textAutoComplete"
                             android:text="@={viewModel.address}" />
 
                     </com.google.android.material.textfield.TextInputLayout>

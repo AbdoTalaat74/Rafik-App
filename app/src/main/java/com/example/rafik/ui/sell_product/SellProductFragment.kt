@@ -42,6 +42,10 @@ class SellProductFragment : Fragment() {
             this, SellProductVMFactory(requireContext().applicationContext as Application)
         )[SellProductViewModel::class.java]
         initTargetSpinner()
+        amountFocusListener()
+        productTypeFocusListener()
+        addressFocusListener()
+        priceFocusListener()
         binding.viewModel = viewModel
         binding.pickImg.setOnClickListener {
             ImagePicker.with(this)
@@ -208,4 +212,82 @@ class SellProductFragment : Fragment() {
                 }
             }
         }
+
+    private fun productTypeFocusListener() {
+        binding.productTypeTextField.setOnFocusChangeListener { _, focus ->
+            if (!focus) {
+                binding.productTypeTextLayout.error = validateProductType()
+            } else {
+                binding.productTypeTextLayout.error = null
+            }
+        }
+    }
+
+    private fun validateProductType(): String? {
+        val name = binding.productTypeTextField.text.toString()
+        while (name == "") {
+            return getString(R.string.please_fill_product_type_field)
+        }
+        return null
+    }
+
+    private fun amountFocusListener() {
+        binding.amountTextField.setOnFocusChangeListener { _, focus ->
+            if (!focus) {
+                binding.amountTextLayout.error = validateAmount()
+            } else {
+                binding.amountTextLayout.error = ""
+            }
+        }
+    }
+
+    private fun validateAmount(): String? {
+        val name = binding.amountTextField.text.toString()
+        while (name == "") {
+            return getString(R.string.please_fill_amount_field)
+        }
+        return null
+    }
+
+
+    private fun addressFocusListener() {
+        binding.addressTextField.setOnFocusChangeListener { _, focus ->
+            if (!focus) {
+                binding.addressTextLayout.error = validateAddress()
+            } else {
+                binding.addressTextLayout.error = ""
+            }
+        }
+    }
+
+    private fun validateAddress(): String? {
+        val name = binding.addressTextField.text.toString()
+        while (name == "") {
+            return getString(R.string.please_fill_address_field)
+        }
+        return null
+    }
+
+
+    private fun priceFocusListener() {
+        binding.priceTextField.setOnFocusChangeListener { _, focus ->
+            if (!focus) {
+                binding.priceTextLayout.error = validatePrice()
+            } else {
+                binding.priceTextLayout.error = ""
+            }
+        }
+    }
+
+
+
+    private fun validatePrice(): String? {
+        val name = binding.priceTextField.text.toString()
+        while (name == "") {
+            return getString(R.string.please_fill_price_field)
+        }
+        return null
+    }
+
+
 }

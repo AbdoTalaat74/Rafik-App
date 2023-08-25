@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.rafik.R
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.FertilizerRequest
+import com.example.rafik.domian.entity.User
 import kotlinx.coroutines.launch
 
 class OrganicFertilizerViewModel(private val application: Application) : ViewModel() {
@@ -29,9 +30,17 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     val dialogMessage: LiveData<String>
         get() = _dialogMessage
 
-    private val _onNavigateUp = MutableLiveData<Boolean>()
-    val onNavigateUp: LiveData<Boolean>
-        get() = _onNavigateUp
+    private val _navigateUp = MutableLiveData<Boolean>()
+    val navigateUp: LiveData<Boolean>
+        get() = _navigateUp
+
+    private val _sendRequest = MutableLiveData<Boolean>()
+    val sendRequest: LiveData<Boolean>
+        get() = _sendRequest
+
+    fun onNavigateUp() {
+        _navigateUp.postValue(false)
+    }
 
     private fun validateForm() {
         Log.e("OrganicFertilizerViewModel", "invalidForm Called")
@@ -40,7 +49,12 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
             message += application.resources.getString(R.string.please_fill_the_area_field)
             validArea = false
         } else {
-            validArea = true
+            if (acre.get() == "0" && carat.get() == "0") {
+                validArea = false
+                message += application.resources.getString(R.string.you_must_enter_a_value_per_carat_or_acre)
+            } else {
+                validArea = true
+            }
         }
         if (cropType.get().isNullOrBlank()) {
             message += application.resources.getString(R.string.please_fill_crop_type_field)
@@ -59,9 +73,20 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
         _dialogMessage.postValue(message)
     }
 
-    fun sendRequest() {
+
+    fun validateAndSendRequest() {
+        Log.e("OrganicFertilizerFragment", "validateAndSendRequest called")
         validateForm()
         if (validArea && validCropType && validFertilizerType) {
+            Log.e("OrganicFertilizerFragment", "validation done")
+            _sendRequest.postValue(true)
+        }
+    }
+
+
+    fun sendRequest() {
+        validateForm()
+        if (user.value != null) {
             val fertilizerRequest = FertilizerRequest(
                 "",
                 acre.get()?.toDouble(),
@@ -77,11 +102,14 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
             viewModelScope.launch {
                 fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
             }
-            _onNavigateUp.value = true
+            _sendRequest.postValue(false)
+            _navigateUp.postValue(true)
         }
     }
 
     init {
+        acre.set("0")
+        carat.set("0")
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
         }

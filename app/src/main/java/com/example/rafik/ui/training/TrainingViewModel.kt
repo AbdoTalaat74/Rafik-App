@@ -23,7 +23,11 @@ class TrainingViewModel(application: Application) : ViewModel() {
         get() = _navigateUp
 
 
-    fun onNavigateUp(){
+    private val _sendRequest = MutableLiveData<Boolean>()
+    val sendRequest: LiveData<Boolean>
+        get() = _sendRequest
+
+    fun onNavigateUp() {
         _navigateUp.postValue(false)
     }
 
@@ -35,26 +39,35 @@ class TrainingViewModel(application: Application) : ViewModel() {
         _trainingPlace.postValue(trainingPlace)
     }
 
+
+    fun validateAndSendRequest() {
+        Log.e("TrainingViewModel", "validateAndSendRequest called")
+        Log.e("TrainingViewModel", _productType.value!!)
+        Log.e("TrainingViewModel", _trainingPlace.value!!)
+        if (!(_trainingPlace.value.isNullOrBlank() && _productType.value.isNullOrBlank())) {
+            Log.e("TrainingViewModel", "validation done")
+            _sendRequest.postValue(true)
+        }
+    }
+
+
     fun sendRequest() {
         Log.e("TrainingViewModel", "sendRequest called")
         Log.e("TrainingViewModel", _productType.value!!)
         Log.e("TrainingViewModel", _trainingPlace.value!!)
-        if (_trainingPlace.value.isNullOrBlank() && _productType.value.isNullOrBlank()) {
-            Log.e("TrainingViewModel", "Null values")
-            return
-        } else {
-            if (user.value != null) {
-                trainingRequest = TrainingRequest(
-                    productType = _productType.value!!,
-                    trainingPlace = _trainingPlace.value!!,
-                    user = user.value!!
-                )
-                viewModelScope.launch {
-                    fireBaseRepoImpl.setTrainingRequest(trainingRequest)
-                }
-                _navigateUp.value = true
+        if (user.value != null) {
+            trainingRequest = TrainingRequest(
+                productType = _productType.value!!,
+                trainingPlace = _trainingPlace.value!!,
+                user = user.value!!
+            )
+            viewModelScope.launch {
+                fireBaseRepoImpl.setTrainingRequest(trainingRequest)
             }
+            _navigateUp.value = true
+            _sendRequest.postValue(false)
         }
+
     }
 
 
