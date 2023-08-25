@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/setting"
-        android:icon="@drawable/settings"
-        android:title="@string/settings"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/rafik"
         android:icon="@drawable/rafik_menu_icon"
         android:title="@string/app_name"

@@ -91,7 +91,7 @@
     <string name="please_fill_price_field">\nبرجاء إدخال السعر</string>
     <string name="please_fill_production_date_field">\nبرجاء إدخال تاريخ الانتاج</string>
     <string name="remove_photo">إزالة الصورة</string>
-    <string name="navigate_up_confirmation">هل أنت متأكد من رغبتك في العودة\nسوف تفقد كل البيانات التي أدخلتها!</string>
+    <string name="navigate_up_confirmation">هل أنت متأكد من رغبتك في العودة؟\nسوف تفقد كل البيانات التي أدخلتها!</string>
     <string name="already_have_an_account">هل لديك حساب؟</string>
     <string name="login">تسجيل دخول</string>
     <string name="signup">تسجيل</string>
@@ -103,5 +103,10 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
 
 
+    <string name="register">إنشاء حساب</string>
+    <string name="type_of_fertilizer">أنواع السماد</string>
+    <string name="organic_products">المنتجات العضوية</string>
+    <string name="overview">نظرة عامة</string>
+    <string name="home_screen">الصفحة الرئيسية</string>
 
 </resources>

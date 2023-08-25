@@ -98,6 +98,11 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="register">Register</string>
+    <string name="type_of_fertilizer">Types of Fertilizer</string>
+    <string name="organic_products">Organic Products</string>
+    <string name="overview">Overview</string>
+    <string name="home_screen">Home</string>
 
 
 </resources>

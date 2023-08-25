@@ -1,5 +1,6 @@
 package com.example.rafik.ui.home
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentHomeScreenBinding
+import com.example.rafik.ui.onBackPressed
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
@@ -25,9 +28,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeScreenBinding.inflate(layoutInflater)
+        initHomeToolBar()
         binding.contactUsLayout.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
-
 
             animation.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
@@ -63,8 +66,9 @@ class HomeFragment : Fragment() {
         // assign the on menu item click listener
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.setting -> {
-                    findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+
+                R.id.rafik -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_overviewFragment)
                     true
                 }
 
@@ -80,4 +84,18 @@ class HomeFragment : Fragment() {
         intent.data = Uri.parse("https://api.whatsapp.com/send?phone=201093111955")
         startActivity(intent)
     }
+
+
+    private fun initHomeToolBar(
+    ) {
+        binding.topAppBar.setNavigationIcon(R.drawable.ic_settings2)
+        binding.topAppBar.title = getString(R.string.home_screen)
+        binding.topAppBar.setTitleTextColor(this.resources.getColor(R.color.base_green_color))
+        binding.topAppBar.isTitleCentered = true
+        binding.topAppBar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
+
+    }
+
 }

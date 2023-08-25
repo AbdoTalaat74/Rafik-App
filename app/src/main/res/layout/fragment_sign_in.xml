@@ -224,7 +224,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_16sdp"
                         android:background="@drawable/login_button_bk"
-                        android:text="@string/registration"
+                        android:text="@string/register"
                         android:textColor="@color/white"
                         app:initialCornerAngle="27dp"
                         app:layout_constraintEnd_toEndOf="parent"

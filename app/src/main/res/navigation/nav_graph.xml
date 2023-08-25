@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/organicFertilizerFragment"
@@ -44,4 +47,14 @@
         tools:layout="@layout/fragment_settings"
         android:name="com.example.rafik.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_overview"
+        android:id="@+id/overviewFragment"
+        android:name="com.example.rafik.ui.overview.OverviewFragment"
+        android:label="OverviewFragment" />
 </navigation>
