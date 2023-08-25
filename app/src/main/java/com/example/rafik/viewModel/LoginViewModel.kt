@@ -349,7 +349,7 @@ class LoginViewModel : ViewModel() {
         City(
             "القاهرة", "Cairo",
             listOf(
-                Area("اسلام الاول"),
+                Area("السلام الاول"),
                 Area("السلام التاني"),
                 Area("المرج"),
                 Area("المطرية"),

@@ -51,27 +51,26 @@ class TrainingFragment : Fragment() {
     }
 
     private fun initProductTypeSpinner() {
-        val trainingsType = resources.getStringArray(R.array.product_types)
-        val trainingsAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, trainingsType)
-        binding.productTypeSpinner.adapter = trainingsAdapter
-        binding.productTypeSpinner.post {
-            binding.productTypeSpinner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>,
-                        view: View,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.i("initAreaSpinner", "area: ${trainingsType[position]}")
-                        viewModel.postProductType(trainingsType[position])
-                    }
-
-                    override fun onNothingSelected(parent: AdapterView<*>) {
-                        //todo
-                    }
+        val productTypes = resources.getStringArray(R.array.product_types)
+        val productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, productTypes)
+        binding.productTypeSpinner.adapter = productAdapter
+        binding.productTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.i("initAreaSpinner", "area: ${productTypes[position]}")
+                    viewModel.postProductType(productTypes[position])
                 }
-        }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    //todo
+                }
+            }
+
 
     }
 
