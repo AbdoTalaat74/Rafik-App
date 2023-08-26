@@ -56,8 +56,7 @@ class SignInFragment : Fragment() {
                         findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
                     } else {
                         //todo ya tal3oooooooooooooooooooooot
-                        Toast.makeText(requireContext(), "this number is exist", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(requireContext(), "this number is exist", Toast.LENGTH_SHORT).show()
                         binding.registerButton.revertAnimation()
                         binding.loginButton.revertAnimation()
                     }
@@ -77,11 +76,6 @@ class SignInFragment : Fragment() {
                         findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
                     }
                 }
-
-                UserFound.UNKNOWN -> {
-                    Log.i(tag, "UNKNOWN")
-                }
-
                 null -> {
                     Log.i(tag, "INVALID_USER")
                 }

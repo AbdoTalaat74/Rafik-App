@@ -19,11 +19,9 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
 
-
 @Suppress("DEPRECATION")
 class AuthenticationActivity : AppCompatActivity() {
-    private val TAG = "AuthenticationActivity"
-
+    private val tag = "AuthenticationActivity"
     private lateinit var binding: ActivityAuthenticationBinding
     private val loginViewModel by viewModels<LoginViewModel>()
     private val initViewModel: InitViewModel by viewModels()
@@ -78,13 +76,13 @@ class AuthenticationActivity : AppCompatActivity() {
                     finish()
                 }
 
-                LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.i(TAG, "UNAUTHENTICATED")
+                LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.i(tag, "UNAUTHENTICATED")
                 LoginViewModel.AuthenticationState.INVALID_AUTHENTICATION -> Log.i(
-                    TAG,
+                    tag,
                     "INVALID_AUTHENTICATION"
                 )
 
-                null -> Log.i(TAG, "INVALID_AUTHENTICATION")
+                null -> Log.i(tag, "INVALID_AUTHENTICATION")
             }
         }
     }
