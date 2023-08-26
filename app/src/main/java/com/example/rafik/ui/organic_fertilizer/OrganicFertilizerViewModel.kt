@@ -11,6 +11,7 @@ import com.example.rafik.R
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.FertilizerRequest
 import com.example.rafik.domian.entity.User
+import com.example.rafik.utils.Constants
 import kotlinx.coroutines.launch
 
 class OrganicFertilizerViewModel(private val application: Application) : ViewModel() {
@@ -37,6 +38,18 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     private val _sendRequest = MutableLiveData<Boolean>()
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
+
+    private val _stateToastMessage = MutableLiveData<String>()
+    val stateToastMessage: LiveData<String>
+        get() = _stateToastMessage
+
+
+    val isSuccess:LiveData<Constants.Request?>
+        get() = fireBaseRepoImpl.fertilizerRequest
+
+    fun setNavigate(state:Boolean){
+        _navigateUp.postValue(state)
+    }
 
     fun onNavigateUp() {
         _navigateUp.postValue(false)
@@ -100,10 +113,9 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
             cropType.set("")
             fertilizerType.set("")
             viewModelScope.launch {
-                fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
+                 fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
             }
             _sendRequest.postValue(false)
-            _navigateUp.postValue(true)
         }
     }
 
