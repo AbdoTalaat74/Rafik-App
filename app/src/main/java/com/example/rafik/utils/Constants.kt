@@ -13,4 +13,8 @@ object Constants {
     enum class UserFound {
         FOUND, NOT_FOUND, UNKNOWN
     }
+
+    enum class Request {
+        SUCCESS, FAILED
+    }
 }

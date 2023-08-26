@@ -3,16 +3,21 @@ package com.example.rafik.ui.organic_fertilizer
 import android.app.AlertDialog
 import android.app.Application
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOrganicFertilizerBinding
 import com.example.rafik.ui.initToolbar
+import com.example.rafik.utils.Constants
+import com.google.android.material.snackbar.Snackbar
 
 class OrganicFertilizerFragment : Fragment() {
     private lateinit var binding: FragmentOrganicFertilizerBinding
@@ -39,6 +44,7 @@ class OrganicFertilizerFragment : Fragment() {
 
         viewModel.dialogMessage.observe(viewLifecycleOwner) { message ->
             if (!(message.isNullOrBlank())) {
+                submitForm()
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.error))
                     .setMessage(message)
@@ -68,15 +74,37 @@ class OrganicFertilizerFragment : Fragment() {
 
         viewModel.navigateUp.observe(viewLifecycleOwner) {
             if (it == true) {
-                findNavController().navigateUp()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    findNavController().navigateUp()
+                }, 1500)
+
                 viewModel.navigateUp
                 viewModel.onNavigateUp()
             }
         }
 
+        viewModel.isSuccess.observe(viewLifecycleOwner){
+            when (it){
+                Constants.Request.SUCCESS ->{
+                    Snackbar.make(binding.coordinatorlayout,getString(R.string.request_sent_successfully),Snackbar.LENGTH_LONG).show()
+
+                    viewModel.setNavigate(true)
+
+                }
+                Constants.Request.FAILED ->{
+                    Snackbar.make(requireView(),getString(R.string.your_request_was_not_sent_please_try_again_later),Snackbar.LENGTH_LONG).show()
+
+                }
+                else -> {
+                    Toast.makeText(requireContext(),getString(R.string.your_request_was_not_sent_please_try_again_later),Toast.LENGTH_LONG).show()
+
+                }
+            }
+        }
 
         return binding.root
     }
+
 
 
     private fun acreFocusListener() {
@@ -90,10 +118,9 @@ class OrganicFertilizerFragment : Fragment() {
     }
 
 
-
     private fun validateAcre(): String? {
-        val name = binding.acreTextField.text.toString()
-        while (name == "") {
+        val acre = binding.acreTextField.text.toString()
+        while (acre.isNullOrBlank()) {
             return getString(R.string.this_field_cannot_be_empty)
         }
         return null
@@ -110,10 +137,9 @@ class OrganicFertilizerFragment : Fragment() {
     }
 
 
-
     private fun validateCarat(): String? {
-        val name = binding.caratTextField.text.toString()
-        while (name == "") {
+        val carat = binding.caratTextField.text.toString()
+        while (carat.isNullOrBlank()) {
             return getString(R.string.this_field_cannot_be_empty)
         }
         return null
@@ -130,10 +156,9 @@ class OrganicFertilizerFragment : Fragment() {
     }
 
 
-
     private fun validateCultivationType(): String? {
-        val name = binding.cultivationTypeTextField.text.toString()
-        while (name == "") {
+        val cultivationType = binding.cultivationTypeTextField.text.toString()
+        while (cultivationType.isNullOrBlank()) {
             return getString(R.string.please_fill_crop_type_field)
         }
         return null
@@ -142,7 +167,7 @@ class OrganicFertilizerFragment : Fragment() {
     private fun fertilizerTypeFocusListener() {
         binding.fertilizerTypeTextField.setOnFocusChangeListener { _, focus ->
             if (!focus) {
-                binding.fertilizerTypeTextLayout.error = validateCultivationType()
+                binding.fertilizerTypeTextLayout.error = validateFertilizerType()
             } else {
                 binding.fertilizerTypeTextLayout.error = ""
             }
@@ -150,13 +175,20 @@ class OrganicFertilizerFragment : Fragment() {
     }
 
 
-
     private fun validateFertilizerType(): String? {
-        val name = binding.fertilizerTypeTextField.text.toString()
-        while (name == "") {
+        val fertilizerType = binding.fertilizerTypeTextField.text.toString()
+        while (fertilizerType.isNullOrBlank()) {
             return getString(R.string.please_fill_fertilizer_type_field)
         }
         return null
+    }
+
+
+    private fun submitForm() {
+        binding.acreTextLayout.error = validateAcre()
+        binding.caratTextLayout.error = validateCarat()
+        binding.cultivationTypeTextLayout.error = validateCultivationType()
+        binding.fertilizerTypeTextLayout.error = validateFertilizerType()
     }
 
 

@@ -114,6 +114,7 @@ class SellProductFragment : Fragment() {
 
         viewModel.dialogMessage.observe(viewLifecycleOwner) { message ->
             if (!(message.isNullOrBlank())) {
+                submitForm()
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.error))
                     .setMessage(message)
@@ -284,8 +285,8 @@ class SellProductFragment : Fragment() {
     }
 
     private fun validateProductType(): String? {
-        val name = binding.productTypeTextField.text.toString()
-        while (name == "") {
+        val productType = binding.productTypeTextField.text.toString()
+        while (productType.isNullOrBlank()) {
             return getString(R.string.please_fill_product_type_field)
         }
         return null
@@ -302,8 +303,8 @@ class SellProductFragment : Fragment() {
     }
 
     private fun validateAmount(): String? {
-        val name = binding.amountTextField.text.toString()
-        while (name == "") {
+        val amount = binding.amountTextField.text.toString()
+        while (amount.isNullOrBlank()) {
             return getString(R.string.please_fill_amount_field)
         }
         return null
@@ -321,8 +322,8 @@ class SellProductFragment : Fragment() {
     }
 
     private fun validateAddress(): String? {
-        val name = binding.addressTextField.text.toString()
-        while (name == "") {
+        val address = binding.addressTextField.text.toString()
+        while (address.isNullOrBlank()) {
             return getString(R.string.please_fill_address_field)
         }
         return null
@@ -342,11 +343,21 @@ class SellProductFragment : Fragment() {
 
 
     private fun validatePrice(): String? {
-        val name = binding.priceTextField.text.toString()
-        while (name == "") {
+        val price = binding.priceTextField.text.toString()
+        while (price.isNullOrBlank()) {
             return getString(R.string.please_fill_price_field)
         }
         return null
+    }
+
+
+
+    private fun submitForm(){
+        Log.e("SellProductFragment","submitForm called")
+        binding.productTypeTextLayout.error = validateProductType()
+        binding.amountTextLayout.error = validateAmount()
+        binding.addressTextLayout.error = validateAddress()
+        binding.priceTextLayout.error = validatePrice()
     }
 
 

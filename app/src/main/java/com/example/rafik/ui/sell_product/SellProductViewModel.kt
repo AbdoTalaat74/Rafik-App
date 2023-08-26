@@ -147,7 +147,7 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
             )
             Log.i("SellProductViewModel", sellProductRequest.toString())
             viewModelScope.launch {
-                fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
+               val state = fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
             }
             _navigateUp.postValue(true)
             _sendRequest.postValue(false)

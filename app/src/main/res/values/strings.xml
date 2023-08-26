@@ -157,6 +157,8 @@
     <string name="_0">0</string>
     <string name="you_must_enter_a_value_per_carat_or_acre">You must enter a value per carat or acre</string>
     <string name="this_field_cannot_be_empty">This field cannot be empty</string>
+    <string name="request_sent_successfully">Request sent Successfully</string>
+    <string name="your_request_was_not_sent_please_try_again_later">Your request was not sent, please try again later</string>
 
 
 </resources>

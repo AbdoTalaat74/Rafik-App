@@ -8,6 +8,7 @@ import com.example.rafik.domian.entity.SellProductRequest
 import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
+import com.example.rafik.utils.Constants.Request
 import com.example.rafik.utils.Constants.UserFound
 import com.example.rafik.utils.Constants.FERTILIZER_REQUEST
 import com.example.rafik.utils.Constants.PHOTOS
@@ -29,6 +30,7 @@ class FireBaseRepoImpl : FirebaseRepo {
     val users = MutableLiveData<List<User>>()
     var user = MutableLiveData<User>()
     var isUserFound = MutableLiveData<UserFound?>()
+    var fertilizerRequest = MutableLiveData<Request?>()
 
     override suspend fun refreshData() {
         TODO("Not yet implemented")
@@ -130,10 +132,13 @@ class FireBaseRepoImpl : FirebaseRepo {
         newRequestRef.set(fertilizerRequest)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                this.fertilizerRequest.value = Request.SUCCESS
                 res = true
             }
             .addOnFailureListener { e ->
                 Log.w(tag, "Error adding document", e)
+                this.fertilizerRequest.value = Request.FAILED
+
             }
         return res
     }
