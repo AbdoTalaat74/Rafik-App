@@ -112,7 +112,7 @@
     <string name="please_fill_crop_type_field">\nبرجاء ادخال نوع المحصول</string>
     <string name="please_fill_fertilizer_type_field">\nبرجاء ادخال نوع السماد</string>
     <string name="okay">حسناً</string>
-    <string name="amount">الكمية</string>
+    <string name="amount">الكمية (بالكيلوجرام)</string>
     <string name="price">السعر</string>
     <string name="date">التاريخ</string>
     <string name="target">المستهدف</string>
