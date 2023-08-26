@@ -7,6 +7,8 @@ import android.app.DatePickerDialog
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +33,10 @@ import com.bumptech.glide.request.target.Target
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSellProductBinding
 import com.example.rafik.ui.initToolbar
+import com.example.rafik.utils.Constants
 import com.example.rafik.utils.Constants.MY_FORMAT
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -84,11 +88,11 @@ class SellProductFragment : Fragment() {
                 binding.imageProgressBar.visibility = VISIBLE
                 binding.imageProgressBar.isActivated = it
             } else {
-                if (picUri == null){
+                if (picUri == null) {
                     binding.pickImg.visibility = VISIBLE
                     binding.productImage.visibility = GONE
                     binding.deleteImage.visibility = GONE
-                }else{
+                } else {
                     binding.pickImg.visibility = GONE
                     binding.productImage.visibility = VISIBLE
                     binding.deleteImage.visibility = VISIBLE
@@ -201,6 +205,38 @@ class SellProductFragment : Fragment() {
             })
             it.startAnimation(animation)
         }
+
+        viewModel.isSuccessfulRequest.observe(viewLifecycleOwner) {
+            when (it) {
+                Constants.Request.SUCCESS -> {
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.request_sent_successfully),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        viewModel.setNavigateUp(true)
+                    }, 1500)
+                }
+
+                Constants.Request.FAILED -> {
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+
+                else -> {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
 
         return binding.root
     }
@@ -341,7 +377,6 @@ class SellProductFragment : Fragment() {
     }
 
 
-
     private fun validatePrice(): String? {
         val price = binding.priceTextField.text.toString()
         while (price.isNullOrBlank()) {
@@ -351,9 +386,8 @@ class SellProductFragment : Fragment() {
     }
 
 
-
-    private fun submitForm(){
-        Log.e("SellProductFragment","submitForm called")
+    private fun submitForm() {
+        Log.e("SellProductFragment", "submitForm called")
         binding.productTypeTextLayout.error = validateProductType()
         binding.amountTextLayout.error = validateAmount()
         binding.addressTextLayout.error = validateAddress()

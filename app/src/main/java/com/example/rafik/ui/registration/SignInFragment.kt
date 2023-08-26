@@ -21,6 +21,7 @@ import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.User
 import com.example.rafik.utils.Constants.UserFound
 import com.example.rafik.viewModel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class SignInFragment : Fragment() {
     private val tag = "SignInFragment"
@@ -55,8 +56,11 @@ class SignInFragment : Fragment() {
                     if (isLogin) {
                         findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
                     } else {
-                        //todo ya tal3oooooooooooooooooooooot
-                        Toast.makeText(requireContext(), "this number is exist", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            binding.coordinatorlayout,
+                            getString(R.string.this_number_is_already_registered_try_to_log_in),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                         binding.registerButton.revertAnimation()
                         binding.loginButton.revertAnimation()
                     }
@@ -64,11 +68,10 @@ class SignInFragment : Fragment() {
 
                 UserFound.NOT_FOUND -> {
                     if (isLogin) {
-                        //todo ya tal3oooooooooooooooooooooot
-                        Toast.makeText(
-                            requireContext(),
-                            "this number is not exist you need to sign up",
-                            Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            binding.coordinatorlayout,
+                            getString(R.string.this_number_is_not_registered_try_to_register),
+                            Snackbar.LENGTH_SHORT
                         ).show()
                         binding.registerButton.revertAnimation()
                         binding.loginButton.revertAnimation()
@@ -76,6 +79,7 @@ class SignInFragment : Fragment() {
                         findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
                     }
                 }
+
                 null -> {
                     Log.i(tag, "INVALID_USER")
                 }

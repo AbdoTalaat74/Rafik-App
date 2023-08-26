@@ -107,7 +107,8 @@
             app:layout_constraintBottom_toTopOf="@+id/img_hexagon2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tryAgain"
+            app:layout_constraintTop_toBottomOf="@+id/otp_view"
+            app:layout_constraintVertical_bias="0.7"
             app:spinning_bar_color="#FFF"
             app:spinning_bar_padding="6dp"
             app:spinning_bar_width="4dp" />

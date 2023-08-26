@@ -39,12 +39,7 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
 
-    private val _stateToastMessage = MutableLiveData<String>()
-    val stateToastMessage: LiveData<String>
-        get() = _stateToastMessage
-
-
-    val isSuccess:LiveData<Constants.Request?>
+    val isSuccessfulRequest:LiveData<Constants.Request?>
         get() = fireBaseRepoImpl.fertilizerRequest
 
     fun setNavigate(state:Boolean){

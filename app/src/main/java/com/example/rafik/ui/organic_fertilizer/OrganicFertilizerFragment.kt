@@ -74,37 +74,46 @@ class OrganicFertilizerFragment : Fragment() {
 
         viewModel.navigateUp.observe(viewLifecycleOwner) {
             if (it == true) {
-                Handler(Looper.getMainLooper()).postDelayed({
-                    findNavController().navigateUp()
-                }, 1500)
+                findNavController().navigateUp()
 
                 viewModel.navigateUp
                 viewModel.onNavigateUp()
             }
         }
 
-        viewModel.isSuccess.observe(viewLifecycleOwner){
-            when (it){
-                Constants.Request.SUCCESS ->{
-                    Snackbar.make(binding.coordinatorlayout,getString(R.string.request_sent_successfully),Snackbar.LENGTH_LONG).show()
-
-                    viewModel.setNavigate(true)
-
+        viewModel.isSuccessfulRequest.observe(viewLifecycleOwner) {
+            when (it) {
+                Constants.Request.SUCCESS -> {
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.request_sent_successfully),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        viewModel.setNavigate(true)
+                    }, 1500)
                 }
-                Constants.Request.FAILED ->{
-                    Snackbar.make(requireView(),getString(R.string.your_request_was_not_sent_please_try_again_later),Snackbar.LENGTH_LONG).show()
 
+                Constants.Request.FAILED -> {
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
+
                 else -> {
-                    Toast.makeText(requireContext(),getString(R.string.your_request_was_not_sent_please_try_again_later),Toast.LENGTH_LONG).show()
-
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
 
         return binding.root
     }
-
 
 
     private fun acreFocusListener() {
