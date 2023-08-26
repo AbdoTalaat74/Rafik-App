@@ -19,10 +19,11 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
 
-const val TAG = "AuthenticationActivity"
 
 @Suppress("DEPRECATION")
 class AuthenticationActivity : AppCompatActivity() {
+    private val TAG = "AuthenticationActivity"
+
     private lateinit var binding: ActivityAuthenticationBinding
     private val loginViewModel by viewModels<LoginViewModel>()
     private val initViewModel: InitViewModel by viewModels()
