@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOverviewBinding
 import com.example.rafik.ui.initToolbar
@@ -23,7 +24,7 @@ class OverviewFragment : Fragment() {
 
         binding = FragmentOverviewBinding.inflate(layoutInflater)
 
-        initToolbar(binding.topAppBar,getString(R.string.overview),this)
+        initOverviewToolBar()
 
         initTrainingPlacesSpinner()
         initOrganicProductTypeSpinner()
@@ -55,6 +56,19 @@ class OverviewFragment : Fragment() {
         binding.fertilizerSpinner.adapter = productAdapter
 
     }
+
+
+    private fun initOverviewToolBar(
+    ) {
+        binding.topAppBar.setNavigationIcon(R.drawable.ic_back_arrow)
+        binding.topAppBar.title = getString(R.string.overview)
+        binding.topAppBar.setTitleTextColor(this.resources.getColor(R.color.base_green_color))
+        binding.topAppBar.isTitleCentered = true
+        binding.topAppBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
 
 
 }
