@@ -19,18 +19,69 @@
 
 
     <string-array name="product_types">
-        <item>منتج 1</item>
-        <item>منتج 2</item>
-        <item>منتج 3</item>
-        <item>منتج 4</item>
+        <item>دبس رمان</item>
+        <item>دبس تمر</item>
+        <item>طماطم مجففة</item>
+        <item>بصل مجفف</item>
+        <item>ثوم مجفف</item>
+        <item>سيرب نعناع</item>
+        <item>زيت زيتون</item>
+        <item>زيت نعناع</item>
+        <item>مانجو مخللة</item>
     </string-array>
 
     <string-array name="training_places">
-        <item>مكان 1</item>
-        <item>مكان 2</item>
-        <item>مكان 3</item>
-        <item>مكان 4</item>
+        <item>القاهرة</item>
+        <item>الجيزة</item>
+        <item>القليوبية</item>
+        <item>الإسكندرية</item>
+        <item>البحيرة</item>
+        <item>مطروح</item>
+        <item>الساحل الشمالي</item>
+        <item>كفر الشيخ</item>
+        <item>الدقهلية</item>
+        <item>الشرقية</item>
+        <item>المنوفية</item>
+        <item>دمياط</item>
+        <item>بورسعيد</item>
+        <item>الإسماعيلية</item>
+        <item>السويس</item>
+        <item>الشيخ زايد</item>
+        <item>الفيوم</item>
+        <item>بني سويف</item>
+        <item>المنيا</item>
+        <item>أسيوط</item>
+        <item>سوهاج</item>
+        <item>قنا</item>
+        <item>أسوان</item>
+        <item>الأقصر</item>
+        <item>البحر الأحمر</item>
+        <item>الوادي الجديد</item>
+        <item>مطروح</item>
     </string-array>
+
+
+    <string-array name="fertilizer_types">
+        <item>كمبوست سائل متوازن</item>
+        <item>كمبوست سائل عالي النيتروجين</item>
+        <item>كمبوست سائل عالي الفوسفات</item>
+        <item>كمبوست سائل عالي البوتاسيوم</item>
+        <item>كمبوست</item>
+        <item>مبيدات حيوية</item>
+
+    </string-array>
+
+    <string-array name="organic_crops_type">
+        <item>رمان</item>
+        <item>بلح</item>
+        <item>نعناع</item>
+        <item>بصل</item>
+        <item>ثوم</item>
+        <item>طماطم</item>
+        <item>زيتون</item>
+        <item>مانجو</item>
+    </string-array>
+
     <string name="sign_up">تسجيل دخول</string>
     <string name="username">الاسم</string>
     <string name="registration">تسجيل دخول</string>
@@ -105,7 +156,7 @@
 
     <string name="register">إنشاء حساب</string>
     <string name="type_of_fertilizer">أنواع السماد</string>
-    <string name="organic_products">المنتجات العضوية</string>
+    <string name="organic_products">المحاصيل العضوية</string>
     <string name="overview">نظرة عامة</string>
     <string name="home_screen">الصفحة الرئيسية</string>
     <string name="_0">0</string>
