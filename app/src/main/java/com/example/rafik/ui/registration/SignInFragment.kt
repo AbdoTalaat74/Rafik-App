@@ -41,15 +41,15 @@ class SignInFragment : Fragment() {
         binding.registerButton.setOnClickListener {
             binding.registerButton.startAnimation()
             if (binding.editTextName.text.toString() == "") {
-                binding.textInputName.helperText = getString(R.string.enter_your_name)
+                binding.textInputName.error = getString(R.string.enter_your_name)
                 binding.registerButton.revertAnimation()
             }
             if (binding.editTextAddress.text.toString() == "") {
-                binding.textInputPhone.helperText = getString(R.string.enter_your_address)
+                binding.textInputPhone.error = getString(R.string.enter_your_address)
                 binding.registerButton.revertAnimation()
             }
             if (binding.editTextPhone.text.toString() == "") {
-                binding.textInputPhone.helperText = getString(R.string.enter_phone)
+                binding.textInputPhone.error = getString(R.string.enter_phone)
                 binding.registerButton.revertAnimation()
             }
             submitForm()
@@ -58,7 +58,7 @@ class SignInFragment : Fragment() {
         binding.loginButton.setOnClickListener {
             binding.loginButton.startAnimation()
             if (binding.editTextPhone.text.toString() == "") {
-                binding.textInputPhone.helperText = getString(R.string.enter_phone)
+                binding.textInputPhone.error = getString(R.string.enter_phone)
                 binding.registerButton.revertAnimation()
             }
             submitForm2()
@@ -70,9 +70,9 @@ class SignInFragment : Fragment() {
     private fun nameFocusListener() {
         binding.editTextName.setOnFocusChangeListener { _, focus ->
             if (!focus) {
-                binding.textInputName.helperText = validateName()
+                binding.textInputName.error = validateName()
             } else {
-                binding.textInputName.helperText = ""
+                binding.textInputName.error = ""
             }
         }
     }
@@ -88,9 +88,9 @@ class SignInFragment : Fragment() {
     private fun addressFocusListener() {
         binding.editTextAddress.setOnFocusChangeListener { _, focus ->
             if (!focus) {
-                binding.textInputAddress.helperText = validateAddress()
+                binding.textInputAddress.error = validateAddress()
             } else {
-                binding.textInputAddress.helperText = ""
+                binding.textInputAddress.error = ""
             }
         }
     }
@@ -154,9 +154,9 @@ class SignInFragment : Fragment() {
     private fun phoneFocusListener() {
         binding.editTextPhone.setOnFocusChangeListener { _, focus ->
             if (!focus) {
-                binding.textInputPhone.helperText = validatePhone()
+                binding.textInputPhone.error = validatePhone()
             } else {
-                binding.textInputPhone.helperText = ""
+                binding.textInputPhone.error = ""
             }
         }
     }
@@ -179,8 +179,8 @@ class SignInFragment : Fragment() {
     }
 
     private fun submitForm2() {
-        binding.textInputPhone.helperText = validatePhone()
-        val validPhone = (binding.textInputPhone.helperText == null)
+        binding.textInputPhone.error = validatePhone()
+        val validPhone = (binding.textInputPhone.error == null)
         if (validPhone) {
             user = User(phone = phone)
             Log.i("SignInFragment", "throw $user to vm")
@@ -189,12 +189,12 @@ class SignInFragment : Fragment() {
     }
 
     private fun submitForm() {
-        binding.textInputName.helperText = validateName()
-        binding.textInputAddress.helperText = validateAddress()
-        binding.textInputPhone.helperText = validatePhone()
-        val validName = (binding.textInputName.helperText == null)
-        val validAddress = (binding.textInputAddress.helperText == null)
-        val validPhone = (binding.textInputPhone.helperText == null)
+        binding.textInputName.error = validateName()
+        binding.textInputAddress.error = validateAddress()
+        binding.textInputPhone.error = validatePhone()
+        val validName = (binding.textInputName.error == null)
+        val validAddress = (binding.textInputAddress.error == null)
+        val validPhone = (binding.textInputPhone.error == null)
         if (validName && validAddress && validPhone) {
             //todo throw user to vm
             alertDialog(false)
