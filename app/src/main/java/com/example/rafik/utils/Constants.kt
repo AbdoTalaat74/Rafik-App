@@ -11,7 +11,7 @@ object Constants {
 
 
     enum class UserFound {
-        FOUND, NOT_FOUND, UNKNOWN
+        FOUND, NOT_FOUND
     }
 
     enum class Request {

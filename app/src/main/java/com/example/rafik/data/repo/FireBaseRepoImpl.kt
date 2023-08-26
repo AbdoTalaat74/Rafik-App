@@ -21,7 +21,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 
-
 class FireBaseRepoImpl : FirebaseRepo {
     private val tag = "FireBaseRepoImpl"
     private val db = Firebase.firestore
@@ -31,6 +30,8 @@ class FireBaseRepoImpl : FirebaseRepo {
     var user = MutableLiveData<User>()
     var isUserFound = MutableLiveData<UserFound?>()
     var fertilizerRequest = MutableLiveData<Request?>()
+    var sellProductRequest = MutableLiveData<Request?>()
+    var trainingRequest = MutableLiveData<Request?>()
 
     override suspend fun refreshData() {
         TODO("Not yet implemented")
@@ -84,7 +85,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun checkUser(phone: String): Boolean {
         var res = false
-        isUserFound.value = UserFound.UNKNOWN
+        isUserFound.value = UserFound.NOT_FOUND
         db.collection(USERS).whereEqualTo("phone", phone).get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -100,7 +101,7 @@ class FireBaseRepoImpl : FirebaseRepo {
             }
             .addOnFailureListener { exception ->
                 Log.w(tag, "Error getting documents.", exception)
-                isUserFound.value = UserFound.UNKNOWN
+                isUserFound.value = UserFound.NOT_FOUND
             }
         return res
     }
@@ -150,10 +151,12 @@ class FireBaseRepoImpl : FirebaseRepo {
         newRequestRef.set(trainingRequest)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                this.trainingRequest.value = Request.SUCCESS
                 res = true
             }
             .addOnFailureListener { e ->
                 Log.w(tag, "Error adding document", e)
+                this.trainingRequest.value = Request.FAILED
             }
         return res
     }
@@ -169,10 +172,13 @@ class FireBaseRepoImpl : FirebaseRepo {
         newRequestRef.set(sellProductRequest)
             .addOnSuccessListener { documentReference ->
                 Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                this.sellProductRequest.value = Request.SUCCESS
+
                 res = true
             }
             .addOnFailureListener { e ->
                 Log.w(tag, "Error adding document", e)
+                this.sellProductRequest.value = Request.FAILED
             }
         return res
     }
