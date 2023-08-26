@@ -11,13 +11,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSettingsBinding
 import com.example.rafik.ui.AuthenticationActivity
+import com.example.rafik.utils.Utils.Companion.findNavControllerSafely
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
@@ -127,6 +132,50 @@ class SettingsFragment : Fragment() {
                     binding.save.visibility = View.GONE
                 }
             }
+
+
+        binding.backArrow.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // Animation started
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    // Animation ended, navigate to the RevenuesAndExpensesFragment
+                    findNavController().navigateUp()
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // Animation repeated
+                }
+            })
+            it.startAnimation(animation)
+        }
+
+        binding.textView7.setOnClickListener {
+
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // Animation started
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    // Animation ended, navigate to the RevenuesAndExpensesFragment
+                    findNavController().navigateUp()
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // Animation repeated
+                }
+            })
+            binding.backArrow.startAnimation(animation)
+
+        }
+
             return binding.root
         }
 

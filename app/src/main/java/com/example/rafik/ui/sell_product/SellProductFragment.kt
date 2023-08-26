@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Application
 import android.app.DatePickerDialog
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,6 +42,7 @@ class SellProductFragment : Fragment() {
     private lateinit var viewModel: SellProductViewModel
     val sdf = SimpleDateFormat(MY_FORMAT, Locale.ENGLISH)
     private var cal = Calendar.getInstance()
+    private var picUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -82,6 +84,15 @@ class SellProductFragment : Fragment() {
                 binding.imageProgressBar.visibility = VISIBLE
                 binding.imageProgressBar.isActivated = it
             } else {
+                if (picUri == null){
+                    binding.pickImg.visibility = VISIBLE
+                    binding.productImage.visibility = GONE
+                    binding.deleteImage.visibility = GONE
+                }else{
+                    binding.pickImg.visibility = GONE
+                    binding.productImage.visibility = VISIBLE
+                    binding.deleteImage.visibility = VISIBLE
+                }
                 binding.imageProgressBar.visibility = GONE
                 binding.imageProgressBar.isActivated = it
             }
@@ -89,6 +100,7 @@ class SellProductFragment : Fragment() {
 
         viewModel.imageUri.observe(viewLifecycleOwner) {
             if (it != null) {
+                picUri = it
                 binding.productImage.visibility = VISIBLE
                 binding.deleteImage.visibility = VISIBLE
                 binding.imageProgressBar.visibility = GONE
@@ -148,6 +160,7 @@ class SellProductFragment : Fragment() {
                 override fun onAnimationEnd(animation: Animation?) {
                     // Animation ended, navigate to the RevenuesAndExpensesFragment
                     viewModel.postImageUri(null)
+                    picUri = null
                 }
 
                 override fun onAnimationRepeat(animation: Animation?) {

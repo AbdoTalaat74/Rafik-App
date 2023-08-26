@@ -42,7 +42,7 @@ class OverviewFragment : Fragment() {
 
 
     private fun initOrganicProductTypeSpinner() {
-        val organicProductTypes = resources.getStringArray(R.array.product_types)
+        val organicProductTypes = resources.getStringArray(R.array.organic_crops_type)
         val productAdapter =
             ArrayAdapter(requireContext(), R.layout.dropdown_item, organicProductTypes)
         binding.organicProductsSpinner.adapter = productAdapter
@@ -50,7 +50,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun initFertilizeTypeSpinner() {
-        val fertilizeTypes = resources.getStringArray(R.array.product_types)
+        val fertilizeTypes = resources.getStringArray(R.array.fertilizer_types)
         val productAdapter =
             ArrayAdapter(requireContext(), R.layout.dropdown_item, fertilizeTypes)
         binding.fertilizerSpinner.adapter = productAdapter

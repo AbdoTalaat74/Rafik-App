@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="InconsistentArrays">
     <string name="app_name">Rafik</string>
     <string name="rafik">Rafik</string>
     <string name="rafik_phone_number">+201093111955</string>
@@ -15,18 +15,69 @@
     <string name="trainings">Trainings</string>
 
     <string-array name="product_types">
-        <item>product 1</item>
-        <item>product 2</item>
-        <item>product 3</item>
-        <item>product 4</item>
+        <item>دبس رمان</item>
+        <item>دبس تمر</item>
+        <item>طماطم مجففة</item>
+        <item>بصل مجفف</item>
+        <item>ثوم مجفف</item>
+        <item>سيرب نعناع</item>
+        <item>زيت زيتون</item>
+        <item>زيت نعناع</item>
+        <item>مانجو مخللة</item>
     </string-array>
 
     <string-array name="training_places">
-        <item>place 1</item>
-        <item>place 2</item>
-        <item>place 3</item>
-        <item>place 4</item>
+        <item>القاهرة</item>
+        <item>الجيزة</item>
+        <item>القليوبية</item>
+        <item>الإسكندرية</item>
+        <item>البحيرة</item>
+        <item>مطروح</item>
+        <item>الساحل الشمالي</item>
+        <item>كفر الشيخ</item>
+        <item>الدقهلية</item>
+        <item>الشرقية</item>
+        <item>المنوفية</item>
+        <item>دمياط</item>
+        <item>بورسعيد</item>
+        <item>الإسماعيلية</item>
+        <item>السويس</item>
+        <item>الشيخ زايد</item>
+        <item>الفيوم</item>
+        <item>بني سويف</item>
+        <item>المنيا</item>
+        <item>أسيوط</item>
+        <item>سوهاج</item>
+        <item>قنا</item>
+        <item>أسوان</item>
+        <item>الأقصر</item>
+        <item>البحر الأحمر</item>
+        <item>الوادي الجديد</item>
+        <item>مطروح</item>
     </string-array>
+
+
+    <string-array name="fertilizer_types">
+        <item>كمبوست سائل متوازن</item>
+        <item>كمبوست سائل عالي النيتروجين</item>
+        <item>كمبوست سائل عالي الفوسفات</item>
+        <item>كمبوست سائل عالي البوتاسيوم</item>
+        <item>كمبوست</item>
+        <item>مبيدات حيوية</item>
+    </string-array>
+
+    <string-array name="organic_crops_type">
+        <item>رمان</item>
+        <item>بلح</item>
+        <item>نعناع</item>
+        <item>بصل</item>
+        <item>ثوم</item>
+        <item>طماطم</item>
+        <item>زيتون</item>
+        <item>مانجو</item>
+    </string-array>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="sign_up">SIGN UP</string>
     <string name="username">Username</string>

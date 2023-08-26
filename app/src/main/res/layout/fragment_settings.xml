@@ -19,18 +19,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/back_arrow3"
+                android:layout_marginStart="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
             <TextView
                 android:id="@+id/textView7"
                 style="@style/viewParent.headerText"
-                android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginTop="@dimen/_24sdp"
                 android:text="@string/settings"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/back_arrow"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/usernameTextView"
