@@ -148,7 +148,7 @@ class FireBaseRepoImpl : FirebaseRepo {
     }
 
     override suspend fun uploadImage(bitmap: Bitmap, name: String): String {
-        var url = ""
+        val url = "$PHOTOS + ${user.value!!.uid}//$name"
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
@@ -158,12 +158,6 @@ class FireBaseRepoImpl : FirebaseRepo {
             Log.w(tag, "Error adding document", e)
         }.addOnSuccessListener { taskSnapshot ->
             Log.d(tag, "taskSnapshot added with ID: ${taskSnapshot.storage.downloadUrl}")
-        }
-        storage.reference.child("$PHOTOS + ${user.value!!.uid}//$name").downloadUrl.addOnSuccessListener { uri ->
-            Log.d(tag, "taskSnapshot added with ID: $uri")
-            url = uri.toString()
-        }.addOnFailureListener { e ->
-            Log.w(tag, "Error adding document", e)
         }
         return url
     }
