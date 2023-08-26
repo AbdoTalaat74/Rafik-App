@@ -10,4 +10,7 @@ object Constants {
     const val MY_FORMAT = "yyyy/MM/dd" // mention the format you need
 
 
+    enum class UserFound {
+        FOUND, NOT_FOUND, UNKNOWN
+    }
 }

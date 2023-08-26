@@ -94,8 +94,7 @@
                             android:autofillHints="Name"
                             android:hint="@string/username"
                             android:inputType="textPersonName"
-                            android:maxLines="1"
-                            android:text="khph" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -186,8 +185,7 @@
                             android:autofillHints="Name"
                             android:hint="@string/address"
                             android:inputType="textPersonName"
-                            android:maxLines="1"
-                            android:text="15 maycity cairo" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -214,8 +212,7 @@
                             android:autofillHints="Name"
                             android:hint="@string/phone"
                             android:inputType="phone"
-                            android:maxLines="1"
-                            android:text="01129891472" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.apachat.loadingbutton.core.customViews.CircularProgressButton
@@ -273,7 +270,7 @@
                             android:hint="@string/phone"
                             android:inputType="phone"
                             android:maxLines="1"
-                            android:text="01129891472" />
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.apachat.loadingbutton.core.customViews.CircularProgressButton

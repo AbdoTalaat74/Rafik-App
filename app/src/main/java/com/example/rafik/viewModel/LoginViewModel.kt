@@ -11,6 +11,7 @@ import com.example.rafik.domian.entity.Area
 import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.FirebaseUserLiveData
 import com.example.rafik.domian.entity.User
+import com.example.rafik.utils.Constants
 import kotlinx.coroutines.launch
 
 @SuppressLint("CheckResult")
@@ -488,8 +489,8 @@ class LoginViewModel : ViewModel() {
     val username: LiveData<String?>
         get() = _username
 
-    private val _user = MutableLiveData<User?>()
-    val user: LiveData<User?>
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User>
         get() = _user
 
     private val _isLogin = MutableLiveData<Boolean>()
@@ -500,7 +501,12 @@ class LoginViewModel : ViewModel() {
     val authenticationState: LiveData<AuthenticationState?>
         get() = _authenticationState
 
-    fun postUser(user: User ,isLogin:Boolean) {
+
+
+    val isUserFound: LiveData<Constants.UserFound?>
+        get() = firebaseRepoImpl.isUserFound
+
+    fun postUser(user: User, isLogin: Boolean) {
         _user.value = user
         _isLogin.value = isLogin
         _isLogin.postValue(isLogin)
@@ -515,6 +521,11 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    fun checkUser(phone: String) {
+        viewModelScope.launch {
+            firebaseRepoImpl.checkUser(phone)
+        }
+    }
 
     fun setUser(user: User) {
         viewModelScope.launch {
@@ -528,7 +539,7 @@ class LoginViewModel : ViewModel() {
     }
 
     init {
-        _isLogin.value=false
+        _isLogin.value = false
         FirebaseUserLiveData().map { user ->
             if (user != null) {
                 _authenticationState.value = AuthenticationState.AUTHENTICATED
@@ -538,5 +549,6 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
 
 }

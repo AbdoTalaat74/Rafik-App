@@ -44,14 +44,14 @@ class OtpAuthFrag : Fragment() {
         loginViewModel.user.observe(viewLifecycleOwner) {
             Log.i("OtpAuthFrag", "observing $it")
             binding.user = it
-            phone = "+20" + it!!.phone
+            phone = "+20" + it.phone
+            loginViewModel.checkUser(it.phone)
             binding.otpView.requestFocus()
             sendVerificationCode(phone)
         }
         loginViewModel.isLogin.observe(viewLifecycleOwner) {
             isLogin = it
             Log.i("isLogin", "isLogin $isLogin")
-
         }
 
         binding.otpView.otpListener = object : OTPListener {
