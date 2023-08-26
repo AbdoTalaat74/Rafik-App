@@ -3,6 +3,7 @@ package com.example.rafik.ui.sell_product
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Application
+import android.app.DatePickerDialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,11 +30,17 @@ import com.bumptech.glide.request.target.Target
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentSellProductBinding
 import com.example.rafik.ui.initToolbar
+import com.example.rafik.utils.Constants.MY_FORMAT
 import com.github.dhaval2404.imagepicker.ImagePicker
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class SellProductFragment : Fragment() {
     private lateinit var binding: FragmentSellProductBinding
     private lateinit var viewModel: SellProductViewModel
+    val sdf = SimpleDateFormat(MY_FORMAT, Locale.ENGLISH)
+    private var cal = Calendar.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -47,6 +55,15 @@ class SellProductFragment : Fragment() {
         addressFocusListener()
         priceFocusListener()
         binding.viewModel = viewModel
+
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                binding.textDate.text = sdf.format(cal.time)
+            }
+
         binding.pickImg.setOnClickListener {
             ImagePicker.with(this)
                 .compress(1024)//Final image size will be less than 1 MB(Optional)
@@ -82,7 +99,6 @@ class SellProductFragment : Fragment() {
                 binding.pickImg.visibility = VISIBLE
             }
         }
-
 
         viewModel.dialogMessage.observe(viewLifecycleOwner) { message ->
             if (!(message.isNullOrBlank())) {
@@ -132,6 +148,37 @@ class SellProductFragment : Fragment() {
                 override fun onAnimationEnd(animation: Animation?) {
                     // Animation ended, navigate to the RevenuesAndExpensesFragment
                     viewModel.postImageUri(null)
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // Animation repeated
+                }
+            })
+            it.startAnimation(animation)
+        }
+
+        binding.date.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation)
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // Animation started
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    // Animation ended, navigate to the RevenuesAndExpensesFragment
+                    val timePicker = DatePickerDialog(
+                        requireContext(),
+                        dateSetListener,
+                        // set DatePickerDialog to point to today's date when it loads up
+                        cal.get(Calendar.YEAR),
+                        cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH)
+                    )
+                    timePicker.setOnCancelListener {
+
+                    }
+                    timePicker.show()
                 }
 
                 override fun onAnimationRepeat(animation: Animation?) {

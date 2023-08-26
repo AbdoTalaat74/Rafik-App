@@ -7,5 +7,7 @@ object Constants {
     const val TRAINING_REQUEST = "TrainingRequest"
     const val CITIES = "cities"
     const val USERS = "users"
+    const val MY_FORMAT = "yyyy/MM/dd" // mention the format you need
+
 
 }

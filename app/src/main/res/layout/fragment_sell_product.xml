@@ -155,27 +155,43 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/date"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_32sdp"
-                        android:layout_marginTop="@dimen/_12sdp"
-                        android:hint="@string/production_date"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/production_date"
+                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/date"
+                        app:layout_constraintEnd_toStartOf="@+id/date"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/price_text_layout">
+                        app:layout_constraintTop_toTopOf="@+id/date" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/date_"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:inputType="textAutoComplete"
-                            android:text="@={viewModel.productionDate}" />
+                    <TextView
+                        android:id="@+id/textDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@={viewModel.productionDate}"                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/date"
+                        app:layout_constraintEnd_toStartOf="@+id/date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/date"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginStart="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="16dp"
+                        android:contentDescription="@string/todo"
+                        android:padding="8dp"
+                        android:src="@drawable/date_picker"
+                        app:layout_constraintEnd_toEndOf="@+id/price_text_layout"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/price_text_layout" />
 
                     <TextView
                         android:id="@+id/add_image_tv"
@@ -244,11 +260,11 @@
                         android:id="@+id/product_type_spinner_card"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_24sdp"
                         android:layout_marginTop="@dimen/_24sdp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="4dp"
-                        app:layout_constraintEnd_toEndOf="@+id/date"
+                        app:layout_constraintEnd_toEndOf="@+id/price_text_layout"
                         app:layout_constraintStart_toEndOf="@+id/product_type_tv"
                         app:layout_constraintTop_toBottomOf="@+id/date"
                         app:strokeWidth="1dp">
@@ -270,7 +286,9 @@
                         android:textSize="@dimen/_16ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/product_type_spinner_card"
-                        app:layout_constraintStart_toStartOf="@+id/date"
+                        app:layout_constraintEnd_toEndOf="@+id/textView15"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/textView15"
                         app:layout_constraintTop_toTopOf="@+id/product_type_spinner_card" />
 
                     <Button
