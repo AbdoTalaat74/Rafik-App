@@ -3,299 +3,304 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_hexagon"
-            android:layout_width="180dp"
-            android:layout_height="170dp"
-            android:layout_gravity="end"
-            android:contentDescription="@android:string/ok"
-            android:scaleType="fitXY"
-            android:src="@drawable/artificial_plant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="@string/bias1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_32sdp"
-            android:layout_marginEnd="@dimen/_32sdp"
-            android:text="@string/registration"
-            android:textSize="@dimen/_20ssp"
-            app:chainUseRtl="false"
-            app:layout_constraintBottom_toBottomOf="@+id/img_hexagon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="@string/bias0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/personalDetailsCard"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_hexagon">
+            android:layout_height="match_parent">
 
-            <ScrollView
+            <ImageView
+                android:id="@+id/img_hexagon"
+                android:layout_width="180dp"
+                android:layout_height="170dp"
+                android:layout_gravity="end"
+                android:contentDescription="@android:string/ok"
+                android:scaleType="fitXY"
+                android:src="@drawable/artificial_plant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="@string/bias1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_32sdp"
+                android:text="@string/registration"
+                android:textSize="@dimen/_20ssp"
+                app:chainUseRtl="false"
+                app:layout_constraintBottom_toBottomOf="@+id/img_hexagon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="@string/bias0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/personalDetailsCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.example.rafik.ui.registration.SignInFragment">
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_hexagon">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    tools:context="com.example.rafik.ui.registration.SignInFragment">
 
-                    <TextView
-                        android:id="@+id/createAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:text="@string/new_to_rafik"
-                        android:textAlignment="center"
-                        android:textColor="@color/green"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputName"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        app:helperText=""
-                        app:helperTextTextColor="@color/md_red_400"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/createAccount">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextName"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:autofillHints="Name"
-                            android:hint="@string/username"
-                            android:inputType="textPersonName"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/city"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintBottom_toBottomOf="@+id/city_spinner_card"
-                        app:layout_constraintStart_toStartOf="@+id/textInputName"
-                        app:layout_constraintTop_toTopOf="@+id/city_spinner_card" />
-
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/city_spinner_card"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView5"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputName"
-                        app:strokeWidth="1dp">
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/city_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="?attr/dropdownListPreferredItemHeight"
-                            android:orientation="horizontal" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/area"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintBottom_toBottomOf="@+id/area_spinner_card"
-                        app:layout_constraintStart_toStartOf="@+id/textView5"
-                        app:layout_constraintTop_toTopOf="@+id/area_spinner_card" />
-
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/area_spinner_card"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="4dp"
-                        app:layout_constraintEnd_toEndOf="@+id/city_spinner_card"
-                        app:layout_constraintStart_toStartOf="@+id/city_spinner_card"
-                        app:layout_constraintTop_toBottomOf="@+id/city_spinner_card"
-                        app:strokeWidth="1dp"
-                        tools:layout_height="?attr/dropdownListPreferredItemHeight">
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/area_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="?attr/dropdownListPreferredItemHeight"
-                            android:orientation="horizontal" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputAddress"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        app:helperText=""
-                        app:helperTextTextColor="@color/md_red_400"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/area_spinner_card"
-                        app:layout_constraintVertical_bias="0.0">
+                        android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextAddress"
+                        <TextView
+                            android:id="@+id/createAccount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:text="@string/new_to_rafik"
+                            android:textAlignment="center"
+                            android:textColor="@color/green"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputName"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:helperText=""
+                            app:helperTextTextColor="@color/md_red_400"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/createAccount">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextName"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints="Name"
+                                android:hint="@string/username"
+                                android:inputType="textPersonName"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/city"
+                            android:textSize="@dimen/_15ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/city_spinner_card"
+                            app:layout_constraintStart_toStartOf="@+id/textInputName"
+                            app:layout_constraintTop_toTopOf="@+id/city_spinner_card" />
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/city_spinner_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView5"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputName"
+                            app:strokeWidth="1dp">
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/city_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="?attr/dropdownListPreferredItemHeight"
+                                android:orientation="horizontal" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/area"
+                            android:textSize="@dimen/_15ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/area_spinner_card"
+                            app:layout_constraintStart_toStartOf="@+id/textView5"
+                            app:layout_constraintTop_toTopOf="@+id/area_spinner_card" />
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/area_spinner_card"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="4dp"
+                            app:layout_constraintEnd_toEndOf="@+id/city_spinner_card"
+                            app:layout_constraintStart_toStartOf="@+id/city_spinner_card"
+                            app:layout_constraintTop_toBottomOf="@+id/city_spinner_card"
+                            app:strokeWidth="1dp"
+                            tools:layout_height="?attr/dropdownListPreferredItemHeight">
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/area_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="?attr/dropdownListPreferredItemHeight"
+                                android:orientation="horizontal" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputAddress"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:autofillHints="Name"
-                            android:hint="@string/address"
-                            android:inputType="textPersonName"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:helperText=""
+                            app:helperTextTextColor="@color/md_red_400"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/area_spinner_card"
+                            app:layout_constraintVertical_bias="0.0">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPhone"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        app:helperText=""
-                        app:helperTextTextColor="@color/md_red_400"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputAddress"
-                        app:layout_constraintVertical_bias="0.0">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints="Name"
+                                android:hint="@string/address"
+                                android:inputType="textPersonName"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextPhone"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputPhone"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:autofillHints="Name"
-                            android:hint="@string/phone"
-                            android:inputType="phone"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:helperText=""
+                            app:helperTextTextColor="@color/md_red_400"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputAddress"
+                            app:layout_constraintVertical_bias="0.0">
 
-                    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                        android:id="@+id/registerButton"
-                        style="@style/loginButton"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:background="@drawable/login_button_bk"
-                        android:text="@string/register"
-                        android:textColor="@color/white"
-                        app:initialCornerAngle="27dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputPhone"
-                        app:spinning_bar_color="#FFF"
-                        app:spinning_bar_padding="6dp"
-                        app:spinning_bar_width="4dp" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints="Name"
+                                android:hint="@string/phone"
+                                android:inputType="phone"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:id="@+id/haveAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:text="@string/already_have_an_account"
-                        android:textAlignment="center"
-                        android:textColor="@color/green"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+                        <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                            android:id="@+id/registerButton"
+                            style="@style/loginButton"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/login_button_bk"
+                            android:text="@string/register"
+                            android:textColor="@color/white"
+                            app:initialCornerAngle="27dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputPhone"
+                            app:spinning_bar_color="#FFF"
+                            app:spinning_bar_padding="6dp"
+                            app:spinning_bar_width="4dp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPhone2"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        app:helperText=""
-                        app:helperTextTextColor="@color/md_red_400"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/haveAccount"
-                        app:layout_constraintVertical_bias="0.0">
+                        <TextView
+                            android:id="@+id/haveAccount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:text="@string/already_have_an_account"
+                            android:textAlignment="center"
+                            android:textColor="@color/green"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/registerButton" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextPhone2"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputPhone2"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:autofillHints="Name"
-                            android:hint="@string/phone"
-                            android:inputType="phone"
-                            android:maxLines="1"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:helperText=""
+                            app:helperTextTextColor="@color/md_red_400"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/haveAccount"
+                            app:layout_constraintVertical_bias="0.0">
 
-                    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                        android:id="@+id/loginButton"
-                        style="@style/loginButton"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_24sdp"
-                        android:layout_marginBottom="@dimen/_16sdp"
-                        android:background="@drawable/login_button_bk"
-                        android:text="@string/login"
-                        android:textColor="@color/white"
-                        app:initialCornerAngle="27dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputPhone2"
-                        app:spinning_bar_color="#FFF"
-                        app:spinning_bar_padding="6dp"
-                        app:spinning_bar_width="4dp" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextPhone2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints="Name"
+                                android:hint="@string/phone"
+                                android:inputType="phone"
+                                android:maxLines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
+                        <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                            android:id="@+id/loginButton"
+                            style="@style/loginButton"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:background="@drawable/login_button_bk"
+                            android:text="@string/login"
+                            android:textColor="@color/white"
+                            app:initialCornerAngle="27dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textInputPhone2"
+                            app:spinning_bar_color="#FFF"
+                            app:spinning_bar_padding="6dp"
+                            app:spinning_bar_width="4dp" />
 
-        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

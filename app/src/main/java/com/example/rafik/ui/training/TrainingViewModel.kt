@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rafik.data.repo.FireBaseRepoImpl
 import com.example.rafik.domian.entity.TrainingRequest
+import com.example.rafik.utils.Constants
 import com.google.firebase.firestore.FieldValue
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,13 @@ class TrainingViewModel(application: Application) : ViewModel() {
     private val _sendRequest = MutableLiveData<Boolean>()
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
+
+    val isSuccessfulRequest:LiveData<Constants.Request?>
+        get() = fireBaseRepoImpl.trainingRequest
+
+    fun setNavigateUp(state: Boolean){
+        _navigateUp.postValue(state)
+    }
 
     fun onNavigateUp() {
         _navigateUp.postValue(false)
@@ -64,7 +72,6 @@ class TrainingViewModel(application: Application) : ViewModel() {
             viewModelScope.launch {
                 fireBaseRepoImpl.setTrainingRequest(trainingRequest)
             }
-            _navigateUp.value = true
             _sendRequest.postValue(false)
         }
 

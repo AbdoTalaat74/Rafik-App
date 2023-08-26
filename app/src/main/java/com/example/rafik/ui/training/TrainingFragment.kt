@@ -4,18 +4,23 @@ import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentTrainingBinding
 import com.example.rafik.ui.initToolbar
+import com.example.rafik.utils.Constants
+import com.google.android.material.snackbar.Snackbar
 
 class TrainingFragment : Fragment() {
     private lateinit var binding: FragmentTrainingBinding
@@ -63,6 +68,38 @@ class TrainingFragment : Fragment() {
                 viewModel.onNavigateUp()
             }
         }
+
+        viewModel.isSuccessfulRequest.observe(viewLifecycleOwner) {
+            when (it) {
+                Constants.Request.SUCCESS -> {
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.request_sent_successfully),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        viewModel.setNavigateUp(true)
+                    }, 1500)
+                }
+
+                Constants.Request.FAILED -> {
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+
+                else -> {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.your_request_was_not_sent_please_try_again_later),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
 
 
         return binding.root
