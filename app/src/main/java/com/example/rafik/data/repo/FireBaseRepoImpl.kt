@@ -8,6 +8,7 @@ import com.example.rafik.domian.entity.SellProductRequest
 import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
+import com.example.rafik.utils.Constants.UserFound
 import com.example.rafik.utils.Constants.FERTILIZER_REQUEST
 import com.example.rafik.utils.Constants.PHOTOS
 import com.example.rafik.utils.Constants.SELL_PRODUCT_REQUEST
@@ -27,6 +28,7 @@ class FireBaseRepoImpl : FirebaseRepo {
     private val storage = Firebase.storage
     val users = MutableLiveData<List<User>>()
     var user = MutableLiveData<User>()
+    var isUserFound = MutableLiveData<UserFound?>()
 
     override suspend fun refreshData() {
         TODO("Not yet implemented")
@@ -76,6 +78,29 @@ class FireBaseRepoImpl : FirebaseRepo {
                     Log.d(tag, "get failed with ", exception)
                 }
         }
+    }
+
+    override suspend fun checkUser(phone: String): Boolean {
+        var res = false
+        isUserFound.value = UserFound.UNKNOWN
+        db.collection(USERS).whereEqualTo("phone", phone).get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (document.exists()) {
+                        Log.d(tag, "User already exists.")
+                        res = true
+                        isUserFound.value = UserFound.FOUND
+                    } else {
+                        Log.d(tag, "User doesn't exist.")
+                        isUserFound.value = UserFound.NOT_FOUND
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(tag, "Error getting documents.", exception)
+                isUserFound.value = UserFound.UNKNOWN
+            }
+        return res
     }
 
     override suspend fun getUsers(): List<User> {

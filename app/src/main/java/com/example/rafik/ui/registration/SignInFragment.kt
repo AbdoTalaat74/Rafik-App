@@ -4,13 +4,14 @@ package com.example.rafik.ui.registration
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
@@ -18,17 +19,21 @@ import com.example.rafik.databinding.FragmentSignInBinding
 import com.example.rafik.domian.entity.Area
 import com.example.rafik.domian.entity.City
 import com.example.rafik.domian.entity.User
+import com.example.rafik.utils.Constants.UserFound
 import com.example.rafik.viewModel.LoginViewModel
 
 class SignInFragment : Fragment() {
+    private val tag = "SignInFragment"
     private lateinit var binding: FragmentSignInBinding
     private val loginViewModel by activityViewModels<LoginViewModel>()
     lateinit var name: String
     private lateinit var phone: String
+    private lateinit var phone2: String
     private lateinit var address: String
     private lateinit var user: User
     private lateinit var city: City
     private lateinit var area: Area
+    private var isLogin: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +43,50 @@ class SignInFragment : Fragment() {
         addressFocusListener()
         phoneFocusListener()
         initCitySpinner(binding.citySpinner, loginViewModel.cities)
+        loginViewModel.isLogin.observe(viewLifecycleOwner) {
+            isLogin = it
+            Log.i("isLogin", "isLogin $isLogin")
+        }
+        loginViewModel.isUserFound.observe(viewLifecycleOwner) {
+            Log.i("SignInFragment", "isUserFound=$it")
+            Log.i("SignInFragment", "isLogin=$isLogin")
+            when (it) {
+                UserFound.FOUND -> {
+                    if (isLogin) {
+                        findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+                    } else {
+                        //todo ya tal3oooooooooooooooooooooot
+                        Toast.makeText(requireContext(), "this number is exist", Toast.LENGTH_SHORT)
+                            .show()
+                        binding.registerButton.revertAnimation()
+                        binding.loginButton.revertAnimation()
+                    }
+                }
+
+                UserFound.NOT_FOUND -> {
+                    if (isLogin) {
+                        //todo ya tal3oooooooooooooooooooooot
+                        Toast.makeText(
+                            requireContext(),
+                            "this number is not exist you need to sign up",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.registerButton.revertAnimation()
+                        binding.loginButton.revertAnimation()
+                    } else {
+                        findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+                    }
+                }
+
+                UserFound.UNKNOWN -> {
+                    Log.i(tag, "UNKNOWN")
+                }
+
+                null -> {
+                    Log.i(tag, "INVALID_USER")
+                }
+            }
+        }
         binding.registerButton.setOnClickListener {
             binding.registerButton.startAnimation()
             if (binding.editTextName.text.toString() == "") {
@@ -57,8 +106,8 @@ class SignInFragment : Fragment() {
 
         binding.loginButton.setOnClickListener {
             binding.loginButton.startAnimation()
-            if (binding.editTextPhone.text.toString() == "") {
-                binding.textInputPhone.error = getString(R.string.enter_phone)
+            if (binding.editTextPhone2.text.toString() == "") {
+                binding.textInputPhone2.error = getString(R.string.enter_phone)
                 binding.registerButton.revertAnimation()
             }
             submitForm2()
@@ -161,6 +210,23 @@ class SignInFragment : Fragment() {
         }
     }
 
+    private fun validatePhone2(): String? {
+        phone2 = binding.editTextPhone2.text.toString()
+        while (phone2 == "") {
+            binding.loginButton.revertAnimation()
+            return getString(R.string.enter_phone)
+        }
+        if (phone2.length < 11) {
+            binding.loginButton.revertAnimation()
+            return getString(R.string.lenght_phone_check)
+        }
+        if (!phone2.matches("01\\d{9}".toRegex())) {
+            binding.loginButton.revertAnimation()
+            return getString(R.string.contian_11)
+        }
+        return null
+    }
+
     private fun validatePhone(): String? {
         phone = binding.editTextPhone.text.toString()
         while (phone == "") {
@@ -179,12 +245,12 @@ class SignInFragment : Fragment() {
     }
 
     private fun submitForm2() {
-        binding.textInputPhone.error = validatePhone()
-        val validPhone = (binding.textInputPhone.error == null)
+        binding.textInputPhone2.error = validatePhone2()
+        val validPhone = (binding.textInputPhone2.error == null)
         if (validPhone) {
-            user = User(phone = phone)
+            user = User(phone = phone2)
             Log.i("SignInFragment", "throw $user to vm")
-            alertDialog(true)
+            alertDialog2()
         }
     }
 
@@ -197,29 +263,39 @@ class SignInFragment : Fragment() {
         val validPhone = (binding.textInputPhone.error == null)
         if (validName && validAddress && validPhone) {
             //todo throw user to vm
-            alertDialog(false)
+            alertDialog()
         }
     }
 
-    private fun alertDialog(isLogin: Boolean) {
+    private fun alertDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(resources.getString(R.string.confirmation))
         builder.setMessage("${resources.getString(R.string.are_you_sure)} $phone ?")
         builder.setPositiveButton(R.string.yes) { _, _ ->
-            //todo yes
-            when (isLogin) {
-                true -> {
-                    user = User(phone = phone)
-                    loginViewModel.postUser(user, true)
-                }
+            user = User(name, phone, address, "", city, area)
+            Log.i("SignInFragment", "throw $user to vm")
+            loginViewModel.postUser(user, false)
+            loginViewModel.checkUser(phone)
+            isLogin = true
+        }
 
-                false -> {
-                    user = User(name, phone, address, "", city, area)
-                    Log.i("SignInFragment", "throw $user to vm")
-                    loginViewModel.postUser(user, false)
-                }
-            }
-            findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+        builder.setNegativeButton(R.string.no) { _, _ ->
+            //todo no
+            binding.registerButton.revertAnimation()
+            binding.loginButton.revertAnimation()
+        }
+        builder.show()
+    }
+
+    private fun alertDialog2() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(resources.getString(R.string.confirmation))
+        builder.setMessage("${resources.getString(R.string.are_you_sure)} $phone2 ?")
+        builder.setPositiveButton(R.string.yes) { _, _ ->
+            user = User(phone = phone2)
+            loginViewModel.postUser(user, true)
+            loginViewModel.checkUser(phone2)
+            isLogin = true
         }
 
         builder.setNegativeButton(R.string.no) { _, _ ->

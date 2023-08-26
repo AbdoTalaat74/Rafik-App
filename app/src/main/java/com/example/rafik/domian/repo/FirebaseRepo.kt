@@ -14,6 +14,7 @@ interface FirebaseRepo {
     suspend fun setUser(user: User): Boolean
     suspend fun updateUser(user: User): Boolean
     suspend fun getUser()
+    suspend fun checkUser(phone:String):Boolean
     suspend fun getUsers(): List<User>
 
     suspend fun setFertilizerRequest(fertilizerRequest: FertilizerRequest): Boolean
