@@ -134,22 +134,24 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
                 MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, it)
             }
         }
-        val sellProductRequest = SellProductRequest(
-            productImage = bitmap,
-            productType = productType.get()!!,
-            amount = amount.get()!!,
-            address = address.get()!!,
-            price = price.get()!!,
-            productionDate = productionDate.get()!!,
-            target = _target.value!!,
-            user = user.value!!
-        )
-        Log.i("SellProductViewModel", sellProductRequest.toString())
-        viewModelScope.launch {
-            fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
+        if (user.value != null) {
+            val sellProductRequest = SellProductRequest(
+                productImage = bitmap,
+                productType = productType.get()!!,
+                amount = amount.get()!!,
+                address = address.get()!!,
+                price = price.get()!!,
+                productionDate = productionDate.get()!!,
+                target = _target.value!!,
+                user = user.value!!
+            )
+            Log.i("SellProductViewModel", sellProductRequest.toString())
+            viewModelScope.launch {
+                fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
+            }
+            _navigateUp.postValue(true)
+            _sendRequest.postValue(false)
         }
-        _navigateUp.postValue(true)
-        _sendRequest.postValue(false)
     }
 
     init {

@@ -1,5 +1,6 @@
 package com.example.rafik.ui.training
 
+import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
@@ -38,6 +39,23 @@ class TrainingFragment : Fragment() {
 
         initProductTypeSpinner()
         initTrainingPlacesSpinner()
+
+        viewModel.sendRequest.observe(viewLifecycleOwner) {
+            if (it == true) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.confirmation))
+                    .setMessage(resources.getString(R.string.send_request_confirmation))
+                    .setPositiveButton(resources.getString(R.string.okay)) { _, _ ->
+                        viewModel.sendRequest()
+                    }
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                        //do nothing
+                    }
+                    .setIcon(R.drawable.ic_warning)
+                    .show()
+            }
+        }
+
 
         viewModel.navigateUp.observe(viewLifecycleOwner) {
             if (it == true) {

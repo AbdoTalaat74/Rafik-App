@@ -12,19 +12,40 @@
         tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/action_homeFragment_to_organicFertilizerFragment"
-            app:destination="@id/organicFertilizerFragment" />
+            app:destination="@id/organicFertilizerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_trainingFragment"
-            app:destination="@id/trainingFragment" />
+            app:destination="@id/trainingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_sellProductFragment"
-            app:destination="@id/sellProductFragment" />
+            app:destination="@id/sellProductFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_down"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/slide_up_out"
+            app:popExitAnim="@anim/slide_up" />
         <action
             android:id="@+id/action_homeFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
+            app:destination="@id/overviewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/organicFertilizerFragment"

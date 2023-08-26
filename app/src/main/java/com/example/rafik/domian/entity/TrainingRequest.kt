@@ -15,5 +15,7 @@ data class TrainingRequest(
     @SerializedName("user")
     val user: User,
     @SerializedName("date")
-    var date: FieldValue = FieldValue.serverTimestamp()
+    var date: FieldValue = FieldValue.serverTimestamp(),
+    @SerializedName("isRead")
+    var isRead: Boolean = false
 )

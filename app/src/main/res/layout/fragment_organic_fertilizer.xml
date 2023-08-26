@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.rafik.ui.organic_fertilizer.OrganicFertilizerViewModel" />
@@ -14,17 +15,16 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:drawableStart="@drawable/rafik_logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/rafik_logo">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 style="@style/MyToolbar"
-                app:menu="@menu/top_app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-            </com.google.android.material.appbar.MaterialToolbar>
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/top_app_bar"></com.google.android.material.appbar.MaterialToolbar>
 
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -33,149 +33,154 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_48sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5">
+                android:layout_height="match_parent">
 
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="@string/land_area"
-                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_48sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/acre_text_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:hint="@string/acre"
-                    app:layout_constraintEnd_toEndOf="@+id/textView3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/acre_text_field"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@={viewModel.acre}"
-                        android:inputType="number|numberDecimal" />
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/land_area"
+                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/carat_text_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:hint="@string/carat"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/carat_text_field"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/acre_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.carat}"
-                        android:gravity="center"
-                        android:inputType="number|numberDecimal" />
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="@string/acre"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"
+                        app:layout_constraintEnd_toEndOf="@+id/textView3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/acre_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="number|numberDecimal"
+                            android:text="@={viewModel.acre}" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/cultivation_type_text_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_200sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_32sdp"
-                    android:hint="@string/cultivation_or_crop_type"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/carat_text_layout">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/cultivation_type_text_field"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/carat_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.cropType}"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"
+                        android:hint="@string/carat"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView3"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                        android:gravity="center" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/carat_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="number|numberDecimal"
+                            android:text="@={viewModel.carat}" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fertilizer_type_text_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_200sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_32sdp"
-                    android:hint="@string/type_of_fertilizer_required"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cultivation_type_text_layout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fertilizer_type_text_field"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cultivation_type_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_200sdp"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.fertilizerType}"
-                        android:gravity="center" />
+                        android:layout_marginTop="@dimen/_32sdp"
+                        android:hint="@string/cultivation_or_crop_type"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/carat_text_layout">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/cultivation_type_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+
+                            android:text="@={viewModel.cropType}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-                <Button
-                    android:id="@+id/send_request_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_marginHorizontal="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_24sdp"
-                    android:backgroundTint="@color/base_green_color"
-                    android:text="@string/send_request"
-                    android:textSize="@dimen/_14ssp"
-                    android:onClick="@{()->viewModel.sendRequest()}"
-                    app:cornerRadius="@dimen/_15sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fertilizer_type_text_layout"
-                    app:strokeColor="@color/base_green_color" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fertilizer_type_text_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_32sdp"
+                        android:hint="@string/type_of_fertilizer_required"
+                        app:boxStrokeErrorColor="?attr/colorError"
+                        app:errorIconDrawable="@drawable/ic_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cultivation_type_text_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fertilizer_type_text_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@={viewModel.fertilizerType}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <Button
+                        android:id="@+id/send_request_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_marginHorizontal="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:backgroundTint="@color/base_green_color"
+                        android:onClick="@{()->viewModel.validateAndSendRequest()}"
+                        android:text="@string/send_request"
+                        android:textSize="@dimen/_14ssp"
+                        app:cornerRadius="@dimen/_15sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fertilizer_type_text_layout"
+                        app:strokeColor="@color/base_green_color" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 
 

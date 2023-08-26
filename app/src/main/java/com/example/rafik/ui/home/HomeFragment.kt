@@ -44,13 +44,16 @@ class HomeFragment : Fragment() {
         }
 
         binding.organicFertilizerBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.organicFertilizerFragment)
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToOrganicFertilizerFragment())
         }
         binding.manufactureTrainingBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.trainingFragment)
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToTrainingFragment())
         }
         binding.productForSaleBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.sellProductFragment)
+            this.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToSellProductFragment())
         }
 
         // assign the on menu item click listener
