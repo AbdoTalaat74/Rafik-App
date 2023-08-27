@@ -14,10 +14,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentTrainingBinding
+import com.example.rafik.domian.entity.ProductType
+import com.example.rafik.domian.entity.TrainingArea
 import com.example.rafik.ui.initToolbar
 import com.example.rafik.utils.Constants
 import com.google.android.material.snackbar.Snackbar
@@ -42,8 +45,29 @@ class TrainingFragment : Fragment() {
 
         initToolbar(binding.topAppBar, getString(R.string.trainings), this)
 
-        initProductTypeSpinner()
-        initTrainingPlacesSpinner()
+        viewModel.trainingAreas.observe(viewLifecycleOwner){
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initTrainingPlacesSpinner(it)
+            }
+        }
+
+        viewModel.productTypes.observe(viewLifecycleOwner){
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initProductTypeSpinner(it)
+            }
+        }
 
         viewModel.sendRequest.observe(viewLifecycleOwner) {
             if (it == true) {
@@ -105,9 +129,8 @@ class TrainingFragment : Fragment() {
         return binding.root
     }
 
-    private fun initProductTypeSpinner() {
-        val productTypes = resources.getStringArray(R.array.product_types)
-        val productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, productTypes)
+    private fun initProductTypeSpinner(data: List<ProductType>) {
+        val productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
         binding.productTypeSpinner.adapter = productAdapter
         binding.productTypeSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -117,7 +140,7 @@ class TrainingFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    viewModel.postProductType(productTypes[position])
+                    viewModel.postProductType(data[position].name)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -128,9 +151,8 @@ class TrainingFragment : Fragment() {
 
     }
 
-    private fun initTrainingPlacesSpinner() {
-        val trainingPlaces = resources.getStringArray(R.array.training_places)
-        val placesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, trainingPlaces)
+    private fun initTrainingPlacesSpinner(data: List<TrainingArea>) {
+        val placesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
         binding.trainingPlacesSpinner.adapter = placesAdapter
 
         binding.trainingPlacesSpinner.onItemSelectedListener =
@@ -141,7 +163,7 @@ class TrainingFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    viewModel.postTrainingPlace(trainingPlaces[position])
+                    viewModel.postTrainingPlace(data[position].name)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
