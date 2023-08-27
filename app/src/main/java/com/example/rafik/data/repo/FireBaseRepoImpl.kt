@@ -85,7 +85,6 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun checkUser(phone: String): Boolean {
         var res = false
-        isUserFound.value = UserFound.NOT_FOUND
         db.collection(USERS).whereEqualTo("phone", phone).get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -102,6 +101,11 @@ class FireBaseRepoImpl : FirebaseRepo {
             .addOnFailureListener { exception ->
                 Log.w(tag, "Error getting documents.", exception)
                 isUserFound.value = UserFound.NOT_FOUND
+            }.addOnCompleteListener {
+                Log.d(tag, "CompleteListener")
+                if (isUserFound.value != UserFound.FOUND) {
+                    isUserFound.value = UserFound.NOT_FOUND
+                }
             }
         return res
     }
