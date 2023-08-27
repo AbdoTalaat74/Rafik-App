@@ -503,6 +503,11 @@ class LoginViewModel : ViewModel() {
             )
         ),
     )
+
+    private val _navigatable = MutableLiveData(true)
+    val navigatable: LiveData<Boolean>
+        get() = _navigatable
+
     private val _username = MutableLiveData<String?>()
     val username: LiveData<String?>
         get() = _username
@@ -520,9 +525,13 @@ class LoginViewModel : ViewModel() {
         get() = _authenticationState
 
 
-
     val isUserFound: LiveData<Constants.UserFound?>
         get() = firebaseRepoImpl.isUserFound
+
+    fun setNavigate_able(bool: Boolean) {
+        _navigatable.value = bool
+        _navigatable.postValue(bool)
+    }
 
     fun postUser(user: User, isLogin: Boolean) {
         _user.value = user

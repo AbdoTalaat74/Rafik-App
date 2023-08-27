@@ -58,6 +58,7 @@ class OtpAuthFrag : Fragment() {
             loginViewModel.checkUser(it.phone)
             binding.otpView.requestFocus()
             sendVerificationCode(phone)
+            loginViewModel.setNavigate_able(false)
         }
         binding.viewModel = loginViewModel
         loginViewModel.isLogin.observe(viewLifecycleOwner) {
