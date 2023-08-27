@@ -46,7 +46,7 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
         get() = _sendRequest
 
     val isSuccessfulRequest:LiveData<Constants.Request?>
-        get() = fireBaseRepoImpl.trainingRequest
+        get() = fireBaseRepoImpl.sellProductRequest
 
 
     fun setNavigateUp(state:Boolean){
