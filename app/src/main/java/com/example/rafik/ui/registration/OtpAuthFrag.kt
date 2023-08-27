@@ -2,13 +2,15 @@ package com.example.rafik.ui.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -38,6 +40,10 @@ class OtpAuthFrag : Fragment() {
     private lateinit var intent: Intent
     private var isLogin: Boolean = false
 
+    private lateinit var countDownTimer: CountDownTimer
+    private val initialTimeInMillis: Long = 60000 // 60 seconds in milliseconds
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,11 +59,11 @@ class OtpAuthFrag : Fragment() {
             binding.otpView.requestFocus()
             sendVerificationCode(phone)
         }
+        binding.viewModel = loginViewModel
         loginViewModel.isLogin.observe(viewLifecycleOwner) {
             isLogin = it
             Log.i("isLogin", "isLogin $isLogin")
         }
-
         binding.otpView.otpListener = object : OTPListener {
             override fun onInteractionListener() {
 
@@ -71,27 +77,50 @@ class OtpAuthFrag : Fragment() {
         binding.tryAgain.setOnClickListener {
             binding.otpView.requestFocus()
             sendVerificationCode(phone)
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.tryAgain.visibility = GONE
-            }, 500)
+            startTimer()
 
         }
 
+        loginViewModel.startTimer.observe(viewLifecycleOwner){
+            if (it == true) {
+                startTimer()
+            }
+        }
+
+        loginViewModel.isButtonEnabled.observe(viewLifecycleOwner){
+            binding.tryAgain.isEnabled = it
+            if (it == true){
+                Log.e("OtpAuthFrag","tryAgain Enabled")
+                binding.tryAgain.setTextColor(resources.getColor(com.apachat.loadingbutton.core.R.color.green,null))
+                binding.timerText.visibility = INVISIBLE
+            }else{
+                Log.e("OtpAuthFrag","tryAgain Disabled")
+                binding.tryAgain.setTextColor(resources.getColor(R.color.Gray,null))
+                binding.timerText.visibility = VISIBLE
+            }
+        }
+
+
+
         binding.idBtnVerify.setOnClickListener {
-            binding.idBtnVerify.startAnimation()
-            if (TextUtils.isEmpty(binding.otpView.otp)) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.please_enter_code),
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.idBtnVerify.revertAnimation()
-                binding.otpView.showError()
-            } else {
-                binding.otpView.otp?.let {
-                    verifyCode(it)
+            if (it.isEnabled){
+                binding.idBtnVerify.startAnimation()
+                if (TextUtils.isEmpty(binding.otpView.otp)) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.please_enter_code),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.idBtnVerify.revertAnimation()
+                    binding.otpView.showError()
+                } else {
+                    binding.otpView.otp?.let { code ->
+                        verifyCode(code)
+                        it.isEnabled = false
+                    }
                 }
             }
+
         }
         // Inflate the layout for this fragment
         return binding.root
@@ -189,5 +218,27 @@ class OtpAuthFrag : Fragment() {
     private fun verifyCode(code: String) {
         val credential = PhoneAuthProvider.getCredential(verificationId, code)
         signInWithCredential(credential)
+    }
+
+
+    private fun startTimer() {
+        loginViewModel.onStartTimer()
+        countDownTimer = object : CountDownTimer(initialTimeInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = millisUntilFinished / 1000
+                loginViewModel.timerText.set(secondsRemaining.toString())
+                loginViewModel.setButtonState(false)
+                binding.timerText.visibility = VISIBLE
+            }
+
+            override fun onFinish() {
+                loginViewModel.timerText.set("0")
+                Log.e("OtpAuthFrag","onFinish called")
+                loginViewModel.setButtonState(true)
+
+                // Handle timer completion
+            }
+        }
+        countDownTimer.start()
     }
 }
