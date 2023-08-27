@@ -51,38 +51,42 @@ class SignInFragment : Fragment() {
         loginViewModel.isUserFound.observe(viewLifecycleOwner) {
             Log.i("SignInFragment", "isUserFound=$it")
             Log.i("SignInFragment", "isLogin=$isLogin")
-            when (it) {
-                UserFound.FOUND -> {
-                    if (isLogin) {
-                        findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
-                    } else {
-                        Snackbar.make(
-                            binding.coordinatorlayout,
-                            getString(R.string.this_number_is_already_registered_try_to_log_in),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        binding.registerButton.revertAnimation()
-                        binding.loginButton.revertAnimation()
+            if (loginViewModel.navigatable.value == true) {
+                when (it) {
+                    UserFound.FOUND -> {
+                        if (isLogin) {
+                            findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+                        } else {
+                            Snackbar.make(
+                                binding.coordinatorlayout,
+                                getString(R.string.this_number_is_already_registered_try_to_log_in),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                            binding.registerButton.revertAnimation()
+                            binding.loginButton.revertAnimation()
+                        }
+                    }
+
+                    UserFound.NOT_FOUND -> {
+                        if (isLogin) {
+                            Snackbar.make(
+                                binding.coordinatorlayout,
+                                getString(R.string.this_number_is_not_registered_try_to_register),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                            binding.registerButton.revertAnimation()
+                            binding.loginButton.revertAnimation()
+                        } else {
+                            findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
+                        }
+                    }
+
+                    null -> {
+                        Log.i(tag, "INVALID_USER")
                     }
                 }
-
-                UserFound.NOT_FOUND -> {
-                    if (isLogin) {
-                        Snackbar.make(
-                            binding.coordinatorlayout,
-                            getString(R.string.this_number_is_not_registered_try_to_register),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        binding.registerButton.revertAnimation()
-                        binding.loginButton.revertAnimation()
-                    } else {
-                        findNavController().navigate(R.id.action_signInFragment_to_otpAuthFrag)
-                    }
-                }
-
-                null -> {
-                    Log.i(tag, "INVALID_USER")
-                }
+            }else{
+                loginViewModel.setNavigate_able(true)
             }
         }
         binding.registerButton.setOnClickListener {

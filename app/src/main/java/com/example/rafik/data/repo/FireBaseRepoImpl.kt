@@ -3,16 +3,24 @@ package com.example.rafik.data.repo
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.rafik.domian.entity.CropType
 import com.example.rafik.domian.entity.FertilizerRequest
+import com.example.rafik.domian.entity.FertilizerType
+import com.example.rafik.domian.entity.ProductType
 import com.example.rafik.domian.entity.SellProductRequest
+import com.example.rafik.domian.entity.TrainingArea
 import com.example.rafik.domian.entity.TrainingRequest
 import com.example.rafik.domian.entity.User
 import com.example.rafik.domian.repo.FirebaseRepo
+import com.example.rafik.utils.Constants.CROP_TYPE
 import com.example.rafik.utils.Constants.Request
 import com.example.rafik.utils.Constants.UserFound
 import com.example.rafik.utils.Constants.FERTILIZER_REQUEST
+import com.example.rafik.utils.Constants.FERTILIZER_TYPE
 import com.example.rafik.utils.Constants.PHOTOS
+import com.example.rafik.utils.Constants.PRODUCT_TYPE
 import com.example.rafik.utils.Constants.SELL_PRODUCT_REQUEST
+import com.example.rafik.utils.Constants.TRAINING_AREA
 import com.example.rafik.utils.Constants.TRAINING_REQUEST
 import com.example.rafik.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +34,11 @@ class FireBaseRepoImpl : FirebaseRepo {
     private val db = Firebase.firestore
     private val auth = FirebaseAuth.getInstance()
     private val storage = Firebase.storage
-    val users = MutableLiveData<List<User>>()
+    private val users = MutableLiveData<List<User>>()
+    val productTypes = MutableLiveData<List<ProductType>>()
+    val trainingAreas = MutableLiveData<List<TrainingArea>>()
+    val fertilizerTypes = MutableLiveData<List<FertilizerType>>()
+    val cropTypes = MutableLiveData<List<CropType>>()
     var user = MutableLiveData<User>()
     var isUserFound = MutableLiveData<UserFound?>()
     var fertilizerRequest = MutableLiveData<Request?>()
@@ -200,5 +212,141 @@ class FireBaseRepoImpl : FirebaseRepo {
             Log.d(tag, "taskSnapshot added with ID: ${taskSnapshot.storage.downloadUrl}")
         }
         return url
+    }
+
+    override suspend fun setProductType(productType: ProductType): Boolean {
+        var res = false
+        val newRequestRef = db.collection(PRODUCT_TYPE).document()
+        productType.uid = newRequestRef.id
+        newRequestRef.set(productType)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun getProductType(): List<ProductType> {
+        val array = ArrayList<ProductType>()
+        db.collection(PRODUCT_TYPE).whereEqualTo("isAvailable",true)
+            .get()
+            .addOnSuccessListener { result ->
+                array.clear()
+                for (document in result) {
+                    val product: ProductType = document.toObject(ProductType::class.java)
+                    array.add(product)
+                    Log.d(tag, "${document.id} => ${document.data}")
+                }
+                productTypes.value = array
+            }
+            .addOnFailureListener { exception ->
+                Log.w(tag, "Error getting documents.", exception)
+            }
+        return array
+    }
+
+    override suspend fun setTrainingArea(trainingArea: TrainingArea): Boolean {
+        var res = false
+        val newRequestRef = db.collection(TRAINING_AREA).document()
+        trainingArea.uid = newRequestRef.id
+        newRequestRef.set(trainingArea)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun getTrainingArea(): List<TrainingArea> {
+        val array = ArrayList<TrainingArea>()
+        db.collection(TRAINING_AREA).whereEqualTo("isAvailable",true)
+            .get()
+            .addOnSuccessListener { result ->
+                array.clear()
+                for (document in result) {
+                    val trainingArea: TrainingArea = document.toObject(TrainingArea::class.java)
+                    array.add(trainingArea)
+                    Log.d(tag, "${document.id} => ${document.data}")
+                }
+                trainingAreas.value = array
+            }
+            .addOnFailureListener { exception ->
+                Log.w(tag, "Error getting documents.", exception)
+            }
+        return array
+    }
+
+    override suspend fun setFertilizerType(fertilizerType: FertilizerType): Boolean {
+        var res = false
+        val newRequestRef = db.collection(FERTILIZER_TYPE).document()
+        fertilizerType.uid = newRequestRef.id
+        newRequestRef.set(fertilizerType)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun getFertilizerType(): List<FertilizerType> {
+        val array = ArrayList<FertilizerType>()
+        db.collection(FERTILIZER_TYPE).whereEqualTo("isAvailable",true)
+            .get()
+            .addOnSuccessListener { result ->
+                array.clear()
+                for (document in result) {
+                    val fertilizerType: FertilizerType = document.toObject(FertilizerType::class.java)
+                    array.add(fertilizerType)
+                    Log.d(tag, "${document.id} => ${document.data}")
+                }
+                fertilizerTypes.value = array
+            }
+            .addOnFailureListener { exception ->
+                Log.w(tag, "Error getting documents.", exception)
+            }
+        return array
+    }
+
+    override suspend fun setCropType(cropType: CropType): Boolean {
+        var res = false
+        val newRequestRef = db.collection(CROP_TYPE).document()
+        cropType.uid = newRequestRef.id
+        newRequestRef.set(cropType)
+            .addOnSuccessListener { documentReference ->
+                Log.d(tag, "DocumentSnapshot added with ID: $documentReference")
+                res = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(tag, "Error adding document", e)
+            }
+        return res
+    }
+
+    override suspend fun getCropType(): List<CropType> {
+        val array = ArrayList<CropType>()
+        db.collection(CROP_TYPE).whereEqualTo("isAvailable",true)
+            .get()
+            .addOnSuccessListener { result ->
+                array.clear()
+                for (document in result) {
+                    val cropType: CropType = document.toObject(CropType::class.java)
+                    array.add(cropType)
+                    Log.d(tag, "${document.id} => ${document.data}")
+                }
+                cropTypes.value = array
+            }
+            .addOnFailureListener { exception ->
+                Log.w(tag, "Error getting documents.", exception)
+            }
+        return array
     }
 }
