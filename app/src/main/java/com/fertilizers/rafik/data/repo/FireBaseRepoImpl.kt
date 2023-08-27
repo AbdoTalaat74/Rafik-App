@@ -231,7 +231,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getProductType(): List<ProductType> {
         val array = ArrayList<ProductType>()
-        db.collection(PRODUCT_TYPE).whereEqualTo("isAvailable",true)
+        db.collection(PRODUCT_TYPE)
             .get()
             .addOnSuccessListener { result ->
                 array.clear()
@@ -265,7 +265,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getTrainingArea(): List<TrainingArea> {
         val array = ArrayList<TrainingArea>()
-        db.collection(TRAINING_AREA).whereEqualTo("isAvailable",true)
+        db.collection(TRAINING_AREA)
             .get()
             .addOnSuccessListener { result ->
                 array.clear()
@@ -299,7 +299,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getFertilizerType(): List<FertilizerType> {
         val array = ArrayList<FertilizerType>()
-        db.collection(FERTILIZER_TYPE).whereEqualTo("isAvailable",true)
+        db.collection(FERTILIZER_TYPE)
             .get()
             .addOnSuccessListener { result ->
                 array.clear()
@@ -333,7 +333,7 @@ class FireBaseRepoImpl : FirebaseRepo {
 
     override suspend fun getCropType(): List<CropType> {
         val array = ArrayList<CropType>()
-        db.collection(CROP_TYPE).whereEqualTo("isAvailable",true)
+        db.collection(CROP_TYPE)
             .get()
             .addOnSuccessListener { result ->
                 array.clear()
