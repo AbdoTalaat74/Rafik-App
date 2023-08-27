@@ -81,7 +81,7 @@ class TrainingViewModel(application: Application) : ViewModel() {
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
             fireBaseRepoImpl.getTrainingArea()
-            fireBaseRepoImpl.getTrainingArea()
+            fireBaseRepoImpl.getProductType()
         }
     }
 
