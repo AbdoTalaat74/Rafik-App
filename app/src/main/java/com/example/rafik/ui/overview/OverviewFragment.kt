@@ -8,13 +8,19 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOverviewBinding
+import com.example.rafik.domian.entity.CropType
+import com.example.rafik.domian.entity.FertilizerType
+import com.example.rafik.domian.entity.TrainingArea
 import com.example.rafik.ui.initToolbar
+import com.google.android.material.snackbar.Snackbar
 
 class OverviewFragment : Fragment() {
     private lateinit var binding: FragmentOverviewBinding
+    private lateinit var viewModel: OverviewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,35 +30,72 @@ class OverviewFragment : Fragment() {
 
         binding = FragmentOverviewBinding.inflate(layoutInflater)
 
+        viewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
         initOverviewToolBar()
 
-        initTrainingPlacesSpinner()
-        initOrganicProductTypeSpinner()
-        initFertilizeTypeSpinner()
+
+        viewModel.fertilizerTypes.observe(viewLifecycleOwner) {
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initFertilizeTypeSpinner(it)
+            }
+        }
+
+        viewModel.cropType.observe(viewLifecycleOwner) {
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initOrganicProductTypeSpinner(it)
+            }
+        }
+
+        viewModel.trainingAreas.observe(viewLifecycleOwner) {
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initTrainingPlacesSpinner(it)
+            }
+        }
+
+
+
+
+
+
 
         return binding.root
     }
 
 
-    private fun initTrainingPlacesSpinner() {
-        val trainingPlaces = resources.getStringArray(R.array.training_places)
-        val placesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, trainingPlaces)
+    private fun initTrainingPlacesSpinner(data: List<TrainingArea>) {
+        val placesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
         binding.trainingSpinner.adapter = placesAdapter
     }
 
 
-    private fun initOrganicProductTypeSpinner() {
-        val organicProductTypes = resources.getStringArray(R.array.organic_crops_type)
+    private fun initOrganicProductTypeSpinner(data:List<CropType>) {
         val productAdapter =
-            ArrayAdapter(requireContext(), R.layout.dropdown_item, organicProductTypes)
+            ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
         binding.organicProductsSpinner.adapter = productAdapter
 
     }
 
-    private fun initFertilizeTypeSpinner() {
-        val fertilizeTypes = resources.getStringArray(R.array.fertilizer_types)
+    private fun initFertilizeTypeSpinner(data:List<FertilizerType>) {
         val productAdapter =
-            ArrayAdapter(requireContext(), R.layout.dropdown_item, fertilizeTypes)
+            ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
         binding.fertilizerSpinner.adapter = productAdapter
 
     }
@@ -68,7 +111,6 @@ class OverviewFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
-
 
 
 }
