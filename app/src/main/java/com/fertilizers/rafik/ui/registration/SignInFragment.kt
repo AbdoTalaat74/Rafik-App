@@ -270,8 +270,10 @@ class SignInFragment : Fragment() {
 
     private fun alertDialog() {
         val builder = AlertDialog.Builder(requireContext())
+        val message = resources.getString(R.string.are_you_sure) + phone + resources.getString(R.string._question_mark)
         builder.setTitle(resources.getString(R.string.confirmation))
-        builder.setMessage("${resources.getString(R.string.are_you_sure)} $phone ?")
+        builder.setMessage(message)
+        builder.setCancelable(false)
         builder.setPositiveButton(R.string.yes) { _, _ ->
             user = User(name, phone, address, "", city, area)
             Log.i("SignInFragment", "throw $user to vm")
@@ -290,8 +292,10 @@ class SignInFragment : Fragment() {
 
     private fun alertDialog2() {
         val builder = AlertDialog.Builder(requireContext())
+        val message = resources.getString(R.string.are_you_sure) + phone2 + resources.getString(R.string._question_mark)
         builder.setTitle(resources.getString(R.string.confirmation))
-        builder.setMessage("${resources.getString(R.string.are_you_sure)} $phone2 ?")
+        builder.setMessage(message)
+        builder.setCancelable(false)
         builder.setPositiveButton(R.string.yes) { _, _ ->
             user = User(phone = phone2)
             loginViewModel.postUser(user, true)

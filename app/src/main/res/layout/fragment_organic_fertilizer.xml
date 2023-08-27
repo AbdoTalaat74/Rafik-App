@@ -25,7 +25,7 @@
                 style="@style/MyToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/top_app_bar"></com.google.android.material.appbar.MaterialToolbar>
+                app:menu="@menu/top_app_bar" />
 
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -39,7 +39,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,29 +54,16 @@
                     app:layout_constraintVertical_bias="0.5">
 
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:text="@string/land_area"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/acre_text_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_100sdp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
                         android:hint="@string/acre"
                         app:boxStrokeErrorColor="?attr/colorError"
                         app:errorIconDrawable="@drawable/ic_error"
-                        app:layout_constraintEnd_toEndOf="@+id/textView3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView3">
+                        app:layout_constraintStart_toStartOf="@+id/cultivation_type_text_layout"
+                        app:layout_constraintTop_toTopOf="@+id/carat_text_layout">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/acre_text_field"
@@ -91,14 +78,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/carat_text_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_100sdp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
+                        android:hint="@string/carat"
+                        android:layout_marginTop="@dimen/_16sdp"
                         app:boxStrokeErrorColor="?attr/colorError"
                         app:errorIconDrawable="@drawable/ic_error"
-                        android:hint="@string/carat"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView3"
+                        app:layout_constraintEnd_toEndOf="@+id/cultivation_type_text_layout"
                         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -111,10 +97,23 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/land_area"
+                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/cultivation_type_text_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_250sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_32sdp"
                         android:hint="@string/cultivation_or_crop_type"
@@ -135,28 +134,63 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/fertilizer_type_text_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_200sdp"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/required_fertilizer_linear_layout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_32sdp"
-                        android:hint="@string/type_of_fertilizer_required"
-                        app:boxStrokeErrorColor="?attr/colorError"
-                        app:errorIconDrawable="@drawable/ic_error"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@+id/cultivation_type_text_layout"
+                        app:layout_constraintStart_toStartOf="@+id/cultivation_type_text_layout"
                         app:layout_constraintTop_toBottomOf="@+id/cultivation_type_text_layout">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/fertilizer_type_text_field"
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:src="@drawable/ic_fertilizer"
+                            app:layout_constraintBottom_toBottomOf="@+id/product_type_tv"
+                            app:layout_constraintEnd_toStartOf="@+id/product_type_tv"
+                            app:layout_constraintTop_toTopOf="@+id/product_type_tv" />
+
+                        <TextView
+                            android:id="@+id/product_type_tv"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@={viewModel.fertilizerType}" />
+                            android:layout_gravity="center"
+                            android:text="@string/type_of_fertilizer_required"
+                            android:textSize="@dimen/_16ssp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/cultivation_type_text_layout"
+                            app:layout_constraintStart_toStartOf="@+id/cultivation_type_text_layout"
+                            app:layout_constraintTop_toBottomOf="@+id/cultivation_type_text_layout" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
 
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fertilizer_type_spinner_card"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="@+id/cultivation_type_text_layout"
+                        app:layout_constraintStart_toStartOf="@+id/cultivation_type_text_layout"
+                        app:layout_constraintTop_toBottomOf="@+id/required_fertilizer_linear_layout"
+                        app:strokeWidth="1dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/fertilizer_type_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            tools:layout_height="?attr/dropdownListPreferredItemHeight" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <Button
                         android:id="@+id/send_request_btn"
@@ -171,7 +205,7 @@
                         app:cornerRadius="@dimen/_15sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fertilizer_type_text_layout"
+                        app:layout_constraintTop_toBottomOf="@+id/fertilizer_type_spinner_card"
                         app:strokeColor="@color/base_green_color" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

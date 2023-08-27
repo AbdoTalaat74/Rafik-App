@@ -138,7 +138,7 @@ class OtpAuthFrag : Fragment() {
                             Log.i("signInWithCredential", "login successfully")
                             Snackbar.make(
                                 binding.constraintLayout,
-                                "Logged in successfully",
+                                getString(R.string.logged_in_successfully),
                                 Snackbar.LENGTH_LONG
                             ).show()
                             Handler(Looper.getMainLooper()).postDelayed({
@@ -152,7 +152,7 @@ class OtpAuthFrag : Fragment() {
                             Log.i("signInWithCredential", "sign up successfully")
                             Snackbar.make(
                                 binding.constraintLayout,
-                                "successfully registered",
+                                getString(R.string.successfully_registered),
                                 Snackbar.LENGTH_LONG
                             ).show()
                             Handler(Looper.getMainLooper()).postDelayed({

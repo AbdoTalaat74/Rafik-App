@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -31,6 +32,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.fertilizers.rafik.R
 import com.fertilizers.rafik.databinding.FragmentSellProductBinding
+import com.fertilizers.rafik.domian.entity.ProductType
 import com.fertilizers.rafik.ui.initToolbar
 import com.fertilizers.rafik.utils.Constants
 import com.fertilizers.rafik.utils.Constants.MY_FORMAT
@@ -56,7 +58,6 @@ class SellProductFragment : Fragment() {
         )[SellProductViewModel::class.java]
         initTargetSpinner()
         amountFocusListener()
-        productTypeFocusListener()
         addressFocusListener()
         priceFocusListener()
         binding.viewModel = viewModel
@@ -83,7 +84,7 @@ class SellProductFragment : Fragment() {
 
         viewModel.imageProgressBar.observe(viewLifecycleOwner) {
             if (it == true) {
-                binding.pickImg.visibility = GONE
+                binding.pickImg.visibility = INVISIBLE
                 binding.imageProgressBar.visibility = VISIBLE
                 binding.imageProgressBar.isActivated = it
             } else {
@@ -92,7 +93,7 @@ class SellProductFragment : Fragment() {
                     binding.productImage.visibility = GONE
                     binding.deleteImage.visibility = GONE
                 } else {
-                    binding.pickImg.visibility = GONE
+                    binding.pickImg.visibility = INVISIBLE
                     binding.productImage.visibility = VISIBLE
                     binding.deleteImage.visibility = VISIBLE
                 }
@@ -107,11 +108,23 @@ class SellProductFragment : Fragment() {
                 binding.productImage.visibility = VISIBLE
                 binding.deleteImage.visibility = VISIBLE
                 binding.imageProgressBar.visibility = GONE
-                binding.pickImg.visibility = GONE
+                binding.pickImg.visibility = INVISIBLE
             } else {
                 binding.productImage.visibility = GONE
                 binding.deleteImage.visibility = GONE
                 binding.pickImg.visibility = VISIBLE
+            }
+        }
+
+        viewModel.productTypes.observe(viewLifecycleOwner){
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initProductTypeSpinner(it)
             }
         }
 
@@ -240,6 +253,29 @@ class SellProductFragment : Fragment() {
         return binding.root
     }
 
+
+    private fun initProductTypeSpinner(data: List<ProductType>) {
+        val productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
+        binding.productTypeSpinner.adapter = productAdapter
+        binding.productTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.postProductType(data[position].name)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    //todo
+                }
+            }
+
+
+    }
+
     private fun initTargetSpinner() {
         val targetList = resources.getStringArray(R.array.target_type)
         val targetAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, targetList)
@@ -309,23 +345,6 @@ class SellProductFragment : Fragment() {
             }
         }
 
-    private fun productTypeFocusListener() {
-        binding.productTypeTextField.setOnFocusChangeListener { _, focus ->
-            if (!focus) {
-                binding.productTypeTextLayout.error = validateProductType()
-            } else {
-                binding.productTypeTextLayout.error = null
-            }
-        }
-    }
-
-    private fun validateProductType(): String? {
-        val productType = binding.productTypeTextField.text.toString()
-        while (productType.isNullOrBlank()) {
-            return getString(R.string.please_fill_product_type_field)
-        }
-        return null
-    }
 
     private fun amountFocusListener() {
         binding.amountTextField.setOnFocusChangeListener { _, focus ->
@@ -387,7 +406,6 @@ class SellProductFragment : Fragment() {
 
     private fun submitForm() {
         Log.e("SellProductFragment", "submitForm called")
-        binding.productTypeTextLayout.error = validateProductType()
         binding.amountTextLayout.error = validateAmount()
         binding.addressTextLayout.error = validateAddress()
         binding.priceTextLayout.error = validatePrice()

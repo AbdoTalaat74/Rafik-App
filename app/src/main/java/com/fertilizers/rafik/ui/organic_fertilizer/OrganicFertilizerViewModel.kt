@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.fertilizers.rafik.R
 import com.fertilizers.rafik.data.repo.FireBaseRepoImpl
 import com.fertilizers.rafik.domian.entity.FertilizerRequest
+import com.fertilizers.rafik.domian.entity.FertilizerType
 import com.fertilizers.rafik.utils.Constants
 import kotlinx.coroutines.launch
 
@@ -20,7 +21,9 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     val acre = ObservableField<String>()
     val carat = ObservableField<String>()
     val cropType = ObservableField<String>()
-    val fertilizerType = ObservableField<String>()
+    private val _fertilizerType = MutableLiveData<String>()
+    val fertilizerType: LiveData<String>
+        get() = _fertilizerType
 
     private var validArea: Boolean = true
     private var validCropType: Boolean = true
@@ -38,10 +41,10 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
 
-    val isSuccessfulRequest:LiveData<Constants.Request?>
+    val isSuccessfulRequest: LiveData<Constants.Request?>
         get() = fireBaseRepoImpl.fertilizerRequest
 
-    fun setNavigate(state:Boolean){
+    fun setNavigate(state: Boolean) {
         _navigateUp.postValue(state)
     }
 
@@ -69,7 +72,7 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
         } else {
             validCropType = true
         }
-        if (fertilizerType.get().isNullOrBlank()) {
+        if (_fertilizerType.value.isNullOrBlank()) {
             message += application.resources.getString(R.string.please_fill_fertilizer_type_field)
             validFertilizerType = false
         } else {
@@ -99,18 +102,21 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
                 acre.get()?.toDouble(),
                 carat.get()?.toDouble(),
                 cropType.get()!!,
-                fertilizerType.get()!!,
+                _fertilizerType.value!!,
                 user.value!!
             )
             acre.set("")
             carat.set("")
             cropType.set("")
-            fertilizerType.set("")
             viewModelScope.launch {
-                 fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
+                fireBaseRepoImpl.setFertilizerRequest(fertilizerRequest)
             }
             _sendRequest.postValue(false)
         }
+    }
+
+    fun postFertilizer(fertilizerType: String) {
+        _fertilizerType.postValue(fertilizerType)
     }
 
     init {
@@ -118,8 +124,12 @@ class OrganicFertilizerViewModel(private val application: Application) : ViewMod
         carat.set("0")
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
+            fireBaseRepoImpl.getFertilizerType()
         }
+
     }
 
     val user = fireBaseRepoImpl.user
+    val fertilizerTypes: LiveData<List<FertilizerType>> = fireBaseRepoImpl.fertilizerTypes
+
 }

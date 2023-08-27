@@ -102,7 +102,7 @@ class OverviewFragment : Fragment() {
     ) {
         binding.topAppBar.setNavigationIcon(R.drawable.ic_back_arrow)
         binding.topAppBar.title = getString(R.string.overview)
-        binding.topAppBar.setTitleTextColor(this.resources.getColor(R.color.base_green_color))
+        binding.topAppBar.setTitleTextColor(this.resources.getColor(R.color.base_green_color,null))
         binding.topAppBar.isTitleCentered = true
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().navigateUp()

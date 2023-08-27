@@ -15,73 +15,6 @@
     <string name="product_type">نوع المنتج</string>
     <string name="training_places">اماكن التدريب</string>
     <string name="trainings">التدريبات</string>
-
-
-
-    <string-array name="product_types">
-        <item>دبس رمان</item>
-        <item>دبس تمر</item>
-        <item>طماطم مجففة</item>
-        <item>بصل مجفف</item>
-        <item>ثوم مجفف</item>
-        <item>سيرب نعناع</item>
-        <item>زيت زيتون</item>
-        <item>زيت نعناع</item>
-        <item>مانجو مخللة</item>
-    </string-array>
-
-    <string-array name="training_places">
-        <item>القاهرة</item>
-        <item>الجيزة</item>
-        <item>القليوبية</item>
-        <item>الإسكندرية</item>
-        <item>البحيرة</item>
-        <item>مطروح</item>
-        <item>الساحل الشمالي</item>
-        <item>كفر الشيخ</item>
-        <item>الدقهلية</item>
-        <item>الشرقية</item>
-        <item>المنوفية</item>
-        <item>دمياط</item>
-        <item>بورسعيد</item>
-        <item>الإسماعيلية</item>
-        <item>السويس</item>
-        <item>الشيخ زايد</item>
-        <item>الفيوم</item>
-        <item>بني سويف</item>
-        <item>المنيا</item>
-        <item>أسيوط</item>
-        <item>سوهاج</item>
-        <item>قنا</item>
-        <item>أسوان</item>
-        <item>الأقصر</item>
-        <item>البحر الأحمر</item>
-        <item>الوادي الجديد</item>
-        <item>مطروح</item>
-    </string-array>
-
-
-    <string-array name="fertilizer_types">
-        <item>كمبوست سائل متوازن</item>
-        <item>كمبوست سائل عالي النيتروجين</item>
-        <item>كمبوست سائل عالي الفوسفات</item>
-        <item>كمبوست سائل عالي البوتاسيوم</item>
-        <item>كمبوست</item>
-        <item>مبيدات حيوية</item>
-
-    </string-array>
-
-    <string-array name="organic_crops_type">
-        <item>رمان</item>
-        <item>بلح</item>
-        <item>نعناع</item>
-        <item>بصل</item>
-        <item>ثوم</item>
-        <item>طماطم</item>
-        <item>زيتون</item>
-        <item>مانجو</item>
-    </string-array>
-
     <string name="sign_up">تسجيل دخول</string>
     <string name="username">الاسم</string>
     <string name="registration">تسجيل دخول</string>
@@ -148,10 +81,10 @@
     <string name="signup">تسجيل</string>
     <string name="join_now">انضم الان</string>
     <string name="new_to_rafik">مستخدم جديد لـ رافق؟</string>
-    <string name="are_you_sure">هل انت متاكد من الرقم</string>
+    <string name="are_you_sure">هل انت متاكد من الرقم </string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_splash_screen">شاشة البداية</string>
 
 
     <string name="register">إنشاء حساب</string>
@@ -163,10 +96,13 @@
     <string name="you_must_enter_a_value_per_carat_or_acre">يجب ادخال قيمة للقيراط أوالفدان</string>
     <string name="this_field_cannot_be_empty">لا يمكن ان يكون هذا العنصر فارغ</string>
     <string name="request_sent_successfully">تم إرسال طلبك بنجاح</string>
-    <string name="your_request_was_not_sent_please_try_again_later">Your request was not sent, please try again later</string>
+    <string name="your_request_was_not_sent_please_try_again_later">لم يتم إرسال طلبك, حاول مجدداً لاحقا</string>
     <string name="this_number_is_already_registered_try_to_log_in">هذا الرقم مُسجل مسبقاً، حاول تسجيل الدخول</string>
     <string name="this_number_is_not_registered_try_to_register">هذا الرقم غير مُسجل، حاول إنشاء حساب جديد </string>
     <string name="the_verification_code_is_invalid">رمز التحقق غير صالح, يرجى التحقق وإدخال رمز التحقق الصحيح مرة أخرى.</string>
     <string name="an_error_occurred_try_again_later">حدث خطأ, حاول لاحقا</string>
+    <string name="logged_in_successfully">تم تسجبل الدخول بنجاح</string>
+    <string name="successfully_registered">تم إنشاء الحساب بنجاح</string>
+    <string name="_question_mark">\؟</string>
 
 </resources>

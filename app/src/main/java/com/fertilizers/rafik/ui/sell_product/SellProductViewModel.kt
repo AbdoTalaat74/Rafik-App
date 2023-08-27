@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fertilizers.rafik.R
 import com.fertilizers.rafik.data.repo.FireBaseRepoImpl
+import com.fertilizers.rafik.domian.entity.ProductType
 import com.fertilizers.rafik.domian.entity.SellProductRequest
 import com.fertilizers.rafik.utils.Constants
 import kotlinx.coroutines.launch
@@ -45,11 +46,11 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
 
-    val isSuccessfulRequest:LiveData<Constants.Request?>
+    val isSuccessfulRequest: LiveData<Constants.Request?>
         get() = fireBaseRepoImpl.sellProductRequest
 
 
-    fun setNavigateUp(state:Boolean){
+    fun setNavigateUp(state: Boolean) {
         _navigateUp.postValue(state)
     }
 
@@ -57,7 +58,7 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
         _navigateUp.postValue(false)
     }
 
-    val productType = ObservableField<String>()
+    private val _productType = MutableLiveData<String>()
     val amount = ObservableField<String>()
     val address = ObservableField<String>()
     val price = ObservableField<String>()
@@ -78,6 +79,10 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
         _target.postValue(target)
     }
 
+    fun postProductType(productType: String) {
+        _productType.postValue(productType)
+    }
+
     fun postImageProgressBarState(state: Boolean) {
         _imageProgressBar.postValue(state)
     }
@@ -88,7 +93,7 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
 
         var message = ""
 
-        if (productType.get().isNullOrBlank()) {
+        if (_productType.value.isNullOrBlank()) {
             validProductType = false
             message += application.resources.getString(R.string.please_fill_product_type_field)
         } else {
@@ -133,20 +138,26 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
 
     @Suppress("DEPRECATION")
     fun sendRequest() {
-        var bitmap: Bitmap? =null
+        var bitmap: Bitmap? = null
         Log.i("SellProductViewModel", "sendRequestCalled")
         _imageUri.value?.let {
             bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                ImageDecoder.decodeBitmap(ImageDecoder.createSource(application.applicationContext.contentResolver, it
-                ))
+                ImageDecoder.decodeBitmap(
+                    ImageDecoder.createSource(
+                        application.applicationContext.contentResolver, it
+                    )
+                )
             } else {
-                MediaStore.Images.Media.getBitmap(application.applicationContext.contentResolver, it)
+                MediaStore.Images.Media.getBitmap(
+                    application.applicationContext.contentResolver,
+                    it
+                )
             }
         }
         if (user.value != null) {
             val sellProductRequest = SellProductRequest(
                 productImage = bitmap,
-                productType = productType.get()!!,
+                productType = _productType.value!!,
                 amount = amount.get()!!,
                 address = address.get()!!,
                 price = price.get()!!,
@@ -156,7 +167,7 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
             )
             Log.i("SellProductViewModel", sellProductRequest.toString())
             viewModelScope.launch {
-               val state = fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
+                val state = fireBaseRepoImpl.setSellProductRequest(sellProductRequest)
             }
             _sendRequest.postValue(false)
         }
@@ -165,8 +176,12 @@ class SellProductViewModel(private val application: Application) : ViewModel() {
     init {
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
+            fireBaseRepoImpl.getProductType()
+
         }
     }
 
     val user = fireBaseRepoImpl.user
+    val productTypes: LiveData<List<ProductType>> = fireBaseRepoImpl.productTypes
+
 }

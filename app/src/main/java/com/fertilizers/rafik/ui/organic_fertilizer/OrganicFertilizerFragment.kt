@@ -8,12 +8,15 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.fertilizers.rafik.R
 import com.fertilizers.rafik.databinding.FragmentOrganicFertilizerBinding
+import com.fertilizers.rafik.domian.entity.FertilizerType
 import com.fertilizers.rafik.ui.initToolbar
 import com.fertilizers.rafik.utils.Constants
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +35,6 @@ class OrganicFertilizerFragment : Fragment() {
         acreFocusListener()
         caratFocusListener()
         cultivationFocusListener()
-        fertilizerTypeFocusListener()
         viewModel = ViewModelProvider(
             this, OrganicFertilizerVMFactory(
                 requireContext().applicationContext as Application
@@ -111,6 +113,19 @@ class OrganicFertilizerFragment : Fragment() {
             }
         }
 
+        viewModel.fertilizerTypes.observe(viewLifecycleOwner){
+
+            if (it == null) {
+                Snackbar.make(
+                    binding.coordinatorlayout,
+                    getString(R.string.checkYourInternet),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }else{
+                initFertilizerSpinner(it)
+            }
+
+        }
         return binding.root
     }
 
@@ -172,23 +187,26 @@ class OrganicFertilizerFragment : Fragment() {
         return null
     }
 
-    private fun fertilizerTypeFocusListener() {
-        binding.fertilizerTypeTextField.setOnFocusChangeListener { _, focus ->
-            if (!focus) {
-                binding.fertilizerTypeTextLayout.error = validateFertilizerType()
-            } else {
-                binding.fertilizerTypeTextLayout.error = ""
+
+    private fun initFertilizerSpinner(data:List<FertilizerType>) {
+        val fertilizerTypesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, data)
+        binding.fertilizerTypeSpinner.adapter = fertilizerTypesAdapter
+
+
+        binding.fertilizerTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>, view: View?, position: Int, id: Long
+                ) {
+                    viewModel.postFertilizer(data[position].name)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    //todo
+                }
+
             }
-        }
-    }
 
-
-    private fun validateFertilizerType(): String? {
-        val fertilizerType = binding.fertilizerTypeTextField.text.toString()
-        while (fertilizerType.isNullOrBlank()) {
-            return getString(R.string.please_fill_fertilizer_type_field)
-        }
-        return null
     }
 
 
@@ -196,7 +214,6 @@ class OrganicFertilizerFragment : Fragment() {
         binding.acreTextLayout.error = validateAcre()
         binding.caratTextLayout.error = validateCarat()
         binding.cultivationTypeTextLayout.error = validateCultivationType()
-        binding.fertilizerTypeTextLayout.error = validateFertilizerType()
     }
 
 

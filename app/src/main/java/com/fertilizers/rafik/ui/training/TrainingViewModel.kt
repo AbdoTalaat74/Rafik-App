@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fertilizers.rafik.data.repo.FireBaseRepoImpl
+import com.fertilizers.rafik.domian.entity.ProductType
+import com.fertilizers.rafik.domian.entity.TrainingArea
 import com.fertilizers.rafik.domian.entity.TrainingRequest
 import com.fertilizers.rafik.utils.Constants
 import kotlinx.coroutines.launch
@@ -27,10 +29,10 @@ class TrainingViewModel(application: Application) : ViewModel() {
     val sendRequest: LiveData<Boolean>
         get() = _sendRequest
 
-    val isSuccessfulRequest:LiveData<Constants.Request?>
+    val isSuccessfulRequest: LiveData<Constants.Request?>
         get() = fireBaseRepoImpl.trainingRequest
 
-    fun setNavigateUp(state: Boolean){
+    fun setNavigateUp(state: Boolean) {
         _navigateUp.postValue(state)
     }
 
@@ -86,8 +88,8 @@ class TrainingViewModel(application: Application) : ViewModel() {
     }
 
     val user = fireBaseRepoImpl.user
-    val trainingAreas = fireBaseRepoImpl.trainingAreas
-    val productTypes=fireBaseRepoImpl.productTypes
+    val trainingAreas: LiveData<List<TrainingArea>> = fireBaseRepoImpl.trainingAreas
+    val productTypes: LiveData<List<ProductType>> = fireBaseRepoImpl.productTypes
 
 }
 

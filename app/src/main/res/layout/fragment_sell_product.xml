@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.fertilizers.rafik.ui.sell_product.SellProductViewModel" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -62,17 +60,141 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5">
 
+                    <TextView
+                        android:id="@+id/add_image_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:text="@string/add_image"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/amount_text_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/pickImg"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:clickable="true"
+                        android:contentDescription="@string/add_image"
+                        android:focusable="true"
+                        android:src="@drawable/ic_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/add_image_tv"
+                        app:layout_constraintEnd_toEndOf="@+id/amount_text_layout"
+                        app:layout_constraintTop_toTopOf="@+id/add_image_tv" />
+
+                    <TextView
+                        android:id="@+id/delete_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:visibility="gone"
+                        android:text="@string/remove_photo"
+                        android:textColor="#2196F3"
+                        app:layout_constraintBottom_toTopOf="@+id/product_type_spinner_card"
+                        app:layout_constraintEnd_toEndOf="@+id/product_type_spinner_card"
+                        app:layout_constraintStart_toStartOf="@+id/pickImg"
+                        app:layout_constraintTop_toBottomOf="@+id/productImage" />
+
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:clickable="true"
+                        android:visibility="invisible"
+                        android:contentDescription="@string/add_image"
+                        android:focusable="true"
+                        app:imgUri="@{viewModel.imageUri}"
+                        app:layout_constraintBottom_toBottomOf="@+id/pickImg"
+                        app:layout_constraintStart_toStartOf="@id/pickImg"
+                        app:layout_constraintEnd_toEndOf="@+id/pickImg"
+                        app:layout_constraintTop_toTopOf="@+id/pickImg"
+                        tools:src="@drawable/ic_image" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_organic"
+                        app:layout_constraintBottom_toBottomOf="@+id/product_type_spinner_card"
+                        app:layout_constraintStart_toStartOf="@+id/amount_text_layout"
+                        app:layout_constraintTop_toTopOf="@+id/product_type_spinner_card" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:text="@string/product_type"
+                        android:textSize="@dimen/_16ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+                    <ProgressBar
+                        android:id="@+id/image_progress_bar"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:indeterminateTint="@color/base_green_color"
+                        android:indeterminateTintMode="src_atop"
+                        app:layout_constraintBottom_toBottomOf="@+id/pickImg"
+                        app:layout_constraintEnd_toEndOf="@+id/pickImg"
+                        app:layout_constraintStart_toStartOf="@+id/pickImg"
+                        app:layout_constraintTop_toTopOf="@+id/pickImg" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/product_type_spinner_card"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/amount_text_layout"
+                        app:layout_constraintStart_toEndOf="@+id/textView12"
+                        app:layout_constraintTop_toBottomOf="@+id/add_image_tv"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/product_type_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:enabled="false"
+                                android:orientation="horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:layout_height="?attr/dropdownListPreferredItemHeight" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/amount_text_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_32sdp"
                         android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginHorizontal="@dimen/_32sdp"
                         android:hint="@string/amount"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/product_type_text_layout">
+                        app:layout_constraintTop_toBottomOf="@+id/product_type_spinner_card">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/amount_text_field"
@@ -84,27 +206,29 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/product_type_text_layout"
+                        android:id="@+id/address_text_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_32sdp"
-                        android:layout_marginTop="@dimen/_28sdp"
-                        android:hint="@string/product_type"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:hint="@string/address"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/add_image_tv">
+                        app:layout_constraintTop_toBottomOf="@+id/amount_text_layout">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/product_type_text_field"
+                            android:id="@+id/address_text_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:inputType="textAutoComplete"
-                            android:text="@={viewModel.productType}" />
+                            android:text="@={viewModel.address}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/price_text_layout"
@@ -129,27 +253,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/address_text_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_32sdp"
-                        android:layout_marginTop="@dimen/_12sdp"
-                        android:hint="@string/address"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/amount_text_layout">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/address_text_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:inputType="textAutoComplete"
-                            android:text="@={viewModel.address}" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:id="@+id/textView15"
@@ -187,71 +290,12 @@
                         app:layout_constraintEnd_toEndOf="@+id/price_text_layout"
                         app:layout_constraintTop_toBottomOf="@+id/price_text_layout" />
 
-                    <TextView
-                        android:id="@+id/add_image_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:text="@string/add_image"
-                        android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/product_type_text_layout"
-                        app:layout_constraintTop_toTopOf="@+id/pickImg" />
 
-                    <ImageView
-                        android:id="@+id/pickImg"
-                        android:layout_width="@dimen/_32sdp"
-                        android:layout_height="@dimen/_32sdp"
-                        android:layout_marginTop="16sp"
-                        android:clickable="true"
-                        android:contentDescription="@string/add_image"
-                        android:focusable="true"
-                        android:src="@drawable/ic_image"
-                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/productImage"
-                        android:layout_width="@dimen/_32sdp"
-                        android:layout_height="@dimen/_32sdp"
-                        android:clickable="true"
-                        android:contentDescription="@string/add_image"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        app:imgUri="@{viewModel.imageUri}"
-                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/ic_image" />
 
-                    <TextView
-                        android:id="@+id/delete_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_4sdp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="@string/remove_photo"
-                        android:textColor="#2196F3"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/product_type_text_layout"
-                        app:layout_constraintEnd_toEndOf="@+id/productImage"
-                        app:layout_constraintStart_toStartOf="@+id/productImage"
-                        app:layout_constraintTop_toBottomOf="@+id/productImage" />
-
-                    <ProgressBar
-                        android:id="@+id/image_progress_bar"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_14sdp"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/base_green_color"
-                        android:indeterminateTintMode="src_atop"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="@+id/product_type_text_layout"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/product_type_spinner_card"
+                        android:id="@+id/target_spinner_card"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_24sdp"
@@ -279,27 +323,27 @@
                         android:text="@string/target"
                         android:textSize="@dimen/_16ssp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/product_type_spinner_card"
+                        app:layout_constraintBottom_toBottomOf="@+id/target_spinner_card"
                         app:layout_constraintEnd_toEndOf="@+id/textView15"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/textView15"
-                        app:layout_constraintTop_toTopOf="@+id/product_type_spinner_card" />
+                        app:layout_constraintTop_toTopOf="@+id/target_spinner_card" />
 
                     <Button
                         android:id="@+id/send_request_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_24sdp"
-                        android:layout_marginTop="@dimen/_12sdp"
                         android:backgroundTint="@color/base_green_color"
                         android:onClick="@{()->viewModel.validateAndSendRequest()}"
                         android:paddingVertical="@dimen/_8sdp"
                         android:text="@string/send_request"
                         android:textSize="@dimen/_16ssp"
                         app:cornerRadius="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_16sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/product_type_spinner_card"
+                        app:layout_constraintTop_toBottomOf="@+id/target_spinner_card"
                         app:strokeColor="@color/base_green_color" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
