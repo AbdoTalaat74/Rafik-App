@@ -17,6 +17,7 @@ import com.example.rafik.R
 import com.example.rafik.databinding.FragmentOtpAuthBinding
 import com.example.rafik.ui.MainActivity
 import com.example.rafik.viewModel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -105,20 +106,49 @@ class OtpAuthFrag : Fragment() {
                     when (isLogin) {
                         true -> {
                             Log.i("signInWithCredential", "login successfully")
-                            loginViewModel.loginUser(binding.user!!)
+                            Snackbar.make(
+                                binding.constraintLayout,
+                                "Logged in successfully",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                loginViewModel.loginUser(binding.user!!)
+                            }, 1000)
+
+
                         }
 
                         false -> {
                             Log.i("signInWithCredential", "sign up successfully")
-                            loginViewModel.setUser(binding.user!!)
+                            Snackbar.make(
+                                binding.constraintLayout,
+                                "successfully registered",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                loginViewModel.setUser(binding.user!!)
+                            }, 1000)
+
                         }
                     }
                 } else {
                     binding.otpView.showError()
-                    Toast.makeText(requireContext(), task.exception!!.message, Toast.LENGTH_LONG)
-                        .show()
-                    Log.e("signInWithCredential", task.exception!!.message.toString())
-                    binding.idBtnVerify.revertAnimation()
+                    val errorMessage = task.exception?.message
+                    if (errorMessage == "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again.") {
+                        Snackbar.make(
+                            binding.constraintLayout,
+                            getString(R.string.the_verification_code_is_invalid),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        Log.e("signInWithCredential", task.exception!!.message.toString())
+                        binding.idBtnVerify.revertAnimation()
+                    } else {
+                        Snackbar.make(
+                            binding.constraintLayout,
+                            getString(R.string.an_error_occurred_try_again_later),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
     }
