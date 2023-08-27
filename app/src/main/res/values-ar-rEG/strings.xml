@@ -166,5 +166,7 @@
     <string name="your_request_was_not_sent_please_try_again_later">Your request was not sent, please try again later</string>
     <string name="this_number_is_already_registered_try_to_log_in">هذا الرقم مُسجل مسبقاً، حاول تسجيل الدخول</string>
     <string name="this_number_is_not_registered_try_to_register">هذا الرقم غير مُسجل، حاول إنشاء حساب جديد </string>
+    <string name="the_verification_code_is_invalid">رمز التحقق غير صالح, يرجى التحقق وإدخال رمز التحقق الصحيح مرة أخرى.</string>
+    <string name="an_error_occurred_try_again_later">حدث خطأ, حاول لاحقا</string>
 
 </resources>
