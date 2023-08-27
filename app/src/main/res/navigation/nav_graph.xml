@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.rafik.ui.home.HomeFragment"
+        android:name="com.fertilizers.rafik.ui.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home_screen">
         <action
@@ -49,24 +49,24 @@
     </fragment>
     <fragment
         android:id="@+id/organicFertilizerFragment"
-        android:name="com.example.rafik.ui.organic_fertilizer.OrganicFertilizerFragment"
+        android:name="com.fertilizers.rafik.ui.organic_fertilizer.OrganicFertilizerFragment"
         android:label="OrganicFertilizerFragment"
         tools:layout="@layout/fragment_organic_fertilizer"/>
     <fragment
         android:id="@+id/trainingFragment"
-        android:name="com.example.rafik.ui.training.TrainingFragment"
+        android:name="com.fertilizers.rafik.ui.training.TrainingFragment"
         android:label="TrainingFragment"
         tools:layout="@layout/fragment_training" />
 
     <fragment
         tools:layout="@layout/fragment_sell_product"
         android:id="@+id/sellProductFragment"
-        android:name="com.example.rafik.ui.sell_product.SellProductFragment"
+        android:name="com.fertilizers.rafik.ui.sell_product.SellProductFragment"
         android:label="SellProductFragment" />
     <fragment
         android:id="@+id/settingsFragment"
         tools:layout="@layout/fragment_settings"
-        android:name="com.example.rafik.ui.settings.SettingsFragment"
+        android:name="com.fertilizers.rafik.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_signInFragment"
@@ -74,6 +74,6 @@
     <fragment
         android:id="@+id/overviewFragment"
         tools:layout="@layout/fragment_overview"
-        android:name="com.example.rafik.ui.overview.OverviewFragment"
+        android:name="com.fertilizers.rafik.ui.overview.OverviewFragment"
         android:label="OverviewFragment" />
 </navigation>

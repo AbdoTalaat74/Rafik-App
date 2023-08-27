@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signInFragment"
         tools:layout="@layout/fragment_sign_in"
-        android:name="com.example.rafik.ui.registration.SignInFragment"
+        android:name="com.fertilizers.rafik.ui.registration.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_otpAuthFrag"
@@ -17,6 +17,6 @@
     <fragment
         tools:layout="@layout/fragment_otp_auth"
         android:id="@+id/otpAuthFrag"
-        android:name="com.example.rafik.ui.registration.OtpAuthFrag"
+        android:name="com.fertilizers.rafik.ui.registration.OtpAuthFrag"
         android:label="OtpAuthFrag" />
 </navigation>

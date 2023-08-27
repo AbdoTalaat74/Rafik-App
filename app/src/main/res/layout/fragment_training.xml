@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.rafik.ui.training.TrainingViewModel" />
+            type="com.fertilizers.rafik.ui.training.TrainingViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

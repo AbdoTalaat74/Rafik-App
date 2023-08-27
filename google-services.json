@@ -36,20 +36,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:20873648581:android:ab0c1a8e85a658443d13ac",
+        "mobilesdk_app_id": "1:20873648581:android:dd0da889456b76d33d13ac",
         "android_client_info": {
           "package_name": "com.fertilizers.rafik"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "20873648581-1us0ilpt7prhgecf72b5vr88a2t73654.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.fertilizers.rafik",
-            "certificate_hash": "d6b77c668a11a0bb68fccaafa580977168269838"
-          }
-        },
         {
           "client_id": "20873648581-rpfski4v8vvgrm999dklh3aorkhq5hbr.apps.googleusercontent.com",
           "client_type": 3
