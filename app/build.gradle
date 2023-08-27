@@ -8,11 +8,11 @@ plugins {
 
 
 android {
-    namespace 'com.example.rafik'
+    namespace 'com.fertilizers.rafik'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.rafik"
+        applicationId "com.fertilizers.rafik"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -128,3 +128,4 @@ dependencies {
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'

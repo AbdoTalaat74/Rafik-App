@@ -7,13 +7,13 @@
 
         <variable
             name="user"
-            type="com.example.rafik.domian.entity.User" />
+            type="com.fertilizers.rafik.domian.entity.User" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.rafik.ui.settings.SettingsFragment">
+        tools:context="com.fertilizers.rafik.ui.settings.SettingsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
