@@ -81,9 +81,13 @@ class TrainingViewModel(application: Application) : ViewModel() {
     init {
         viewModelScope.launch {
             fireBaseRepoImpl.getUser()
+            fireBaseRepoImpl.getTrainingArea()
         }
     }
 
     val user = fireBaseRepoImpl.user
+    val trainingAreas = fireBaseRepoImpl.trainingAreas
+    val productTypes=fireBaseRepoImpl.productTypes
+
 }
 
