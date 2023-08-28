@@ -39,6 +39,11 @@ android {
         viewBinding true
         dataBinding true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 }
 
 dependencies {
