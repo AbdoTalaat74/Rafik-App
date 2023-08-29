@@ -1,6 +1,7 @@
 package com.fertilizers.rafik.viewModel
 
 import android.annotation.SuppressLint
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -18,22 +19,10 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("CheckResult")
 class LoginViewModel : ViewModel() {
+
     private val firebaseRepoImpl = FireBaseRepoImpl()
-    val timerText = ObservableField<String>()
-    private val _isButtonEnabled = MutableLiveData<Boolean>()
-    val isButtonEnabled: LiveData<Boolean>
-        get() = _isButtonEnabled
 
-    private val _startTimer = MutableLiveData<Boolean>()
-    val startTimer: LiveData<Boolean>
-        get() = _startTimer
-    fun setButtonState(state: Boolean) {
-        _isButtonEnabled.postValue(state)
-    }
 
-    fun onStartTimer(){
-        _startTimer.postValue(false)
-    }
 
     var cities: List<City> = listOf(
         City(
@@ -565,8 +554,15 @@ class LoginViewModel : ViewModel() {
         AUTHENTICATED, UNAUTHENTICATED, INVALID_AUTHENTICATION
     }
 
+
+
+
+
+
+
+
+
     init {
-        _startTimer.postValue(true)
         Log.e("LoginViewModel","initCalled")
         _isLogin.value = false
         FirebaseUserLiveData().map { user ->
@@ -578,6 +574,7 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
 
 
 }

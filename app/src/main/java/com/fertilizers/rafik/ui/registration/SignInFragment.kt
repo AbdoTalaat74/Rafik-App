@@ -219,11 +219,11 @@ class SignInFragment : Fragment() {
         }
         if (phone2.length < 11) {
             binding.loginButton.revertAnimation()
-            return getString(R.string.lenght_phone_check)
+            return getString(R.string.length_phone_check)
         }
         if (!phone2.matches("01\\d{9}".toRegex())) {
             binding.loginButton.revertAnimation()
-            return getString(R.string.contian_11)
+            return getString(R.string.contain_11)
         }
         return null
     }
@@ -236,11 +236,11 @@ class SignInFragment : Fragment() {
         }
         if (phone.length < 11) {
             binding.registerButton.revertAnimation()
-            return getString(R.string.lenght_phone_check)
+            return getString(R.string.length_phone_check)
         }
         if (!phone.matches("01\\d{9}".toRegex())) {
             binding.registerButton.revertAnimation()
-            return getString(R.string.contian_11)
+            return getString(R.string.contain_11)
         }
         return null
     }
