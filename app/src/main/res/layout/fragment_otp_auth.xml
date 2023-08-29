@@ -10,7 +10,7 @@
             type="com.fertilizers.rafik.domian.entity.User" />
         <variable
             name="viewModel"
-            type="com.fertilizers.rafik.viewModel.LoginViewModel" />
+            type="com.fertilizers.rafik.viewModel.OtpTimerViewModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -28,10 +28,10 @@
     <string name="enter_your_name">ادخل اسمك</string>
     <string name="enter_your_address">ادخل عنوانك</string>
     <string name="enter_phone">ادخل رقم هاتفك</string>
-    <string name="lenght_phone_check">ادخل 11 رقم </string>
+    <string name="length_phone_check">ادخل 11 رقم </string>
     <string name="verification_code">رمز التحقق</string>
     <string name="code_sent"> تم ارسال كود لـ</string>
-    <string name="contian_11">يجب ان يحتوي علي 11 رقم</string>
+    <string name="contain_11">يجب ان يحتوي علي 11 رقم</string>
     <string name="signout">تسجيل خروج</string>
     <string name="verify_code">تأكيد الكود</string>
     <string name="please_enter_code">من فضلك ادخل الكود</string>
