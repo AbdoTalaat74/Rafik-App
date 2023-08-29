@@ -34,7 +34,7 @@
     <string name="contain_11">يجب ان يحتوي علي 11 رقم</string>
     <string name="signout">تسجيل خروج</string>
     <string name="verify_code">تأكيد الكود</string>
-    <string name="please_enter_code">من فضلك ادخل الكود</string>
+    <string name="please_enter_code">من فضلك ادخل الكود المُرسل</string>
     <string name="checkYourInternet">تحقق من اتصالك بالإنترنت من فضلك</string>
     <string name="send_another_code">ارسال كود اخر</string>
     <string name="yourInternetIsBack">تم اعاده الاتصال بالانترنت</string>

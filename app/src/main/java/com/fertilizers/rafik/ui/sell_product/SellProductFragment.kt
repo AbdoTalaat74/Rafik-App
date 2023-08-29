@@ -20,7 +20,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -116,14 +115,14 @@ class SellProductFragment : Fragment() {
             }
         }
 
-        viewModel.productTypes.observe(viewLifecycleOwner){
+        viewModel.productTypes.observe(viewLifecycleOwner) {
             if (it == null) {
                 Snackbar.make(
                     binding.coordinatorlayout,
                     getString(R.string.checkYourInternet),
                     Snackbar.LENGTH_LONG
                 ).show()
-            }else{
+            } else {
                 initProductTypeSpinner(it)
             }
         }
@@ -240,10 +239,10 @@ class SellProductFragment : Fragment() {
                 }
 
                 else -> {
-                    Toast.makeText(
-                        requireContext(),
+                    Snackbar.make(
+                        binding.coordinatorlayout,
                         getString(R.string.your_request_was_not_sent_please_try_again_later),
-                        Toast.LENGTH_LONG
+                        Snackbar.LENGTH_LONG
                     ).show()
                 }
             }
@@ -333,8 +332,11 @@ class SellProductFragment : Fragment() {
                 }
 
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT)
-                        .show()
+                    Snackbar.make(
+                        binding.coordinatorlayout,
+                        getString(R.string.an_error_occurred_try_again_later),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     viewModel.postImageProgressBarState(false)
                 }
 

@@ -34,7 +34,7 @@
     <string name="contain_11">Must Contain 11 Number</string>
     <string name="signout">signOut</string>
     <string name="verify_code">Verify Code</string>
-    <string name="please_enter_code">Please enter Code</string>
+    <string name="please_enter_code">Please the OTP Code</string>
     <string name="checkYourInternet">Check Your internet connection please</string>
     <string name="send_another_code">Send another code</string>
     <string name="yourInternetIsBack">Your Connection Is Back</string>

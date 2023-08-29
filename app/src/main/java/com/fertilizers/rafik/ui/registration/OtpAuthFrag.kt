@@ -11,7 +11,6 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -69,8 +68,9 @@ class OtpAuthFrag : Fragment() {
             override fun onInteractionListener() {
 
             }
+
             override fun onOTPComplete(otp: String) {
-                Toast.makeText(requireContext(), "The OTP is $otp", Toast.LENGTH_SHORT).show()
+
             }
         }
         binding.tryAgain.setOnClickListener {
@@ -80,36 +80,41 @@ class OtpAuthFrag : Fragment() {
 
         }
 
-        otpTimerViewModel.isTimerRunning.observe(viewLifecycleOwner){
-            if (it == true){
+        otpTimerViewModel.isTimerRunning.observe(viewLifecycleOwner) {
+            if (it == true) {
                 otpTimerViewModel.setButtonState(false)
                 binding.timerText.visibility = VISIBLE
-            }else{
+            } else {
                 otpTimerViewModel.setButtonState(true)
                 binding.timerText.visibility = INVISIBLE
             }
         }
 
-        otpTimerViewModel.isButtonEnabled.observe(viewLifecycleOwner){
+        otpTimerViewModel.isButtonEnabled.observe(viewLifecycleOwner) {
             binding.tryAgain.isEnabled = it
-            if (it == true){
-                Log.e("OtpAuthFrag","tryAgain Enabled")
-                binding.tryAgain.setTextColor(resources.getColor(com.apachat.loadingbutton.core.R.color.green,null))
+            if (it == true) {
+                Log.e("OtpAuthFrag", "tryAgain Enabled")
+                binding.tryAgain.setTextColor(
+                    resources.getColor(
+                        com.apachat.loadingbutton.core.R.color.green,
+                        null
+                    )
+                )
                 binding.timerText.visibility = INVISIBLE
-            }else{
-                Log.e("OtpAuthFrag","tryAgain Disabled")
-                binding.tryAgain.setTextColor(resources.getColor(R.color.Gray,null))
+            } else {
+                Log.e("OtpAuthFrag", "tryAgain Disabled")
+                binding.tryAgain.setTextColor(resources.getColor(R.color.Gray, null))
                 binding.timerText.visibility = VISIBLE
             }
         }
         binding.idBtnVerify.setOnClickListener {
-            if (it.isEnabled){
+            if (it.isEnabled) {
                 binding.idBtnVerify.startAnimation()
                 if (TextUtils.isEmpty(binding.otpView.otp)) {
-                    Toast.makeText(
-                        requireContext(),
+                    Snackbar.make(
+                        binding.constraintLayout,
                         getString(R.string.please_enter_code),
-                        Toast.LENGTH_SHORT
+                        Snackbar.LENGTH_SHORT
                     ).show()
                     binding.idBtnVerify.revertAnimation()
                     binding.otpView.showError()
@@ -209,7 +214,11 @@ class OtpAuthFrag : Fragment() {
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(requireActivity(), e.message, Toast.LENGTH_LONG).show()
+                Snackbar.make(
+                    binding.constraintLayout,
+                    R.string.an_error_occurred_try_again_later,
+                    Snackbar.LENGTH_LONG
+                ).show()
                 Log.e("onVerificationFailed", e.message.toString())
                 binding.otpView.showError()
             }
